@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import PostWidget from "../components/PostWidget";
 import Image from "next/image";
 
 const posts: { title: string; excerpt: string }[] = [
@@ -16,7 +17,7 @@ const posts: { title: string; excerpt: string }[] = [
 
 const Home: NextPage = () => {
   return (
-    <div className="container mx-auto px-10 mb-8 bg-gray-300">
+    <div key="home-index" className="container mx-auto px-10 mb-8 bg-gray-300">
       <Head>
         <title>Grant Kyle's Personal Blog</title>
         <link rel="icon" href="/favicon.ico" />
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
             <div>
               <div>
                 <p>
+                  <PostWidget />
                   <b>{post.title}</b>
                 </p>
                 {post.excerpt}{" "}
