@@ -6,6 +6,8 @@ interface PostCardProps {
 }
 
 const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
+
+  console.log('props', typeof props.post)
   return (
     <div>
       {props.post.title}
