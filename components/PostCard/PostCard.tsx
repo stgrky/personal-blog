@@ -1,8 +1,17 @@
 import type { NextPage } from "next";
 import React from "react";
 
-const PostCard: NextPage = () => {
-  return <div>PostCard</div>;
+interface PostCardProps {
+  post: any;
+}
+
+const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
+  return (
+    <div>
+      {props.post.title}
+      {props.post.excerpt}
+    </div>
+  );
 };
 
 export default PostCard;
