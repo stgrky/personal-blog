@@ -27,10 +27,10 @@ const Home: NextPage = () => {
           {posts.map((post, index) => (
             <div>
               <div>
-                <p>
+                <div>
                   <PostWidget />
                   <b>{post.title}</b>
-                </p>
+                </div>
                 {post.excerpt}{" "}
               </div>
               <br />
