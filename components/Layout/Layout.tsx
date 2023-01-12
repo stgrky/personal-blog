@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../Header.jsx";
 
-type Props = {
+type LayoutProps = {
   children: JSX.Element;
 };
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header />
