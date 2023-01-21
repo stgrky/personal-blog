@@ -6,20 +6,11 @@ import PostCard from "../components/PostCard";
 import { getPosts } from "../services";
 import Image from "next/image";
 
-// const posts: { title: string; excerpt: string }[] = [
-//   { title: "This is a test title", excerpt: "This is an excerpt for our blog" },
-//   {
-//     title: "This is the second test title",
-//     excerpt: "This is the second excerpt for our blog",
-//   },
-//   {
-//     title: "This is the third test title",
-//     excerpt: "This is the third excerpt for our blog",
-//   },
-// ];
-
-const Home: NextPage = (props) => {
-  console.log("props", props);
+interface HomeProps {
+  posts: any;
+}
+const Home: NextPage<HomeProps> = ({posts}) => {
+  console.log("props Post", posts);
   return (
     <div key="home-index" className="container mx-auto px-10 mb-8 bg-gray-300">
       <Head>
@@ -28,9 +19,9 @@ const Home: NextPage = (props) => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
-          {/* {posts.map((post, index) => (
-            <PostCard post={post} key={post.title} />
-          ))} */}
+          {posts.map((post: any, index: any) => (
+            <PostCard post={post.node} key={post.title} />
+          ))}
         </div>
         <div className="lg:col-span-4 col-span-1">
           <div className="lg:sticky relative top-8">
