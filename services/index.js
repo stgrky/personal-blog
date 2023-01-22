@@ -16,6 +16,9 @@ export const getPosts = async () => {
               }
               createdAt
             }
+            blogContent {
+              html
+            }
             title
             slug
             excerpt

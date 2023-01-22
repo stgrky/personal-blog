@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import Link from "next/link";
 
 const categories = [
-  { name: "Dogs", slug: "dogs" },
-  { name: "Cats", slug: "cats" },
+  { name: "Personal", slug: "personal" },
+  { name: "Professional", slug: "professional" },
 ];
 
 const Header = () => {
