@@ -9,7 +9,7 @@ import Image from "next/image";
 interface HomeProps {
   posts: any;
 }
-const Home: NextPage<HomeProps> = ({posts}) => {
+const Home: NextPage<HomeProps> = ({ posts }) => {
   console.log("props Post", posts);
   return (
     <div key="home-index" className="container mx-auto px-10 mb-8 bg-gray-300">
@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({posts}) => {
         </div>
         <div className="lg:col-span-4 col-span-1">
           <div className="lg:sticky relative top-8">
-            <PostWidget />
+            <PostWidget categories={undefined} slug={undefined} />
             <Categories />
           </div>
         </div>
