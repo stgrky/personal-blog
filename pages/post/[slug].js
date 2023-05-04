@@ -24,7 +24,6 @@ const PostDetails = ({ post }) => {
               slug={post.slug}
               categories={post.categories.map((category) => category.slug)}
             />{" "}
-            */
             <Categories />
           </div>
         </div>

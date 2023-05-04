@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import Link from "next/Link";
+import Link from "next/link";
 import { getRecentPosts, getSimilarPosts } from "../../services";
 
 interface WidgetProps {
@@ -13,7 +13,9 @@ const PostWidget: NextPage<WidgetProps> = ({ categories, slug }) => {
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts().then((result: any) => setRelatedPosts(result));
+      getSimilarPosts(categories, slug).then((result: any) =>
+        setRelatedPosts(result)
+      );
     } else {
       getRecentPosts().then((result: any) => setRelatedPosts(result));
     }
