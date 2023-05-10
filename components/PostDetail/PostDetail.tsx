@@ -57,6 +57,8 @@ const PostDetail: NextPage<PostDetailProps> = ({ post }) => {
             src={obj.src}
           />
         );
+      default:
+        return modifiedText;
     }
   };
   return (
@@ -88,8 +90,9 @@ const PostDetail: NextPage<PostDetailProps> = ({ post }) => {
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
         {post.blogContent.raw.children.map((typeObj: any, index: number) => {
-          const children = typeObj.children.map((item: any, itemIndex: number) =>
-            getContentFragment(itemIndex, item.text, item)
+          const children = typeObj.children.map(
+            (item: any, itemIndex: number) =>
+              getContentFragment(itemIndex, item.text, item)
           );
 
           return getContentFragment(index, children, typeObj, typeObj.type);

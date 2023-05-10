@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
-const CommentsForm = () => {
-  return (
-    <div>CommentsForm</div>
-  )
-}
+const CommentsForm = ({ slug }) => {
+  const [error, setError] = useState(false);
+  const [localStorage, setLocalStorage] = useState(second)
+  return <div>CommentsForm</div>;
+};
 
-export default CommentsForm
+export default CommentsForm;
