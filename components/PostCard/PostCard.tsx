@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React from "react";
 import moment from "moment";
-import Link from "next/Link";
+import Link from "next/link";
 
 interface PostCardProps {
   post: any;
@@ -20,7 +20,7 @@ const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
       </div>
       <h1
         className="transition duration-200 text-center mb-8 cursor-pointer
-      hover:text-pink-600 text-3xl font-semibold
+      hover:text-blue-600 text-3xl font-semibold
       "
       >
         <Link href={`/post/${props.post.slug}`}>{props.post.title}</Link>
@@ -47,7 +47,7 @@ const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
       </p>
       <div className="text-center">
         <Link href={`/post/${props.post.slug}`}>
-          <span className="transition duration-500 transform hover:-translate-y-1 inline-block bg-pink-600 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
+          <span className="transition duration-500 transform hover:-translate-y-1 inline-block bg-blue-600 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
             Read More
           </span>
         </Link>
