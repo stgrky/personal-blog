@@ -66,7 +66,6 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
         return modifiedText;
     }
   };
-  console.log("aboutContent", aboutContent[0]);
   return (
     <div
       key="home-index"

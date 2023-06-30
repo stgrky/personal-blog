@@ -51,9 +51,6 @@ export const getRecentPosts = async () => {
   `;
 
   const result = await request(graphqlAPI, query);
-
-  console.log("result getRecentPosts", result.posts);
-
   return result.posts;
 };
 
