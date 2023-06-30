@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
 import React, { Fragment } from "react";
 import Head from "next/head";
-import PostWidget from "../components/PostWidget";
-import Categories from "../components/Categories";
-import PostCard from "../components/PostCard";
 import { getAboutPageDetails } from "../services";
-import Image from "next/image";
 
 interface AboutProps {
   aboutContent: any;
@@ -82,7 +78,7 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
                 (item: any, itemIndex: number) =>
-                  getContentFragment(itemIndex, item.text, item)
+                  getContentFragment(itemIndex, item.text, item, "")
               );
               return getContentFragment(index, children, typeObj, typeObj.type);
             }

@@ -85,14 +85,14 @@ const PostDetail: NextPage<PostDetailProps> = ({ post }) => {
             </p>
           </div>
           <div className="font-medium text-gray-700">
-            <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
+            <span>{moment(post.createdAt).format("MMM DD, YYYY"}</span>
           </div>
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
         {post.blogContent.raw.children.map((typeObj: any, index: number) => {
           const children = typeObj.children.map(
             (item: any, itemIndex: number) =>
-              getContentFragment(itemIndex, item.text, item)
+              getContentFragment(itemIndex, item.text, item, "")
           );
 
           return getContentFragment(index, children, typeObj, typeObj.type);

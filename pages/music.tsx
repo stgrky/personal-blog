@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
 import React, { Fragment } from "react";
 import Head from "next/head";
-import PostWidget from "../components/PostWidget";
-import Categories from "../components/Categories";
-import PostCard from "../components/PostCard";
 import { getMusicPageDetails } from "../services";
-import Image from "next/image";
 
 interface MusicProps {
   musicContent: any;
