@@ -131,6 +131,46 @@ export const getPostDetails = async (slug) => {
 
   return result.post;
 };
+export const getAboutPageDetails = async (slug) => {
+  const query = gql`
+    query AboutPageQuery {
+      allAboutPages {
+        aboutPageContent {
+          raw
+        }
+        aboutPageHeroImage {
+          url
+          id
+          fileName
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.allAboutPages;
+};
+export const getMusicPageDetails = async (slug) => {
+  const query = gql`
+    query AboutPageQuery {
+      allMusicPages {
+        musicPageContent {
+          raw
+        }
+        musicPageHeroImage {
+          url
+          id
+          fileName
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.allAboutPages;
+};
 
 // export const submitComment = async (obj) => {
 //   const result = await fetch("/api/comments", {

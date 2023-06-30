@@ -19,6 +19,24 @@ const Header = () => {
             </span>{" "}
           </Link>
         </div>
+        <div className="md:float-left md:contents">
+          <Link href={`/about/`}>
+            <span className="md:float-right mt-2 align-middle text-purple-200 ml-4 font-semibold text-3xl cursor-pointer">
+              About Grant
+            </span>
+          </Link>
+        </div>
+        <div className="md:float-left md:contents hidden md:block">
+          <span className="mt-2 align-middle text-white mx-4">|</span>
+        </div>
+        <div className="md:float-left md:contents">
+          <Link href={`/music/`}>
+            <span className="md:float-right mt-2 align-middle text-purple-200 ml-4 font-semibold text-3xl cursor-pointer">
+              GgatorFlavorR
+            </span>
+          </Link>
+        </div>
+
         {/* <div className="hidden md:float-left md:contents">
           {categories.map((cat: any) => (
             <Link key={cat.slug} href={`/category/${cat.slug}`}>

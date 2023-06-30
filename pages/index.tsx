@@ -12,7 +12,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ posts }) => {
   console.log("props Post", posts);
   return (
-    <div key="home-index" className="container mx-auto rounded-lg px-10 mb-8 bg-gray-300">
+    <div key="home-index" className="container mx-auto rounded-lg lg:px-10 mb-8 bg-gray-300">
       <Head>
         <title>Grant Kyle's Personal Blog</title>
         <link rel="icon" href="/favicon.ico" />
