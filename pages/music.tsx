@@ -69,7 +69,7 @@ const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
     >
       <Head>
         <title>Blog</title>
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
