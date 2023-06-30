@@ -78,7 +78,7 @@ const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
                 (item: any, itemIndex: number) =>
-                  getContentFragment(itemIndex, item.text, item)
+                  getContentFragment(itemIndex, item.text, item, "")
               );
               return getContentFragment(index, children, typeObj, typeObj.type);
             }
