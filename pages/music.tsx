@@ -66,7 +66,6 @@ const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
         return modifiedText;
     }
   };
-  console.log("musicContent", musicContent[0]);
   return (
     <div
       key="home-index"
