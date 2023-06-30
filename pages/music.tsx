@@ -7,11 +7,11 @@ import PostCard from "../components/PostCard";
 import { getMusicPageDetails } from "../services";
 import Image from "next/image";
 
-interface AboutProps {
-  musicPageContent: any;
+interface MusicProps {
+  musicContent: any;
 }
 
-const AboutPage: NextPage<AboutProps> = ({ musicPageContent }) => {
+const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
@@ -66,7 +66,7 @@ const AboutPage: NextPage<AboutProps> = ({ musicPageContent }) => {
         return modifiedText;
     }
   };
-  console.log("musicPageContent", musicPageContent[0]);
+  console.log("musicContent", musicContent[0]);
   return (
     <div
       key="home-index"
@@ -79,7 +79,7 @@ const AboutPage: NextPage<AboutProps> = ({ musicPageContent }) => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
         <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant</h1>
-          {musicPageContent[0].aboutPageContent.raw.children.map(
+          {musicContent[0].musicPageContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
                 (item: any, itemIndex: number) =>
@@ -95,11 +95,11 @@ const AboutPage: NextPage<AboutProps> = ({ musicPageContent }) => {
 };
 
 export async function getStaticProps() {
-  const musicPageContent = (await getMusicPageDetails()) || [];
+  const musicContent = (await getMusicPageDetails()) || [];
 
   return {
-    props: { musicPageContent },
+    props: { musicContent },
   };
 }
 
-export default AboutPage;
+export default MusicPage;

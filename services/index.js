@@ -169,7 +169,7 @@ export const getMusicPageDetails = async (slug) => {
 
   const result = await request(graphqlAPI, query);
 
-  return result.allAboutPages;
+  return result.allMusicPages;
 };
 
 // export const submitComment = async (obj) => {
