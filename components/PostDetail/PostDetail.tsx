@@ -85,7 +85,7 @@ const PostDetail: NextPage<PostDetailProps> = ({ post }) => {
             </p>
           </div>
           <div className="font-medium text-gray-700">
-            <span>{moment(post.createdAt).format("MMM DD, YYYY"}</span>
+            <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
           </div>
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
