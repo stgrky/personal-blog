@@ -21,15 +21,22 @@ const Header = () => {
         </div>
         <div className="md:float-left md:contents">
           <Link href={`/music/`}>
-            <span className="md:float-right mt-2 align-middle text-purple-200 ml-4 font-semibold text-3xl cursor-pointer">
+            <span className="md:float-right mt-2 align-middle text-yellow-200 ml-4 font-semibold text-3xl cursor-pointer">
               GgatorFlavorR
             </span>
           </Link>
         </div>
         <div className="md:float-left md:contents">
           <Link href={`/about/`}>
-            <span className="md:float-right mt-2 align-middle text-purple-200 ml-4 font-semibold text-3xl cursor-pointer">
-              AboutGrant
+            <span className="md:float-right mt-2 align-middle text-red-100 ml-4 font-semibold text-3xl cursor-pointer">
+              GrantTheHuman
+            </span>
+          </Link>
+        </div>{" "}
+        <div className="md:float-left md:contents">
+          <Link href={`/about/`}>
+            <span className="md:float-right mt-2 align-middle text-blue-200 ml-4 font-semibold text-3xl cursor-pointer">
+              GrantTheDev
             </span>
           </Link>
         </div>{" "}

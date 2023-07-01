@@ -168,6 +168,26 @@ export const getMusicPageDetails = async (slug) => {
 
   return result.allMusicPages;
 };
+export const getDevPortfolioDetails = async (slug) => {
+  const query = gql`
+    query devPortfolioQuery {
+      allDevPortfolios {
+        devPortfolioContent {
+          raw
+        }
+        devPortfolioHeroImage {
+          url
+          id
+          fileName
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.allMusicPages;
+};
 
 // export const submitComment = async (obj) => {
 //   const result = await fetch("/api/comments", {
