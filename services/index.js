@@ -170,23 +170,21 @@ export const getMusicPageDetails = async (slug) => {
 };
 export const getDevPortfolioDetails = async (slug) => {
   const query = gql`
-    query devPortfolioQuery {
-      allDevPortfolios {
-        devPortfolioContent {
-          raw
-        }
-        devPortfolioHeroImage {
-          url
-          id
-          fileName
-        }
-      }
+query devPortfolioQuery {
+  allDevPortfolios {
+    devPortfolioContent {
+      raw
     }
+    devPortfolioHeroImage {
+      url
+    }
+  }
+}
   `;
 
   const result = await request(graphqlAPI, query);
 
-  return result.allMusicPages;
+  return result.allDevPortfolios;
 };
 
 // export const submitComment = async (obj) => {

@@ -8,6 +8,7 @@ interface DevPortfolioProps {
 }
 
 const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
+  console.log("devPortfolioContent", devPortfolioContent[0].devPortfolioContent.raw.children);
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
@@ -73,7 +74,9 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
-        <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant</h1>
+          <h1 className="mb-8 mt-8 text-3xl font-semibold">
+            About Grant's Work In Software Engineering
+          </h1>
           {devPortfolioContent[0].devPortfolioContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(

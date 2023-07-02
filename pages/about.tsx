@@ -73,7 +73,7 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
-        <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant</h1>
+        <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant The Human</h1>
           {aboutContent[0].aboutPageContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
