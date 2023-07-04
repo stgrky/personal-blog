@@ -8,10 +8,14 @@ interface DevPortfolioProps {
 }
 
 const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
-  console.log("devPortfolioContent", devPortfolioContent[0].devPortfolioContent.raw.children);
+  // console.log(
+  //   "devPortfolioContent",
+  //   devPortfolioContent[0].devPortfolioContent.raw.children
+  // );
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
+    // console.log("obj", obj);
     if (obj) {
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
@@ -22,6 +26,38 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       if (obj.underline) {
         modifiedText = <u key={index}>{text}</u>;
       }
+      if (obj.href) {
+        modifiedText = (
+          <a
+            key={index}
+            href={obj.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-md text-blue-700"
+          >
+            {obj.children[0].text}
+          </a>
+        );
+      }
+      // if (obj.type === "numbered-list") {
+      //   console.log(
+      //     "obj.children",
+      //     obj.children.map((item: any, i: number) => obj.children[i].children)
+      //   );
+      //   const map = obj.children.map(
+      //     (item: any, i: number) => obj.children[i].children
+      //   );
+      //   const joinedObj = [].concat(...map.children);
+
+      //   console.log("joinedObj", joinedObj);
+      // modifiedText = (
+      //   <ol key={index} className="list-decimal list-inside">
+      //     {obj.children.map((item: any, i: number) => (
+      //       <li key={i}>{item}</li>
+      //     ))}
+      //   </ol>
+      // );
+      // }
     }
 
     switch (type) {
