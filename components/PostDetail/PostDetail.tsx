@@ -47,6 +47,14 @@ const PostDetail: NextPage<PostDetailProps> = ({ post }) => {
             ))}
           </h4>
         );
+      case "unordered-list":
+        return (
+          <ul key={index} className="list-disc ml-8 mb-8">
+            {modifiedText.map((item: any, i: number) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        );
       case "image":
         return (
           <img
