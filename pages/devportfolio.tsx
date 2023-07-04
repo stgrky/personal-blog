@@ -8,7 +8,10 @@ interface DevPortfolioProps {
 }
 
 const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
-  console.log("devPortfolioContent", devPortfolioContent[0].devPortfolioContent.raw.children);
+  console.log(
+    "devPortfolioContent",
+    devPortfolioContent[0].devPortfolioContent.raw.children
+  );
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
@@ -48,6 +51,14 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
               <Fragment key={i}>{item}</Fragment>
             ))}
           </h4>
+        );
+      case "unordered-list":
+        return (
+          <ul key={index} className="list-disc ml-8 mb-8">
+            {modifiedText.map((item: any, i: number) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
         );
       case "image":
         return (
