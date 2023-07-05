@@ -3,6 +3,10 @@ import React, { Fragment } from "react";
 import Head from "next/head";
 import { getDevPortfolioDetails } from "../services";
 
+// TODO Priorities
+// 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
+// 2) Migrate all style fragments to separate file and component
+
 interface DevPortfolioProps {
   devPortfolioContent: any;
 }
