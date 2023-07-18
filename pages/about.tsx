@@ -12,7 +12,6 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
     let modifiedText = text;
 
     if (obj) {
-      console.log("obj", obj);
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
       }

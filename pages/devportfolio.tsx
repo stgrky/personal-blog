@@ -12,15 +12,10 @@ interface DevPortfolioProps {
 }
 
 const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
-  // console.log(
-  //   "devPortfolioContent",
-  //   devPortfolioContent[0].devPortfolioContent.raw.children
-  // );
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
     if (obj) {
-      console.log("obj", obj);
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
       }
