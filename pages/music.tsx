@@ -21,6 +21,19 @@ const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
       if (obj.underline) {
         modifiedText = <u key={index}>{text}</u>;
       }
+      if (obj.href) {
+        modifiedText = (
+          <a
+            key={index}
+            href={obj.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-md text-blue-700"
+          >
+            {obj.children[0].text}
+          </a>
+        );
+      }
     }
 
     switch (type) {
@@ -73,7 +86,9 @@ const MusicPage: NextPage<MusicProps> = ({ musicContent }) => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
-        <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant's Music</h1>
+          <h1 className="mb-8 mt-8 text-3xl font-semibold">
+            About Grant's Music
+          </h1>
           {musicContent[0].musicPageContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(

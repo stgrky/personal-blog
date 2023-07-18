@@ -12,6 +12,7 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
     let modifiedText = text;
 
     if (obj) {
+      console.log("obj", obj);
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
       }
@@ -20,6 +21,19 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
       }
       if (obj.underline) {
         modifiedText = <u key={index}>{text}</u>;
+      }
+      if (obj.href) {
+        modifiedText = (
+          <a
+            key={index}
+            href={obj.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-md text-blue-700"
+          >
+            {obj.children[0].text}
+          </a>
+        );
       }
     }
 
@@ -73,7 +87,9 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
         <div className="lg:col-span-4 col-span-1">
-        <h1 className="mb-8 mt-8 text-3xl font-semibold">About Grant The Human</h1>
+          <h1 className="mb-8 mt-8 text-3xl font-semibold">
+            About Grant The Human
+          </h1>
           {aboutContent[0].aboutPageContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(

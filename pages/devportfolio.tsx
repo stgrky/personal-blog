@@ -19,8 +19,8 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
-    // console.log("obj", obj);
     if (obj) {
+      console.log("obj", obj);
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
       }
@@ -30,7 +30,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       if (obj.underline) {
         modifiedText = <u key={index}>{text}</u>;
       }
-      if (obj.href) {
+      if (obj.a) {
         modifiedText = (
           <a
             key={index}
