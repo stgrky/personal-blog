@@ -25,7 +25,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       if (obj.underline) {
         modifiedText = <u key={index}>{text}</u>;
       }
-      if (obj.a) {
+      if (obj.href) {
         modifiedText = (
           <a
             key={index}

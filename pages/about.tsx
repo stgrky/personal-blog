@@ -7,6 +7,10 @@ interface AboutProps {
   aboutContent: any;
 }
 
+// TODO Priorities
+// 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
+// 2) Migrate all style fragments to separate file and component
+
 const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
