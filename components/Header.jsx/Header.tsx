@@ -36,7 +36,7 @@ const Header = () => {
         <div className="md:float-left md:contents">
           <Link href={`/devportfolio/`}>
             <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
-              GrantTheProfessional
+              GrantThePro
             </span>
           </Link>
         </div>{" "}
