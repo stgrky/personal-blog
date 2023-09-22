@@ -11,8 +11,26 @@ interface HomeProps {
 }
 const Home: NextPage<HomeProps> = ({ posts }) => {
   return (
-    <div key="home-index" className="container mx-auto rounded-lg lg:px-10 pt-10 mb-8 bg-gray-300">
+    <div
+      key="home-index"
+      className="container mx-auto rounded-lg lg:px-10 pt-10 mb-8 bg-gray-300"
+    >
       <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZXDY7EHJSM"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `  
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}'), 
+            path_page: window.location.pathname;`,
+          }}
+        />
+
         <title>Grant Kyle's Personal Blog</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
