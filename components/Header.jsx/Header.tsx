@@ -14,29 +14,29 @@ const Header = () => {
         <div className="md:float-left block">
           <Link href="/">
             {" "}
-            <span className="cursor-pointer font-bold text-5xl text-yellow-300">
+            <span className="cursor-pointer font-bold text-5xl text-black">
               Grant's Blog
             </span>{" "}
           </Link>
         </div>
         <div className="md:float-left md:contents">
           <Link href={`/music/`}>
-            <span className="md:float-right mt-2 align-middle text-yellow-200 ml-4 font-semibold text-3xl cursor-pointer">
+            <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
               GgatorFlavorR
             </span>
           </Link>
         </div>
         <div className="md:float-left md:contents">
           <Link href={`/about/`}>
-            <span className="md:float-right mt-2 align-middle text-red-100 ml-4 font-semibold text-3xl cursor-pointer">
+            <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
               GrantTheHuman
             </span>
           </Link>
         </div>{" "}
         <div className="md:float-left md:contents">
           <Link href={`/devportfolio/`}>
-            <span className="md:float-right mt-2 align-middle text-blue-200 ml-4 font-semibold text-3xl cursor-pointer">
-              GrantTheDev
+            <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
+              GrantThePro
             </span>
           </Link>
         </div>{" "}
