@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Script from "next/script";
 import Head from "next/head";
 import PostWidget from "../components/PostWidget";
 import Categories from "../components/Categories";
@@ -16,18 +17,22 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       className="container mx-auto rounded-lg lg:px-10 pt-10 mb-8 bg-gray-300"
     >
       <Head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZXDY7EHJSM"
+        <meta
+          name="google-site-verification"
+          content="pzj73ZcC3nv6lymzsrykN7OrN5xHRLnlseK1nWEpI4E"
         />
-        <script
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+        />
+        <Script
           dangerouslySetInnerHTML={{
             __html: `  
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date()); 
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}'), 
-            path_page: window.location.pathname;`,
+            gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+            path_page: window.location.pathname,});`,
           }}
         />
 
