@@ -21,7 +21,10 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
           name="google-site-verification"
           content="pzj73ZcC3nv6lymzsrykN7OrN5xHRLnlseK1nWEpI4E"
         />
-        <Script
+        <title>Grant Kyle's Personal Blog</title>
+        {/* <link rel="icon" href="/favicon.ico" /> */}
+      </Head>
+      <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
         />
@@ -35,10 +38,6 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
             path_page: window.location.pathname,});`,
           }}
         />
-
-        <title>Grant Kyle's Personal Blog</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-      </Head>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           {posts.map((post: any, index: any) => (
