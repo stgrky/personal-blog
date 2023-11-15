@@ -19,13 +19,13 @@ const Header = () => {
             </span>{" "}
           </Link>
         </div>
-        <div className="md:float-left md:contents">
+        {/* <div className="md:float-left md:contents">
           <Link href={`/music/`}>
             <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
               GgatorFlavorR
             </span>
           </Link>
-        </div>
+        </div> */}
         <div className="md:float-left md:contents">
           <Link href={`/about/`}>
             <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
