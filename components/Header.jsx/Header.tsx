@@ -52,23 +52,25 @@ const Header = () => {
               }`}
             ></span>
           </button>
-          <div className={`${isOpen ? "inline" : "hidden"}`}>
-            <Link href={`/about/`}>
-              <span
-                className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer `}
-              >
-                GrantTheHuman
-              </span>
-            </Link>
-          </div>{" "}
-          <div className={`${isOpen ? "inline" : "hidden"}`}>
-            <Link href={`/devportfolio/`}>
-              <span
-                className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
-              >
-                GrantThePro
-              </span>
-            </Link>
+          <div className={`float-left ${isOpen ? "inline" : "hidden"}`}>
+            <div className={`w-full`}>
+              <Link href={`/about/`}>
+                <span
+                  className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+                >
+                  GrantTheHuman
+                </span>
+              </Link>
+            </div>{" "}
+            <div>
+              <Link href={`/devportfolio/`}>
+                <span
+                  className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+                >
+                  GrantThePro
+                </span>
+              </Link>
+            </div>
           </div>
         </div>{" "}
         <div className="hidden lg:inline">
