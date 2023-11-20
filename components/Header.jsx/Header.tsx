@@ -4,6 +4,11 @@ import { getCategories } from "../../services";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     getCategories().then((newCategories: any) => setCategories(newCategories));
@@ -26,16 +31,60 @@ const Header = () => {
             </span>
           </Link>
         </div> */}
-        <div className="md:float-left md:contents">
+        <div className="lg:hidden md:contents">
+          <button
+            onClick={handleClick}
+            className="float-right flex flex-col justify-center items-center py-4"
+          >
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                isOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"
+              }`}
+            ></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+                isOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                isOpen ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+              }`}
+            ></span>
+          </button>
+          <div className={`${isOpen ? "inline" : "hidden"}`}>
+            <Link href={`/about/`}>
+              <span
+                className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer `}
+              >
+                GrantTheHuman
+              </span>
+            </Link>
+          </div>{" "}
+          <div className={`${isOpen ? "inline" : "hidden"}`}>
+            <Link href={`/devportfolio/`}>
+              <span
+                className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+              >
+                GrantThePro
+              </span>
+            </Link>
+          </div>
+        </div>{" "}
+        <div className="hidden lg:inline">
           <Link href={`/about/`}>
-            <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
+            <span
+              className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+            >
               GrantTheHuman
             </span>
           </Link>
         </div>{" "}
-        <div className="md:float-left md:contents">
+        <div className="hidden lg:inline">
           <Link href={`/devportfolio/`}>
-            <span className="md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer">
+            <span
+              className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+            >
               GrantThePro
             </span>
           </Link>
