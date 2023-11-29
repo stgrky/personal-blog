@@ -72,7 +72,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
         );
       case "heading-two":
         return (
-          <h2 key={index} className="text-5xl font-semibold mb-4">
+          <h2 key={index} className="text-4xl font-semibold mb-4">
             {modifiedText.map((item: any, i: number) => (
               <Fragment key={i}>{item}</Fragment>
             ))}
@@ -114,9 +114,9 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
         <title>Grant Kyle</title>
         <link rel="icon" href="/g-icon.ico" />
       </Head>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 text-white">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="mb-8 mt-8 text-8xl font-semibold">
+          <h1 className="mb-8 mt-8 text-7xl font-semibold">
             hi 👋 welcome to my website
           </h1>
           {devPortfolioContent[0].devPortfolioContent.raw.children.map(
