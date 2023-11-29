@@ -19,8 +19,8 @@ const Header = () => {
         <div className="md:float-left block">
           <Link href="/">
             {" "}
-            <span className="cursor-pointer font-bold text-5xl text-black">
-              Grant's Blog
+            <span className="cursor-pointer font-bold text-6xl text-white">
+              Grant Kyle
             </span>{" "}
           </Link>
         </div>
@@ -37,17 +37,17 @@ const Header = () => {
             className="float-right flex flex-col justify-center items-center py-4"
           >
             <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+              className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
                 isOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"
               }`}
             ></span>
             <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+              className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
                 isOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+              className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
                 isOpen ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
               }`}
             ></span>
@@ -56,7 +56,7 @@ const Header = () => {
             <div className={`w-full`}>
               <Link href={`/about/`}>
                 <span
-                  className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+                  className={`md:float-right mt-2 align-middle text-white ml-4 font-semibold text-3xl cursor-pointer`}
                 >
                   GrantTheHuman
                 </span>
@@ -65,9 +65,9 @@ const Header = () => {
             <div>
               <Link href={`/devportfolio/`}>
                 <span
-                  className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+                  className={`md:float-right mt-2 align-middle text-white ml-4 font-semibold text-3xl cursor-pointer`}
                 >
-                  GrantThePro
+                  BlogPlayground
                 </span>
               </Link>
             </div>
@@ -76,7 +76,7 @@ const Header = () => {
         <div className="hidden lg:inline">
           <Link href={`/about/`}>
             <span
-              className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+              className={`md:float-right mt-2 align-middle text-white ml-4 font-semibold text-3xl cursor-pointer`}
             >
               GrantTheHuman
             </span>
@@ -85,9 +85,9 @@ const Header = () => {
         <div className="hidden lg:inline">
           <Link href={`/devportfolio/`}>
             <span
-              className={`md:float-right mt-2 align-middle text-black ml-4 font-semibold text-3xl cursor-pointer`}
+              className={`md:float-right mt-2 align-middle text-white ml-4 font-semibold text-3xl cursor-pointer`}
             >
-              GrantThePro
+              BlogPlayground
             </span>
           </Link>
         </div>{" "}

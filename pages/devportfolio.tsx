@@ -1,126 +1,54 @@
 import type { NextPage } from "next";
-import React, { Fragment } from "react";
+import Script from "next/script";
 import Head from "next/head";
-import { getDevPortfolioDetails } from "../services";
+import PostWidget from "../components/PostWidget";
+import Categories from "../components/Categories";
+import PostCard from "../components/PostCard";
+import { getPosts } from "../services";
+import Image from "next/image";
 
-// TODO Priorities
-// 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
-// 2) Migrate all style fragments to separate file and component
-
-interface DevPortfolioProps {
-  devPortfolioContent: any;
+interface HomeProps {
+  posts: any;
 }
-
-const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
-  const getContentFragment = (index: any, text: any, obj: any, type: any) => {
-    let modifiedText = text;
-
-    if (obj) {
-      if (obj.bold) {
-        modifiedText = <b key={index}>{text}</b>;
-      }
-      if (obj.italic) {
-        modifiedText = <em key={index}>{text}</em>;
-      }
-      if (obj.underline) {
-        modifiedText = <u key={index}>{text}</u>;
-      }
-      if (obj.href) {
-        modifiedText = (
-          <a
-            key={index}
-            href={obj.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-md text-blue-700"
-          >
-            {obj.children[0].text}
-          </a>
-        );
-      }
-      // if (obj.type === "numbered-list") {
-      //   console.log(
-      //     "obj.children",
-      //     obj.children.map((item: any, i: number) => obj.children[i].children)
-      //   );
-      //   const map = obj.children.map(
-      //     (item: any, i: number) => obj.children[i].children
-      //   );
-      //   const joinedObj = [].concat(...map.children);
-
-      //   console.log("joinedObj", joinedObj);
-      // modifiedText = (
-      //   <ol key={index} className="list-decimal list-inside">
-      //     {obj.children.map((item: any, i: number) => (
-      //       <li key={i}>{item}</li>
-      //     ))}
-      //   </ol>
-      // );
-      // }
-    }
-
-    switch (type) {
-      case "heading-three":
-        return (
-          <h3 key={index} className="text-xl font-semibold mb-4">
-            {modifiedText.map((item: any, i: number) => (
-              <Fragment key={i}>{item}</Fragment>
-            ))}
-          </h3>
-        );
-      case "paragraph":
-        return (
-          <p key={index} className="mb-8">
-            {modifiedText.map((item: any, i: number) => (
-              <Fragment key={i}>{item}</Fragment>
-            ))}
-          </p>
-        );
-      case "heading-four":
-        return (
-          <h4 key={index} className="text-md font-semibold mb-4">
-            {modifiedText.map((item: any, i: number) => (
-              <Fragment key={i}>{item}</Fragment>
-            ))}
-          </h4>
-        );
-      case "image":
-        return (
-          <img
-            key={index}
-            alt={obj.title}
-            height={obj.height}
-            width={obj.width}
-            src={obj.src}
-          />
-        );
-      default:
-        return modifiedText;
-    }
-  };
+const Home: NextPage<HomeProps> = ({ posts }) => {
   return (
     <div
       key="home-index"
-      className="container mx-auto rounded-lg px-10 mb-8 bg-gray-300"
+      className="container mx-auto rounded-lg lg:px-10 pt-10 mb-8"
     >
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `  
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+            path_page: window.location.pathname,});`,
+        }}
+      />
       <Head>
-        <title>Blog</title>
+        <meta
+          name="google-site-verification"
+          content="pzj73ZcC3nv6lymzsrykN7OrN5xHRLnlseK1nWEpI4E"
+        />
+        <title>Grant Kyle's Personal Blog</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-8 col-span-1">
+          {posts.map((post: any, index: any) => (
+            <PostCard post={post.node} key={post.title} />
+          ))}
+        </div>
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="mb-8 mt-8 text-3xl font-semibold">
-            Grant's Professional Work
-          </h1>
-          {devPortfolioContent[0].devPortfolioContent.raw.children.map(
-            (typeObj: any, index: number) => {
-              const children = typeObj.children.map(
-                (item: any, itemIndex: number) =>
-                  getContentFragment(itemIndex, item.text, item, "")
-              );
-              return getContentFragment(index, children, typeObj, typeObj.type);
-            }
-          )}
+          <div className="lg:sticky relative top-8">
+            <PostWidget categories={undefined} slug={undefined} />
+            {/* <Categories /> */}
+          </div>
         </div>
       </div>
     </div>
@@ -128,11 +56,11 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
 };
 
 export async function getStaticProps() {
-  const devPortfolioContent = (await getDevPortfolioDetails()) || [];
+  const posts = (await getPosts()) || [];
 
   return {
-    props: { devPortfolioContent },
+    props: { posts },
   };
 }
 
-export default DevPortfolio;
+export default Home;
