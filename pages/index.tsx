@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import React, { Fragment } from "react";
 import Head from "next/head";
+import GithubLogo from "../public/GithubLogo";
+import LinkedinLogo from "../public/LinkedinLogo";
 import { getDevPortfolioDetails } from "../services";
 
 // TODO Priorities
@@ -60,29 +62,29 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
     }
 
     switch (type) {
-      case "heading-three":
+      case "paragraph":
         return (
-          <h3 key={index} className="text-5xl font-semibold mb-4">
+          <p key={index} className="mb-8 text-2xl">
             {modifiedText.map((item: any, i: number) => (
               <Fragment key={i}>{item}</Fragment>
             ))}
-          </h3>
+          </p>
         );
       case "heading-two":
         return (
-          <h2 key={index} className="text-2xl font-semibold mb-4">
+          <h2 key={index} className="text-5xl font-semibold mb-4">
             {modifiedText.map((item: any, i: number) => (
               <Fragment key={i}>{item}</Fragment>
             ))}
           </h2>
         );
-      case "paragraph":
+      case "heading-three":
         return (
-          <p key={index} className="mb-8">
+          <h3 key={index} className="text-3xl font-semibold mb-4">
             {modifiedText.map((item: any, i: number) => (
               <Fragment key={i}>{item}</Fragment>
             ))}
-          </p>
+          </h3>
         );
       case "heading-four":
         return (
@@ -107,17 +109,14 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
     }
   };
   return (
-    <div
-      key="home-index"
-      className="container mx-auto rounded-lg px-10 mb-8"
-    >
+    <div key="home-index" className="container mx-auto rounded-lg px-10 mb-8">
       <Head>
-        <title>Homepage</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Grant Kyle</title>
+        <link rel="icon" href="/g-icon.ico" />
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="mb-8 mt-8 text-9xl font-semibold">
+          <h1 className="mb-8 mt-8 text-8xl font-semibold">
             hi 👋 welcome to my website
           </h1>
           {devPortfolioContent[0].devPortfolioContent.raw.children.map(
@@ -129,6 +128,24 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
               return getContentFragment(index, children, typeObj, typeObj.type);
             }
           )}
+          <div className="flex items-center space-x-2">
+            <div className="inline-block">
+              <a
+                target="_blank"
+                href="https://www.github.com/stgrky/"
+              >
+                <GithubLogo />
+              </a>
+            </div>
+            <div className="inline-block">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/steven-grant-kyle/"
+              >
+                <LinkedinLogo />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
