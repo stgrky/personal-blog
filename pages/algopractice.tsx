@@ -6,14 +6,34 @@ interface AlgorithmPracticeProps {
   aboutContent: any;
 }
 
-const revString = (str: any) => {
-  let initialValue = "";
-  return str
-    .split("")
-    .reduce((reversed, characters) => characters + reversed, initialValue);
+// ********************REVERSE STRING
+// const revString = (str: any) => {
+//   let initialValue = "";
+//   return str
+//     .split("")
+//     .reduce((reversed, characters) => characters + reversed, initialValue);
+// };
+// console.log("revString", revString("asdf"));
+
+// ********************CLASSIC FIZZBUZZ
+
+const fizzbuzz = (n: number) => {
+  for (let i = 0; i <= n; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log("fizzbuzz");
+    } else if (i % 3 === 0) {
+      console.log("fizz");
+    } else if (i % 5 === 0) {
+      console.log("buzz");
+    } else {
+      console.log(i);
+    }
+  }
 };
 
-console.log("revString", revString("asdf"));
+const output = fizzbuzz(100);
+
+console.log(output);
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
@@ -30,7 +50,7 @@ const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
             I decidedly need to get better at algorithm fundamentals. So here we
             are.
           </h1>
-          <div>{revString("asdf")}</div>
+          <div></div>
         </div>
       </div>
     </div>
