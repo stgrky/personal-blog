@@ -108,6 +108,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
         return modifiedText;
     }
   };
+
   return (
     <div key="home-index" className="container mx-auto rounded-lg px-10 mb-8">
       <Head>
@@ -130,10 +131,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
           )}
           <div className="flex items-center space-x-2">
             <div className="inline-block">
-              <a
-                target="_blank"
-                href="https://www.github.com/stgrky/"
-              >
+              <a target="_blank" href="https://www.github.com/stgrky/">
                 <GithubLogo />
               </a>
             </div>
