@@ -31,7 +31,7 @@ const Header = () => {
             </span>
           </Link>
         </div> */}
-        {/* <div className="lg:hidden md:contents">
+        <div className="lg:hidden md:contents">
           <button
             onClick={handleClick}
             className="float-right flex flex-col justify-center items-center py-4"
@@ -72,8 +72,8 @@ const Header = () => {
               </Link>
             </div>
           </div>
-        </div> */}
-        {/* <div className="hidden lg:inline">
+        </div>
+        <div className="hidden lg:inline">
           <Link href={`/about/`}>
             <span
               className={`md:float-right mt-2 align-middle text-white ml-4 font-semibold text-3xl cursor-pointer`}
@@ -90,7 +90,7 @@ const Header = () => {
               BlogPlayground
             </span>
           </Link>
-        </div> */}
+        </div>
         {/* <div className="hidden md:float-left md:contents">
           {categories.map((cat: any) => (
             <Link key={cat.slug} href={`/category/${cat.slug}`}>

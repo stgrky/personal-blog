@@ -6,36 +6,38 @@ interface AlgorithmPracticeProps {
   aboutContent: any;
 }
 
-// ********************REVERSE STRING
-// const revString = (str: any) => {
-//   let initialValue = "";
-//   return str
-//     .split("")
-//     .reduce((reversed, characters) => characters + reversed, initialValue);
+// ********************REVERSE STRING and PALINDROME CHECKER
+// const reverseString = (string: string) => {
+//   let reversedString = "";
+//   for (let characters of string) {
+//     reversedString = characters + reversedString;
+//   }
+//   return reversedString === string;
 // };
-// console.log("revString", revString("asdf"));
+
+// console.log("reverseString", reverseString("redrum"));
 
 // ********************CLASSIC FIZZBUZZ
 
-const fizzbuzz = (n: number) => {
-  let i = 1;
-  while (i <= n) {
-    if (i % 3 === 0 && i % 5 === 0) {
-      console.log("fizzbuzz");
-    } else if (i % 3 === 0) {
-      console.log("fizz");
-    } else if (i % 5 === 0) {
-      console.log("buzz");
-    } else {
-      console.log(i);
-    }
-    i++;
-  }
-};
+// const fizzbuzz = (n: number) => {
+//   let i = 1;
+//   while (i <= n) {
+//     if (i % 3 === 0 && i % 5 === 0) {
+//       console.log("fizzbuzz");
+//     } else if (i % 3 === 0) {
+//       console.log("fizz");
+//     } else if (i % 5 === 0) {
+//       console.log("buzz");
+//     } else {
+//       console.log(i);
+//     }
+//     i++;
+//   }
+// };
 
-const output = fizzbuzz(100);
+// const output = fizzbuzz(100);
 
-console.log(output);
+// console.log(output);
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
