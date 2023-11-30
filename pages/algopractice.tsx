@@ -18,7 +18,8 @@ interface AlgorithmPracticeProps {
 // ********************CLASSIC FIZZBUZZ
 
 const fizzbuzz = (n: number) => {
-  for (let i = 0; i <= n; i++) {
+  let i = 1;
+  while (i <= n) {
     if (i % 3 === 0 && i % 5 === 0) {
       console.log("fizzbuzz");
     } else if (i % 3 === 0) {
@@ -28,6 +29,7 @@ const fizzbuzz = (n: number) => {
     } else {
       console.log(i);
     }
+    i++;
   }
 };
 
