@@ -17,6 +17,15 @@ interface AlgorithmPracticeProps {
 
 // console.log("reverseString", reverseString("redrum"));
 
+// ********************INTEGER REVERSAL kinda like REVERSE STRING
+// const reverseInteger = (n: number) => {
+//   const intToString = n.toString().split("").reverse().join("");
+
+//   return Number(intToString);
+// };
+
+// console.log("reverseInt", reverseInteger(1003));
+
 // ********************CLASSIC FIZZBUZZ
 
 // const fizzbuzz = (n: number) => {
@@ -34,10 +43,20 @@ interface AlgorithmPracticeProps {
 //     i++;
 //   }
 // };
-
 // const output = fizzbuzz(100);
-
 // console.log(output);
+
+// ********************MAX CHARACTERS/ CHARACTER MAP
+const maxCharacters = (str: string) => {
+  const charMap = {};
+
+  for (let chars of str) {
+    !charMap[chars] ? (charMap[chars] = 1) : charMap[chars]++;
+  }
+
+  return charMap;
+};
+console.log("maxCharacters", maxCharacters("helloooooo"));
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
