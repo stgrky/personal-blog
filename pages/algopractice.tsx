@@ -49,14 +49,28 @@ interface AlgorithmPracticeProps {
 // ********************MAX CHARACTERS/ CHARACTER MAP
 const maxCharacters = (str: string) => {
   const charMap = {};
+  let max = 1;
+  let maxChar = "";
 
-  for (let chars of str) {
-    !charMap[chars] ? (charMap[chars] = 1) : charMap[chars]++;
+  for (let char of str) {
+    if (!charMap[char]) {
+      charMap[char] = 1;
+    } else {
+      charMap[char]++;
+    }
   }
 
-  return charMap;
+  for (let char in charMap) {
+    if (charMap[char] > max) {
+      max = charMap[char];
+      maxChar = char;
+    }
+    debugger;
+  }
+
+  return maxChar;
 };
-console.log("maxCharacters", maxCharacters("helloooooo"));
+console.log("maxCharacters", maxCharacters("hhhhhhhhheeeehllloooooooooooooooorrrrr"));
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
