@@ -47,30 +47,51 @@ interface AlgorithmPracticeProps {
 // console.log(output);
 
 // ********************MAX CHARACTERS/ CHARACTER MAP
-const maxCharacters = (str: string) => {
-  const charMap = {};
-  let max = 1;
-  let maxChar = "";
+// const maxCharacters = (str: string) => {
+//   const charMap = {};
+//   let max = 1;
+//   let maxChar = "";
 
-  for (let char of str) {
-    if (!charMap[char]) {
-      charMap[char] = 1;
+//   for (let char of str) {
+//     if (!charMap[char]) {
+//       charMap[char] = 1;
+//     } else {
+//       charMap[char]++;
+//     }
+//   }
+
+//   for (let char in charMap) {
+//     if (charMap[char] > max) {
+//       max = charMap[char];
+//       maxChar = char;
+//     }
+//     debugger;
+//   }
+
+//   return maxChar;
+// };
+// console.log("maxCharacters", maxCharacters("hhhhhhhhheeeehllloooooooooooooooorrrrr"));
+
+const chunkedArrays = (array: any, size: number) => {
+  const chunked: any = [];
+
+  for (let element of array) {
+    const last = chunked[chunked.length - 1];
+
+    if (!last || last.length === size) {
+      chunked.push([array]);
     } else {
-      charMap[char]++;
+      last.push(element);
     }
   }
 
-  for (let char in charMap) {
-    if (charMap[char] > max) {
-      max = charMap[char];
-      maxChar = char;
-    }
-    debugger;
-  }
-
-  return maxChar;
+  return chunked;
 };
-console.log("maxCharacters", maxCharacters("hhhhhhhhheeeehllloooooooooooooooorrrrr"));
+
+console.log(
+  "chunkedArrays()",
+  chunkedArrays([1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 5, 1, 12, 3, 123, 123], 8)
+);
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
