@@ -64,34 +64,48 @@ interface AlgorithmPracticeProps {
 //     if (charMap[char] > max) {
 //       max = charMap[char];
 //       maxChar = char;
+//       debugger;
 //     }
-//     debugger;
 //   }
 
 //   return maxChar;
 // };
-// console.log("maxCharacters", maxCharacters("hhhhhhhhheeeehllloooooooooooooooorrrrr"));
+// console.log(
+//   "maxCharacters",
+//   maxCharacters("hhhhhhhhheeeellloooooooooooooooorrrrr")
+// );
 
-const chunkedArrays = (array: any, size: number) => {
-  const chunked: any = [];
+// ********************CHUNKED ARRAYS
+// const chunkedArrays = (array: any, size: number) => {
+//   const chunked: any = [];
 
-  for (let element of array) {
-    const last = chunked[chunked.length - 1];
+//   for (let element of array) {
+//     const last = chunked[chunked.length - 1];
+//     if (!last || last.length === size) {
+//       chunked.push([element]);
+//     } else {
+//       last.push(element);
+//     }
+//   }
 
-    if (!last || last.length === size) {
-      chunked.push([array]);
-    } else {
-      last.push(element);
-    }
-  }
+//   return chunked;
+// };
 
-  return chunked;
-};
+// console.log(
+//   "chunkedArrays()",
+//   chunkedArrays([1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 5, 1, 12, 3, 123, 123], 8)
+// );
 
-console.log(
-  "chunkedArrays()",
-  chunkedArrays([1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 5, 1, 12, 3, 123, 123], 8)
-);
+// ********************MAX CHARACTERS/ CHARACTER MAP
+// const anagram = (strOne, strTwo) => {
+//   const sortedStrOne = strOne.split("").sort().join("");
+//   const sortedStrTwo = strTwo.split("").sort().join("");
+
+//   return sortedStrOne === sortedStrTwo;
+// };
+
+// console.log("anagramOne", anagram("santa", "satan"));
+// console.log("anagramTwo", anagram("hello", "world"));
 
 const AlgoPractice: NextPage<AlgorithmPracticeProps> = () => {
   return (
