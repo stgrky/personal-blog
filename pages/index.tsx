@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import Head from "next/head";
 import GithubLogo from "../public/GithubLogo";
 import LinkedinLogo from "../public/LinkedinLogo";
+import { TypeAnimation } from "react-type-animation";
 import { getDevPortfolioDetails } from "../services";
 
 // TODO Priorities
@@ -118,8 +119,31 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
           <h1 className="mb-8 mt-8 text-7xl font-semibold">
-            hi 👋 welcome to my website
+            nice to meet you 👋
           </h1>
+          <h2 className="font-bold">
+            <TypeAnimation
+              sequence={[
+                "i am a web developer.",
+                1000,
+                "i am a digital marketer.",
+                1000,
+                "i thrive helping startups scale.",
+                1000,
+                "i am an interpersonal communicator.",
+                1000,
+                "i am customer and team-focused.",
+                1000,
+                "i am relentlessly goal-oriented.",
+                1000,
+                "i am a bundle of energy.",
+                1000,
+              ]}
+              speed={50}
+              style={{ fontSize: "2em" }}
+              repeat={Infinity}
+            />
+          </h2>
           {devPortfolioContent[0].devPortfolioContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
