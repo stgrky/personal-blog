@@ -7,10 +7,10 @@ import PostCard from "../components/PostCard";
 import { getPosts } from "../services";
 import Image from "next/image";
 
-interface HomeProps {
+interface BlogProps {
   posts: any;
 }
-const Home: NextPage<HomeProps> = ({ posts }) => {
+const Blog: NextPage<BlogProps> = ({ posts }) => {
   return (
     <div
       key="home-index"
@@ -63,4 +63,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default Blog;
