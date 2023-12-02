@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Script from "next/script";
 import React, { Fragment } from "react";
 import Head from "next/head";
 import GithubLogo from "../public/GithubLogo";
@@ -116,6 +117,19 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
         <title>Grant Kyle</title>
         <link rel="icon" href="/g-icon.ico" />
       </Head>
+      <Script
+        async
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+      <Script strategy="lazyOnload">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'G-ZXDY7EHJSM', {
+            path_page: window.location.pathname})`}
+      </Script>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
           <h1 className="mb-8 mt-8 text-7xl font-semibold">

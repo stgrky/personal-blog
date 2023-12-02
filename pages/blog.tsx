@@ -16,20 +16,6 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
       key="home-index"
       className="container mx-auto rounded-lg lg:px-10 pt-10 mb-8"
     >
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
-      />
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `  
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date()); 
-            gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
-            path_page: window.location.pathname,});`,
-        }}
-      />
       <Head>
         <meta
           name="google-site-verification"
@@ -38,6 +24,19 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
         <title>Grant Kyle's Personal Blog</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
+      <Script
+        async
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+      <Script strategy="lazyOnload">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'G-ZXDY7EHJSM', {
+            path_page: window.location.pathname})`}
+      </Script>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           {posts.map((post: any, index: any) => (
