@@ -132,7 +132,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       </Script>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-7xl font-semibold">
+          <h1 className="md:mb-8 md:mt-8 text-3xl md:text-7xl font-semibold">
             nice to meet you 👋
           </h1>
           <div className="mt-2 md:mt-0 h-20 md:h-10">
@@ -154,7 +154,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
                 1000,
               ]}
               speed={50}
-              className="font-bold text-2xl lg:text-4xl"
+              className="font-bold text-xl lg:text-4xl"
               repeat={Infinity}
             />
           </div>
