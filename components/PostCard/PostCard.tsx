@@ -14,7 +14,7 @@ const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
         <img
           src={props.post.featuredImage.url}
           alt={props.post.title}
-          className="object-top absolute h-80 w-full object-cover rounded shadow-lg rounded-t-lg lg:rounded-lg"
+          className="object-top absolute h-80 w-full lg:object-cover rounded shadow-lg rounded-t-lg lg:rounded-lg"
         />
       </div>
       <h1

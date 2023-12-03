@@ -19,7 +19,7 @@ const Header = () => {
         <div className="md:float-left block">
           <Link href="/">
             {" "}
-            <span className="cursor-pointer font-bold text-6xl text-white">
+            <span className="cursor-pointer font-bold text-4xl md:text-6xl text-white">
               Grant Kyle
             </span>{" "}
           </Link>

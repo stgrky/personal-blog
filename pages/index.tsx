@@ -66,7 +66,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
     switch (type) {
       case "paragraph":
         return (
-          <p key={index} className="mb-8 text-2xl">
+          <p key={index} className="mb-8 text-xl md:text-2xl">
             {modifiedText.map((item: any, i: number) => (
               <Fragment key={i}>{item}</Fragment>
             ))}
@@ -132,10 +132,10 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
       </Script>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-white">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="mb-8 mt-8 text-7xl font-semibold">
+          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-7xl font-semibold">
             nice to meet you 👋
           </h1>
-          <h2 className="font-bold">
+          <div className="mt-2 md:mt-0 h-20 md:h-10">
             <TypeAnimation
               sequence={[
                 "i am a web developer.",
@@ -154,10 +154,10 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
                 1000,
               ]}
               speed={50}
-              style={{ fontSize: "2em" }}
+              className="font-bold text-2xl lg:text-4xl"
               repeat={Infinity}
             />
-          </h2>
+          </div>
           {devPortfolioContent[0].devPortfolioContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
