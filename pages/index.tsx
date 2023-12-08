@@ -111,6 +111,28 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
     }
   };
 
+  const typewriterText = [
+    "i am a web developer.",
+    1000,
+    "i am a digital marketer.",
+    1000,
+    "i thrive helping startups scale.",
+    100,
+    "i thrive helping businesses scale.",
+    100,
+    "i am an interpersonal communicator.",
+    100,
+    "i am team-focused.",
+    100,
+    "i am customer-centric.",
+    100,
+    "i am relentlessly goal-oriented.",
+    100,
+    "i like creating positive impact.",
+    100,
+    "i'd be happy to chat with you.",
+    3000,
+  ];
   return (
     <div key="home-index" className="container mx-auto rounded-lg px-10 mb-8">
       <Head>
@@ -137,28 +159,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
           </h1>
           <div className="mt-2 md:mt-0 h-20 md:h-10">
             <TypeAnimation
-              sequence={[
-                "i am a web developer.",
-                1000,
-                "i am a digital marketer.",
-                1000,
-                "i thrive helping startups scale.",
-                100,
-                "i thrive helping businesses scale.",
-                100,
-                "i am an interpersonal communicator.",
-                100,
-                "i am team-focused.",
-                100,
-                "i am customer-centric.",
-                100,
-                "i am relentlessly goal-oriented.",
-                100,
-                "i like creating positive impact.",
-                100,
-                "i'd be happy to chat with you.",
-                3000,
-              ]}
+              sequence={typewriterText}
               speed={50}
               className="font-bold text-xl lg:text-4xl"
               repeat={Infinity}
@@ -182,7 +183,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
             <div className="inline-block">
               <a
                 target="_blank"
-                href="https://www.linkedin.com/in/steven-grant-kyle/"
+                href="https://www.linkedin.com/in/sgrantkyle/"
               >
                 <LinkedinLogo />
               </a>
