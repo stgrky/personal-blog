@@ -143,15 +143,21 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
                 "i am a digital marketer.",
                 1000,
                 "i thrive helping startups scale.",
-                1000,
+                100,
+                "i thrive helping businesses scale.",
+                100,
                 "i am an interpersonal communicator.",
-                1000,
-                "i am customer and team-focused.",
-                1000,
+                100,
+                "i am team-focused.",
+                100,
+                "i am customer-centric.",
+                100,
                 "i am relentlessly goal-oriented.",
-                1000,
-                "i am a bundle of energy.",
-                1000,
+                100,
+                "i like creating positive impact.",
+                100,
+                "i'd be happy to chat with you.",
+                3000,
               ]}
               speed={50}
               className="font-bold text-xl lg:text-4xl"
@@ -180,6 +186,13 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
               >
                 <LinkedinLogo />
               </a>
+            </div>
+            <div className="float-right">
+              <button className="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                <a target="_blank" href="https://calendly.com/grantkyle/">
+                  Let's talk
+                </a>
+              </button>
             </div>
           </div>
         </div>
