@@ -186,6 +186,7 @@ const DevPortfolio: NextPage<DevPortfolioProps> = ({ devPortfolioContent }) => {
                 href="https://www.linkedin.com/in/sgrantkyle/"
               >
                 <LinkedinLogo />
+                "a"
               </a>
             </div>
             <div className="float-right">
