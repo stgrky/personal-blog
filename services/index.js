@@ -170,21 +170,39 @@ export const getMusicPageDetails = async (slug) => {
 };
 export const getDevPortfolioDetails = async (slug) => {
   const query = gql`
-query devPortfolioQuery {
-  allDevPortfolios {
-    devPortfolioContent {
-      raw
+    query devPortfolioQuery {
+      allDevPortfolios {
+        devPortfolioContent {
+          raw
+        }
+        devPortfolioHeroImage {
+          url
+        }
+      }
     }
-    devPortfolioHeroImage {
-      url
-    }
-  }
-}
   `;
 
   const result = await request(graphqlAPI, query);
 
   return result.allDevPortfolios;
+};
+export const getMentalHealthPageDetails = async () => {
+  const query = gql`
+    query mentalHealthPageQuery {
+      mentalHealthWebDevelopments {
+        mentalHealthPageTitle
+        mentalHealthContent {
+          raw
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  console.log('result', result)
+
+  return result.mentalHealthWebDevelopments;
 };
 
 // export const submitComment = async (obj) => {
