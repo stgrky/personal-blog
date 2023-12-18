@@ -85,7 +85,7 @@ const AboutPage: NextPage<AboutProps> = ({ aboutContent }) => {
       className="container mx-auto rounded-lg px-10 mb-8 bg-gray-300"
     >
       <Head>
-        <title>Blog</title>
+        <title>Blog test</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
