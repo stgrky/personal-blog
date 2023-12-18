@@ -18,7 +18,10 @@ interface MentalHealthPageProps {
 const DevPortfolio: NextPage<MentalHealthPageProps> = ({
   mentalHealthPageContent,
 }) => {
-  console.log("mentalHealthPageContentttt", mentalHealthPageContent);
+  console.log(
+    "mentalHealthPageContentttt",
+    mentalHealthPageContent[0].mentalHealthContent.raw
+  );
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
@@ -115,14 +118,14 @@ const DevPortfolio: NextPage<MentalHealthPageProps> = ({
   };
 
   const typewriterText = [
-    "welcome!",
+    "Need a site for your mental health practice?",
     2000,
-    "i am a web developer.",
+    "I am your person.",
     1000,
-    "and i want to help you build your site",
-    100,
-    "and it will be painless for you to upload content and pics",
-    100,
+    "And don't worry about knowing technology...",
+    1000,
+    "It will be painless for you to manage your own content.",
+    5000,
   ];
   return (
     <div
@@ -130,15 +133,29 @@ const DevPortfolio: NextPage<MentalHealthPageProps> = ({
       className="container mx-auto rounded-lg px-10 mb-8 bg-gray-300"
     >
       <Head>
-        <title>Vanilla Practice</title>
+        <title>Mental Health Practice Web Developer</title>
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 font-sans">
         <div className="lg:col-span-4 col-span-1">
           <h1 className="mb-8 mt-8 text-3xl font-semibold">
-            I decidedly need to get better at algorithm fundamentals. So here we
-            are.
+            {mentalHealthPageContent[0].mentalHealthPageTitle}
           </h1>
-          <div></div>
+          <div>
+            {mentalHealthPageContent[0].mentalHealthContent.raw.children.map(
+              (typeObj: any, index: number) => {
+                const children = typeObj.children.map(
+                  (item: any, itemIndex: number) =>
+                    getContentFragment(itemIndex, item.text, item, "")
+                );
+                return getContentFragment(
+                  index,
+                  children,
+                  typeObj,
+                  typeObj.type
+                );
+              }
+            )}
+          </div>
         </div>
       </div>
     </div>
