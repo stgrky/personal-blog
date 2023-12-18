@@ -7,10 +7,6 @@ import LinkedinLogo from "../public/LinkedinLogo";
 import { TypeAnimation } from "react-type-animation";
 import { getMentalHealthPageDetails } from "../services";
 
-// TODO Priorities
-// 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
-// 2) Migrate all style fragments to separate file and component
-
 interface MentalHealthProps {
   mentalHealthPageContent: any;
 }
@@ -114,32 +110,19 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
   };
 
   const typewriterText = [
-    "i am a web developer.",
+    "Need a site for your mental health practice?",
+    2000,
+    "I am your person.",
     1000,
-    "i am a digital marketer.",
+    "And don't worry about knowing technology...",
     1000,
-    "i thrive helping startups scale.",
-    100,
-    "i thrive helping businesses scale.",
-    100,
-    "i am an interpersonal communicator.",
-    100,
-    "i am team-focused.",
-    100,
-    "i am customer-centric.",
-    100,
-    "i am relentlessly goal-oriented.",
-    100,
-    "i like creating positive impact.",
-    100,
-    "i'd be happy to chat with you.",
-    10000,
+    "It will be painless for you to manage your own content.",
+    5000,
   ];
   return (
     <div className="container mx-auto rounded-lg px-10 mb-8 bg-gray-100">
       <Head>
-        <title>Mental Health Sites</title>
-        <link rel="icon" href="/g-icon.ico" />
+        <title>Mental Health Practice Web Developer</title>
       </Head>
       <Script
         async
