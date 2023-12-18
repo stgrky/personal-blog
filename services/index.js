@@ -200,8 +200,6 @@ export const getMentalHealthPageDetails = async () => {
 
   const result = await request(graphqlAPI, query);
 
-  console.log('result', result)
-
   return result.mentalHealthWebDevelopments;
 };
 

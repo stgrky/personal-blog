@@ -11,14 +11,13 @@ import { getMentalHealthPageDetails } from "../services";
 // 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
 // 2) Migrate all style fragments to separate file and component
 
-interface MentalHealthPageProps {
+interface MentalHealthProps {
   mentalHealthPageContent: any;
 }
 
-const DevPortfolio: NextPage<MentalHealthPageProps> = ({
+const MentalHealth: NextPage<MentalHealthProps> = ({
   mentalHealthPageContent,
 }) => {
-  console.log("mentalHealthPageContentttt", mentalHealthPageContent);
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
@@ -115,30 +114,82 @@ const DevPortfolio: NextPage<MentalHealthPageProps> = ({
   };
 
   const typewriterText = [
-    "welcome!",
-    2000,
     "i am a web developer.",
     1000,
-    "and i want to help you build your site",
+    "i am a digital marketer.",
+    1000,
+    "i thrive helping startups scale.",
     100,
-    "and it will be painless for you to upload content and pics",
+    "i thrive helping businesses scale.",
     100,
+    "i am an interpersonal communicator.",
+    100,
+    "i am team-focused.",
+    100,
+    "i am customer-centric.",
+    100,
+    "i am relentlessly goal-oriented.",
+    100,
+    "i like creating positive impact.",
+    100,
+    "i'd be happy to chat with you.",
+    10000,
   ];
   return (
-    <div
-      key="home-index"
-      className="container mx-auto rounded-lg px-10 mb-8 bg-gray-300"
-    >
+    <div className="container mx-auto rounded-lg px-10 mb-8 bg-gray-100">
       <Head>
-        <title>Vanilla Practice</title>
+        <title>Mental Health Sites</title>
+        <link rel="icon" href="/g-icon.ico" />
       </Head>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 font-sans">
+      <Script
+        async
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+      <Script strategy="lazyOnload">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'G-ZXDY7EHJSM', {
+            path_page: window.location.pathname})`}
+      </Script>
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-gray-800">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="mb-8 mt-8 text-3xl font-semibold">
-            I decidedly need to get better at algorithm fundamentals. So here we
-            are.
+          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-5xl font-extrabold text-indigo-700">
+            Mental Health Practice
           </h1>
-          <div></div>
+          <div className="mt-2 md:mt-0 h-20 md:h-10">
+            <TypeAnimation
+              sequence={typewriterText}
+              speed={50}
+              className="font-bold text-lg lg:text-2xl text-gray-600"
+              repeat={Infinity}
+            />
+          </div>
+          {mentalHealthPageContent[0].mentalHealthContent.raw.children.map(
+            (typeObj: any, index: number) => {
+              const children = typeObj.children.map(
+                (item: any, itemIndex: number) =>
+                  getContentFragment(itemIndex, item.text, item, "")
+              );
+              return getContentFragment(index, children, typeObj, typeObj.type);
+            }
+          )}
+          <div className="flex items-center space-x-2 mt-4">
+            <div className="inline-block">
+              <a target="_blank" href="https://www.linkedin.com/in/sgrantkyle/">
+                <LinkedinLogo />
+              </a>
+            </div>
+            <div className="float-right">
+              <button className="inline-block bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                <a target="_blank" href="https://calendly.com/grantkyle/">
+                  Let's talk
+                </a>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -148,11 +199,9 @@ const DevPortfolio: NextPage<MentalHealthPageProps> = ({
 export async function getStaticProps() {
   const mentalHealthPageContent = (await getMentalHealthPageDetails()) || [];
 
-  console.log("mentalHealthPageContent", mentalHealthPageContent);
-
   return {
     props: { mentalHealthPageContent },
   };
 }
 
-export default DevPortfolio;
+export default MentalHealth;
