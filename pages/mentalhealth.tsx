@@ -7,6 +7,10 @@ import LinkedinLogo from "../public/LinkedinLogo";
 import { TypeAnimation } from "react-type-animation";
 import { getMentalHealthPageDetails } from "../services";
 
+// TODO Priorities
+// 1) Expound upon the available ContentFragments; ensure I have full range of rich text covered
+// 2) Migrate all style fragments to separate file and component
+
 interface MentalHealthProps {
   mentalHealthPageContent: any;
 }
@@ -110,19 +114,32 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
   };
 
   const typewriterText = [
-    "Need a site for your mental health practice?",
-    2000,
-    "I am your person.",
+    "i am a web developer.",
     1000,
-    "And don't worry about knowing technology...",
+    "i am a digital marketer.",
     1000,
-    "It will be painless for you to manage your own content.",
-    5000,
+    "i thrive helping startups scale.",
+    100,
+    "i thrive helping businesses scale.",
+    100,
+    "i am an interpersonal communicator.",
+    100,
+    "i am team-focused.",
+    100,
+    "i am customer-centric.",
+    100,
+    "i am relentlessly goal-oriented.",
+    100,
+    "i like creating positive impact.",
+    100,
+    "i'd be happy to chat with you.",
+    10000,
   ];
   return (
     <div className="container mx-auto rounded-lg px-10 mb-8 bg-gray-100">
       <Head>
-        <title>Mental Health Practice Web Developer</title>
+        <title>Grant Kyle - Web Developer & Digital Marketer</title>
+        <link rel="icon" href="/g-icon.ico" />
       </Head>
       <Script
         async
@@ -139,23 +156,25 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
       </Script>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-gray-800">
         <div className="lg:col-span-4 col-span-1">
-          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-5xl font-extrabold text-indigo-700">
-            Mental Health Practice
+          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-6xl font-extrabold text-indigo-700">
+            Mental Health
           </h1>
-          <div className="mt-2 md:mt-0 h-20 md:h-10">
+          {/* <div className="mt-2 md:mt-0 h-20 md:h-10">
             <TypeAnimation
               sequence={typewriterText}
               speed={50}
               className="font-bold text-lg lg:text-2xl text-gray-600"
               repeat={Infinity}
             />
-          </div>
+          </div> */}
           {mentalHealthPageContent[0].mentalHealthContent.raw.children.map(
             (typeObj: any, index: number) => {
               const children = typeObj.children.map(
                 (item: any, itemIndex: number) =>
                   getContentFragment(itemIndex, item.text, item, "")
               );
+
+              console.log("children", children);
               return getContentFragment(index, children, typeObj, typeObj.type);
             }
           )}
@@ -181,6 +200,8 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
 
 export async function getStaticProps() {
   const mentalHealthPageContent = (await getMentalHealthPageDetails()) || [];
+
+  console.log("mentalHealthPageContent", mentalHealthPageContent);
 
   return {
     props: { mentalHealthPageContent },
