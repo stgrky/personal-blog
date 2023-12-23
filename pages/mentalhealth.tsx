@@ -1,6 +1,11 @@
 import type { NextPage } from "next";
 import Script from "next/script";
 import React, { Fragment } from "react";
+import {
+  CloudArrowUpIcon,
+  LockClosedIcon,
+  ServerIcon,
+} from "@heroicons/react/20/solid";
 import Head from "next/head";
 import GithubLogo from "../public/GithubLogo";
 import LinkedinLogo from "../public/LinkedinLogo";
@@ -135,10 +140,11 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
     "i'd be happy to chat with you.",
     10000,
   ];
+
   return (
-    <div className="container mx-auto rounded-lg px-10 mb-8 bg-gray-100">
+    <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
       <Head>
-        <title>Grant Kyle - Web Developer & Digital Marketer</title>
+        <title>Websites For Therapists</title>
         <link rel="icon" href="/g-icon.ico" />
       </Head>
       <Script
@@ -148,48 +154,114 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
       />
       <Script strategy="lazyOnload">
         {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date()); 
-            gtag('config', 'G-ZXDY7EHJSM', {
-            path_page: window.location.pathname})`}
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZXDY7EHJSM', {
+          path_page: window.location.pathname})`}
       </Script>
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 text-gray-800">
-        <div className="lg:col-span-4 col-span-1">
-          <h1 className="md:mb-8 md:mt-8 text-4xl md:text-6xl font-extrabold text-indigo-700">
-            Mental Health
-          </h1>
-          {/* <div className="mt-2 md:mt-0 h-20 md:h-10">
-            <TypeAnimation
-              sequence={typewriterText}
-              speed={50}
-              className="font-bold text-lg lg:text-2xl text-gray-600"
-              repeat={Infinity}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <svg
+          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="e813992c-7d03-4cc4-a2bd-151760b470a0"
+              width={200}
+              height={200}
+              x="50%"
+              y={-1}
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M100 200V.5M.5 .5H200" fill="none" />
+            </pattern>
+          </defs>
+          <svg x="50%" y={-1} className="overflow-visible fill-gray-50">
+            <path
+              d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
+              strokeWidth={0}
             />
-          </div> */}
-          {mentalHealthPageContent[0].mentalHealthContent.raw.children.map(
-            (typeObj: any, index: number) => {
-              const children = typeObj.children.map(
-                (item: any, itemIndex: number) =>
-                  getContentFragment(itemIndex, item.text, item, "")
-              );
-
-              console.log("children", children);
-              return getContentFragment(index, children, typeObj, typeObj.type);
-            }
-          )}
-          <div className="flex items-center space-x-2 mt-4">
-            <div className="inline-block">
-              <a target="_blank" href="https://www.linkedin.com/in/sgrantkyle/">
-                <LinkedinLogo />
-              </a>
+          </svg>
+          <rect
+            width="100%"
+            height="100%"
+            strokeWidth={0}
+            fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
+          />
+        </svg>
+      </div>
+      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+          <div className="lg:pr-4">
+            <div className="lg:max-w-lg">
+              <p className="text-base font-semibold leading-7 text-indigo-600">
+                Leave the work to me, focus on your patients
+              </p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                I build websites for therapists
+              </h1>
+              <p className="mt-6 text-xl leading-8 text-gray-700">
+                Using modern, performant technology that Google favors for
+                ranking, I build you a content management system that is simple
+                and efficient for you to use and maintain. This requires{" "}
+                <strong>no technical knowledge on your end</strong>, allowing
+                you to do what you do best; make a difference in the lives of
+                those you serve.
+              </p>
             </div>
-            <div className="float-right">
-              <button className="inline-block bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+            <div className="">
+              <button className="inline-block bg-indigo-700 text-white font-bold my-4 py-4 px-6 rounded">
                 <a target="_blank" href="https://calendly.com/grantkyle/">
                   Let's talk
                 </a>
               </button>
+            </div>
+          </div>
+        </div>
+        <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+          <img
+            className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+            src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+            alt=""
+          />
+        </div>
+        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+          <div className="lg:pr-4">
+            <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
+              {mentalHealthPageContent[0].mentalHealthContent.raw.children.map(
+                (typeObj: any, index: number) => {
+                  const children = typeObj.children.map(
+                    (item: any, itemIndex: number) =>
+                      getContentFragment(itemIndex, item.text, item, "")
+                  );
+
+                  console.log("children", children);
+                  return getContentFragment(
+                    index,
+                    children,
+                    typeObj,
+                    typeObj.type
+                  );
+                }
+              )}
+              <div className="flex items-center space-x-2 mt-4">
+                <div className="inline-block">
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/sgrantkyle/"
+                  >
+                    <LinkedinLogo />
+                  </a>
+                </div>
+                <div className="float-right">
+                  <button className="inline-block bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                    <a target="_blank" href="https://calendly.com/grantkyle/">
+                      Let's talk
+                    </a>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
