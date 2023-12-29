@@ -170,21 +170,37 @@ export const getMusicPageDetails = async (slug) => {
 };
 export const getDevPortfolioDetails = async (slug) => {
   const query = gql`
-query devPortfolioQuery {
-  allDevPortfolios {
-    devPortfolioContent {
-      raw
+    query devPortfolioQuery {
+      allDevPortfolios {
+        devPortfolioContent {
+          raw
+        }
+        devPortfolioHeroImage {
+          url
+        }
+      }
     }
-    devPortfolioHeroImage {
-      url
-    }
-  }
-}
   `;
 
   const result = await request(graphqlAPI, query);
 
   return result.allDevPortfolios;
+};
+export const getZeroqodeAssignmentDetails = async () => {
+  const query = gql`
+    query zeroqodeAssignmentQuery {
+      zeroqodeAssignments {
+        zeroqodeAssignmentTitle
+        zerocodeAssignmentBulletContent {
+          raw
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.zeroqodeAssignments;
 };
 
 // export const submitComment = async (obj) => {
