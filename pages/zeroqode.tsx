@@ -164,7 +164,7 @@ const Zeroqode: NextPage<ZeroqodeProps> = ({ zeroqodeAssignmentContent }) => {
                 Let's outline the details needed for "X" company's success
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Below we will outline:
+                Zeroqode Project Scoping Assignment
               </h1>
               {/* <p className="mt-6 text-xl leading-8 text-gray-700">
                 <ul className="list-disc">
