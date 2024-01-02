@@ -1,15 +1,8 @@
 import type { NextPage } from "next";
 import Script from "next/script";
 import React, { Fragment } from "react";
-import {
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon,
-} from "@heroicons/react/20/solid";
 import Head from "next/head";
-import GithubLogo from "../public/GithubLogo";
 import LinkedinLogo from "../public/LinkedinLogo";
-import { TypeAnimation } from "react-type-animation";
 import { getZeroqodeAssignmentDetails } from "../services";
 
 interface ZeroqodeProps {
