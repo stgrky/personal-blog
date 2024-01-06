@@ -55,11 +55,36 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           (item: any, i: number) => obj.children[i].children
         );
         const joinedObj = [].concat(...map);
+        console.log("LI", joinedObj);
         modifiedText = (
           <Fragment key={index}>
             {joinedObj.map((item: any, i: any) => (
-              <li key={i}>{item.text}</li>
+              <li className="mb-8 text-lg md:text-xl" key={i}>
+                {item.text}
+              </li>
             ))}
+          </Fragment>
+        );
+      }
+      if (obj.type === "numbered-list") {
+        const map = obj.children.map(
+          (item: any, i: any) => obj.children[i].children[0]
+        );
+
+        console.log("map", map);
+        const joinedObj = [].concat(...map);
+        console.log("OL", joinedObj.concat(...map));
+
+        // console.log("joinedObj", joinedObj[0]);
+        modifiedText = (
+          <Fragment key={index}>
+            <ol>
+              {joinedObj.map((item: any, i: any) => (
+                <li className="mb-8 text-lg md:text-xl" key={i}>
+                  {item.text}
+                </li>
+              ))}
+            </ol>
           </Fragment>
         );
       }
