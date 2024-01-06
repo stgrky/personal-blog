@@ -27,6 +27,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
     let modifiedText = text;
 
     if (obj) {
+      // console.log("obj", obj);
       if (obj.bold) {
         modifiedText = <b key={index}>{text}</b>;
       }
@@ -49,25 +50,19 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           </a>
         );
       }
-      // if (obj.type === "numbered-list") {
-      //   console.log(
-      //     "obj.children",
-      //     obj.children.map((item: any, i: number) => obj.children[i].children)
-      //   );
-      //   const map = obj.children.map(
-      //     (item: any, i: number) => obj.children[i].children
-      //   );
-      //   const joinedObj = [].concat(...map.children);
-
-      //   console.log("joinedObj", joinedObj);
-      // modifiedText = (
-      //   <ol key={index} className="list-decimal list-inside">
-      //     {obj.children.map((item: any, i: number) => (
-      //       <li key={i}>{item}</li>
-      //     ))}
-      //   </ol>
-      // );
-      // }
+      if (obj.type === "list-item") {
+        const map = obj.children.map(
+          (item: any, i: number) => obj.children[i].children
+        );
+        const joinedObj = [].concat(...map);
+        modifiedText = (
+          <Fragment key={index}>
+            {joinedObj.map((item: any, i: any) => (
+              <li key={i}>{item.text}</li>
+            ))}
+          </Fragment>
+        );
+      }
     }
 
     switch (type) {
@@ -236,7 +231,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                       getContentFragment(itemIndex, item.text, item, "")
                   );
 
-                  console.log("children", children);
+                  // console.log("childrenasdfasdfasd", children);
                   return getContentFragment(
                     index,
                     children,
@@ -273,7 +268,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
 export async function getStaticProps() {
   const mentalHealthPageContent = (await getMentalHealthPageDetails()) || [];
 
-  console.log("mentalHealthPageContent", mentalHealthPageContent);
+  // console.log("mentalHealthPageContent", mentalHealthPageContent);
 
   return {
     props: { mentalHealthPageContent },
