@@ -210,9 +210,9 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                 Using modern, performant technology that Google favors for
                 ranking, I build you a content management system that is simple
                 and efficient for you to use and maintain. This requires{" "}
-                <strong>no technical knowledge on your end</strong>, allowing
-                you to do what you do best; make a difference in the lives of
-                those you serve.
+                <strong>minimal technical knowledge on your end</strong>,
+                allowing you to do what you do best; make a difference in the
+                lives of those you serve.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                 <a
@@ -220,12 +220,6 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Get started
-                </a>
-                <a
-                  href=""
-                  className="text-sm font-semibold leading-6 text-white"
-                >
-                  Learn more <span aria-hidden="true">→</span>
                 </a>
               </div>
             </div>
@@ -279,18 +273,17 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  Pricing... But Make It Simple
+                  Pricing... Simplified
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Though this process is streamlined for you, I recommend
-                  employing my retained services to ensure your site is always
-                  taken care of *
+                  Services offered here are suggestions. Additional needs can
+                  and will met, pending individual consultation and quote.
                 </p>
               </div>
               <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="p-8 sm:p-10 lg:flex-auto">
                   <h3 className="text-2xl font-bold tracking-tight text-gray-900">
-                    Business Card Package
+                    Base website *
                   </h3>
                   <p className="mt-6 text-base leading-7 text-gray-600">
                     Your business is already thriving. You just need a
@@ -326,7 +319,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                       </p>
                       <p className="mt-6 flex items-baseline justify-center gap-x-2">
                         <span className="text-5xl font-bold tracking-tight text-gray-900">
-                          $649
+                          $549
                         </span>
                         <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
                           USD
@@ -339,12 +332,137 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                         Purchase Now
                       </a>
                       <p className="mt-6 text-xs leading-5 text-gray-600">
-                        *Monthly Management Not Included
+                        CMS training included *
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="text-center my-10">
+            <h1 className="font-bold text-3xl mb-2">Recommended Additions</h1>
+            <h4 className="text-gray-600">
+              These are a few examples; we can build your dream site
+            </h4>
+          </div>
+          <div className="flex flex-col md:flex-row px-2 md:px-0">
+            <div className="w-full md:w-1/3 bg-white rounded-lg shadow hover:shadow-xl transition duration-100 ease-in-out p-6 md:mr-4 mb-10 md:mb-0">
+              <h3 className="text-gray-600 text-lg">Site Manager</h3>
+              <p className="text-gray-600 mt-1">
+                <span className="font-bold text-black text-4xl">$59</span>{" "}
+                /Month
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                For a complete hands-off experience. You effectively have a
+                personal site guardian & maid.
+              </p>
+              <div className="text-sm text-gray-600 mt-4">
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Preventative maintenance
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Hosting management
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Analytics w/ regular reporting
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Minor design tweaks
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Image updates on request
+                </p>
+              </div>
+              <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+                Choose Plan
+              </button>
+            </div>
+            <div className="w-full md:w-1/3 text-white bg-purple-700 rounded-lg shadow hover:shadow-xl transition duration-100 ease-in-out p-6 md:mr-4 mb-10 md:mb-0">
+              <h3 className="text-lg">Additional Pages</h3>
+              <p className="mt-1">
+                <span className="font-bold text-4xl">$79</span> /base price
+              </p>
+              <p className="text-sm opacity-75 mt-2">
+                Need an additional page? Start here. Quotes given on individual
+                basis; pricing increases based on complexity and functionality
+                of needs.
+              </p>
+              <div className="text-sm mt-4"></div>
+              <button className="w-full text-purple-700 bg-white rounded opacity-75 hover:opacity-100 hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+                Choose Plan
+              </button>
+            </div>
+            <div className="w-full md:w-1/3 bg-white rounded-lg shadow hover:shadow-xl transition duration-100 ease-in-out p-6 mb-10 md:mb-0">
+              <h3 className="text-gray-600 text-lg">SEO Professional</h3>
+              <p className="text-gray-600 mt-1">
+                <span className="font-bold text-black text-4xl">$739</span>{" "}
+                /Month
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                For growing your practice. Blog page included with content
+                tailored to your practice.
+              </p>
+              <div className="text-sm text-gray-600 mt-4">
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  1 post per week
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Professionally written content
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  <b>Site Manager</b> included
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Blog page included
+                </p>
+                <p className="my-2">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none inline text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  Growth strategy & monitoring
+                </p>
+              </div>
+              <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+                Choose Plan
+              </button>
             </div>
           </div>
         </div>
