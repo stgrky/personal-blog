@@ -45,7 +45,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           (item: any, i: number) => obj.children[i].children
         );
         const joinedObj = [].concat(...map);
-        console.log("LI", joinedObj);
+        // console.log("LI", joinedObj); 
         modifiedText = (
           <Fragment key={index}>
             {joinedObj.map((item: any, i: any) => (
@@ -61,9 +61,9 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           (item: any, i: any) => obj.children[i].children[0]
         );
 
-        console.log("map", map);
+        // console.log("map", map);
         const joinedObj = [].concat(...map);
-        console.log("OL", joinedObj.concat(...map));
+        // console.log("OL", joinedObj.concat(...map));
 
         // console.log("joinedObj", joinedObj[0]);
         modifiedText = (
