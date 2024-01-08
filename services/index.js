@@ -202,6 +202,22 @@ export const getZeroqodeAssignmentDetails = async () => {
 
   return result.zeroqodeAssignments;
 };
+export const getMentalHealthPageDetails = async () => {
+  const query = gql`
+    query mentalHealthPageQuery {
+      mentalHealthWebDevelopments {
+        mentalHealthPageTitle
+        mentalHealthContent {
+          raw
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.mentalHealthWebDevelopments;
+};
 
 // export const submitComment = async (obj) => {
 //   const result = await fetch("/api/comments", {
