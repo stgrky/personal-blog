@@ -45,7 +45,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           (item: any, i: number) => obj.children[i].children
         );
         const joinedObj = [].concat(...map);
-        console.log("LI", joinedObj);
+        // console.log("LI", joinedObj);
         modifiedText = (
           <Fragment key={index}>
             {joinedObj.map((item: any, i: any) => (
@@ -61,9 +61,9 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
           (item: any, i: any) => obj.children[i].children[0]
         );
 
-        console.log("map", map);
+        // console.log("map", map);
         const joinedObj = [].concat(...map);
-        console.log("OL", joinedObj.concat(...map));
+        // console.log("OL", joinedObj.concat(...map));
 
         // console.log("joinedObj", joinedObj[0]);
         modifiedText = (
@@ -153,7 +153,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
 
   const includedFeatures = [
     `Home, About, Services, Contact Pages`,
-    `Site Deployed and Hosted`,
+    `Site Deployed & Hosted`,
     `Content Uploaded & Optimized`,
     `14 Days of Feedback & Edits`,
   ];
@@ -283,7 +283,7 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
               <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="p-8 sm:p-10 lg:flex-auto">
                   <h3 className="text-2xl font-bold tracking-tight text-gray-900">
-                    Base website *
+                    Comprehensive website
                   </h3>
                   <p className="mt-6 text-base leading-7 text-gray-600">
                     Your business is already thriving. You just need a
@@ -394,9 +394,9 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                   Image updates on request
                 </p>
               </div>
-              <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+              {/* <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
                 Choose Plan
-              </button>
+              </button> */}
             </div>
             <div className="w-full md:w-1/3 text-white bg-purple-700 rounded-lg shadow hover:shadow-xl transition duration-100 ease-in-out p-6 md:mr-4 mb-10 md:mb-0">
               <h3 className="text-lg">Additional Pages</h3>
@@ -409,19 +409,19 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                 of needs.
               </p>
               <div className="text-sm mt-4"></div>
-              <button className="w-full text-purple-700 bg-white rounded opacity-75 hover:opacity-100 hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+              {/* <button className="w-full text-purple-700 bg-white rounded opacity-75 hover:opacity-100 hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
                 Choose Plan
-              </button>
+              </button> */}
             </div>
             <div className="w-full md:w-1/3 bg-white rounded-lg shadow hover:shadow-xl transition duration-100 ease-in-out p-6 mb-10 md:mb-0">
-              <h3 className="text-gray-600 text-lg">SEO Professional</h3>
+              <h3 className="text-gray-600 text-lg">Current Site Redesign</h3>
               <p className="text-gray-600 mt-1">
-                <span className="font-bold text-black text-4xl">$739</span>{" "}
-                /Month
+                {/* <span className="font-bold text-black text-4xl">--</span>{" "} */}
+                Custom quote
               </p>
               <p className="text-sm text-gray-600 mt-2">
-                For growing your practice. Blog page included with content
-                tailored to your practice.
+                Already have a website you need redesigned and developed? I am
+                here to bring the vision you have for your site to reality.
               </p>
               <div className="text-sm text-gray-600 mt-4">
                 <p className="my-2">
@@ -429,40 +429,40 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
                     className="h-6 w-5 flex-none inline text-indigo-600"
                     aria-hidden="true"
                   />
-                  1 post per week
+                  Any platform
                 </p>
                 <p className="my-2">
                   <CheckIcon
                     className="h-6 w-5 flex-none inline text-indigo-600"
                     aria-hidden="true"
                   />
-                  Professionally written content
+                  Performance enhancements
                 </p>
                 <p className="my-2">
                   <CheckIcon
                     className="h-6 w-5 flex-none inline text-indigo-600"
                     aria-hidden="true"
                   />
-                  <b>Site Manager</b> included
+                  SEO maintenance
                 </p>
                 <p className="my-2">
                   <CheckIcon
                     className="h-6 w-5 flex-none inline text-indigo-600"
                     aria-hidden="true"
                   />
-                  Blog page included
+                  Design upgrades
                 </p>
                 <p className="my-2">
                   <CheckIcon
                     className="h-6 w-5 flex-none inline text-indigo-600"
                     aria-hidden="true"
                   />
-                  Growth strategy & monitoring
+                  Security improvements
                 </p>
               </div>
-              <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
+              {/* <button className="w-full text-purple-700 border border-purple-700 rounded hover:bg-purple-700 hover:text-white hover:shadow-xl transition duration-150 ease-in-out py-4 mt-4">
                 Choose Plan
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -512,9 +512,6 @@ const MentalHealth: NextPage<MentalHealthProps> = ({
 
 export async function getStaticProps() {
   const mentalHealthPageContent = (await getMentalHealthPageDetails()) || [];
-
-  // console.log("mentalHealthPageContent", mentalHealthPageContent);
-
   return {
     props: { mentalHealthPageContent },
   };
