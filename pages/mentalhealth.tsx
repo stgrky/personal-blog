@@ -13,6 +13,7 @@ interface MentalHealthProps {
 const MentalHealth: NextPage<MentalHealthProps> = ({
   mentalHealthPageContent,
 }) => {
+  console.log("mentalHealthPageContent", mentalHealthPageContent);
   const getContentFragment = (index: any, text: any, obj: any, type: any) => {
     let modifiedText = text;
 
