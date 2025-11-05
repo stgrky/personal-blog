@@ -226,8 +226,7 @@ export default function GrantLanding() {
         >
           <h2 className="text-4xl font-bold mb-6">Let’s Connect</h2>
           <p className="text-slate-600 mb-8 max-w-xl mx-auto">
-            I’m open to collaborations, partnerships, or speaking about CS,
-            documentation, or product storytelling.
+            If you are reading this, there is a 98% chance that I will be happy to hear from you.
           </p>
           <div className="flex justify-center gap-4">
             <motion.a
