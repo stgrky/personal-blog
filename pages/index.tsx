@@ -194,8 +194,8 @@ export default function GrantLanding() {
                 text: "Designing scalable systems and processes that turn great intentions into consistent, measurable results.",
               },
               {
-                title: "Mission-driven Impact",
-                text: "Ensuring the center of gravity is always contributing to a greater good.",
+                title: "Mission-driven Integrity",
+                text: "Ensuring the center of gravity is always contributing to a greater good. Following through on promises. I don't talk about it, I be about it.",
               },
             ].map((v, i) => (
               <motion.div
