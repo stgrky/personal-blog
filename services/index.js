@@ -74,7 +74,7 @@ export const getSimilarPosts = async (categories, slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query, { categories, slug });
+  const result = await request(graphqlAPI, query, { categories, slug })
 
   return result.posts;
 };
@@ -186,22 +186,7 @@ export const getDevPortfolioDetails = async (slug) => {
 
   return result.allDevPortfolios;
 };
-export const getZeroqodeAssignmentDetails = async () => {
-  const query = gql`
-    query zeroqodeAssignmentQuery {
-      zeroqodeAssignments {
-        zeroqodeAssignmentTitle
-        zerocodeAssignmentBulletContent {
-          raw
-        }
-      }
-    }
-  `;
 
-  const result = await request(graphqlAPI, query);
-
-  return result.zeroqodeAssignments;
-};
 export const getMentalHealthPageDetails = async () => {
   const query = gql`
     query mentalHealthPageQuery {
