@@ -1,390 +1,591 @@
-import React, { useEffect, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import React, { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 
 export default function GrantLanding() {
-  const [mounted, setMounted] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
-  const roles = ["Mission-Driven", "Servant-Leadership", "Craft-Focused"];
+
+  const roles = useMemo(
+    () => ["Technical CSM", "Customer Experience Operator", "Engineering-Adjacent Builder"],
+    []
+  );
 
   const { scrollYProgress } = useScroll();
-  const yParallax = useTransform(scrollYProgress, [0, 1], [0, 400]);
+  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, 120]);
 
   useEffect(() => {
-    setMounted(true);
     const interval = setInterval(() => {
       setRoleIndex((i) => (i + 1) % roles.length);
     }, 2600);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
   };
 
+  const sectionTitle = "text-3xl md:text-4xl font-semibold tracking-tight";
+  const sectionKicker = "text-sm uppercase tracking-[0.18em] text-slate-500";
+  const bodyText = "text-slate-600 leading-relaxed";
+
   return (
-    <main className="h-screen w-full overflow-y-scroll snap-y snap-mandatory text-slate-900 bg-slate-50">
-      {/* ---- HERO ---- */}
-      <section className="relative h-[75vh] flex flex-col justify-center items-center text-center px-6 overflow-hidden snap-start">
-        {/* Background image (placeholder) */}
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.6, ease: "easeOut" }}
-          className="absolute inset-0 bg-[url('/hero-bg-placeholder.jpg')] bg-cover bg-center"
-          style={{
-            backgroundPosition: "center 40%",
-            filter: "brightness(0.85)",
-          }}
-        />
+    <main className="min-h-screen w-full text-slate-900 bg-slate-50">
+      {/* --- Sticky Nav --- */}
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur-xl">
+        <div className="mx-auto max-w-6xl px-5 py-3 flex items-center justify-between">
+          <Link href="#top" className="flex items-center gap-2">
+            <div className="h-9 w-9 rounded-xl bg-white border border-slate-200 shadow-sm grid place-items-center">
+              <span className="font-semibold text-slate-800">GK</span>
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold">Grant Kyle</div>
+              <div className="text-xs text-slate-500">Customer Success • Technical • Ops</div>
+            </div>
+          </Link>
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/90 animate-gradientFade" />
+          <nav className="hidden md:flex items-center gap-7 text-sm text-slate-600">
+            <NavLink href="#work" label="Highlights" />
+            <NavLink href="#what" label="What I deliver" />
+            <NavLink href="#cases" label="Case studies" />
+            <NavLink href="#values" label="Values" />
+            <NavLink href="#contact" label="Contact" />
+          </nav>
 
-        {/* Hero content */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative z-10"
-        >
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-orange-500 to-amber-400 animate-gradient">
-            Grant Kyle
-          </h1>
-
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={roleIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5 }}
-              className="text-lg md:text-xl text-slate-800 mb-6"
+          <div className="flex items-center gap-2">
+            <a
+              href="mailto:hello@grantkyle.com"
+              className="hidden sm:inline-flex btn-secondary px-4 py-2 rounded-xl text-sm font-medium"
             >
-              {roles[roleIndex]}
-            </motion.p>
-          </AnimatePresence>
-
-          <div className="flex justify-center gap-4">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="#work"
-              className="btn-primary px-6 py-3 rounded-full font-semibold text-sm"
+              Email
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sgrantkyle/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-4 py-2 rounded-xl text-sm font-semibold"
             >
-              Professional Highlights
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="#contact"
-              className="btn-secondary px-6 py-3 rounded-full font-semibold text-sm"
-            >
-              Get in Touch
-            </motion.a>
+              LinkedIn
+            </a>
+            <MobileMenu />
           </div>
-        </motion.div>
+        </div>
+      </header>
 
-        {/* Ambient blobs */}
-        <motion.div
-          className="absolute w-[400px] h-[400px] bg-pink-300/25 rounded-full blur-3xl top-[15%] left-[8%]"
-          animate={{ y: [0, 25, 0], x: [0, 15, 0] }}
-          transition={{ duration: 14, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute w-[450px] h-[450px] bg-amber-200/25 rounded-full blur-3xl bottom-[10%] right-[8%]"
-          animate={{ y: [0, -25, 0], x: [0, -15, 0] }}
-          transition={{ duration: 18, repeat: Infinity }}
-        />
+      {/* --- HERO --- */}
+      <section id="top" className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          {/* subtle gradient + noise */}
+          <div className="absolute inset-0 bg-[radial-gradient(1200px_circle_at_20%_20%,rgba(251,146,60,0.18),transparent_55%),radial-gradient(900px_circle_at_80%_30%,rgba(236,72,153,0.16),transparent_55%),radial-gradient(1000px_circle_at_50%_90%,rgba(59,130,246,0.10),transparent_55%)]" />
+          <div className="absolute inset-0 opacity-[0.18] mix-blend-multiply pointer-events-none [background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22 x=%220%22 y=%220%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%220.35%22/%3E%3C/svg%3E')]" />
+        </div>
+
+        <div className="mx-auto max-w-6xl px-5 pt-16 pb-14 md:pt-20 md:pb-16 relative">
+          <motion.div style={{ y: heroY }} className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+            {/* Left: Message */}
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <div className={`${sectionKicker} mb-4`}>Technical Customer Success</div>
+
+              <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900">
+                I help customers adopt complex products and get outcomes they can measure.
+              </h1>
+
+              <div className="mt-5">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={roleIndex}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.45 }}
+                    className="text-lg md:text-xl text-slate-700"
+                  >
+                    {roles[roleIndex]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+
+              <p className={`mt-6 max-w-2xl ${bodyText}`}>
+                I bring a customer-facing foundation (business development + account management) and hands-on technical experience
+                (software engineering). Today, I operate as a technical CSM: translating between stakeholders, troubleshooting real problems,
+                and building repeatable systems that scale adoption, retention, and customer confidence.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <a href="#cases" className="btn-primary px-5 py-3 rounded-2xl text-sm font-semibold inline-flex items-center justify-center">
+                  View case studies
+                </a>
+                <a href="#contact" className="btn-secondary px-5 py-3 rounded-2xl text-sm font-semibold inline-flex items-center justify-center">
+                  Get in touch
+                </a>
+              </div>
+
+              {/* proof chips */}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {[
+                  "Exec-to-end-user stakeholder mgmt",
+                  "Engineering fluency",
+                  "Process + playbooks",
+                  "Calm escalation leadership",
+                  "Customer education + enablement",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/70 border border-slate-200 text-slate-700"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Proof Panel */}
+            <motion.aside
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05 }}
+              className="rounded-3xl border border-slate-200 bg-white/70 backdrop-blur-xl shadow-sm p-6"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold text-slate-900">Snapshot</div>
+                  <div className="text-xs text-slate-500 mt-1">How I typically show up</div>
+                </div>
+                <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-900 text-white">CSM</span>
+              </div>
+
+              <div className="mt-5 space-y-4">
+                <MetricRow label="Adoption & enablement" value="High-touch + scalable systems" />
+                <MetricRow label="Technical problem-solving" value="Root cause, integrations, escalation" />
+                <MetricRow label="Operating rhythm" value="Success plans, QBRs, health signals" />
+                <MetricRow label="Cross-functional execution" value="Product, Eng, Ops alignment" />
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-slate-200">
+                <div className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-3">Tools and comfort zones</div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "HubSpot",
+                    "Notion",
+                    "Intercom/KB",
+                    "Next.js/React",
+                    "APIs + integrations",
+                    "Technical troubleshooting",
+                    "Documentation systems",
+                  ].map((t) => (
+                    <span key={t} className="px-2.5 py-1 rounded-lg text-xs bg-slate-50 border border-slate-200 text-slate-700">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.aside>
+          </motion.div>
+        </div>
       </section>
 
-      {/* ---- ABOUT ---- */}
-      <section
-        id="about"
-        className="snap-start relative min-h-screen flex flex-col justify-center items-center px-6 text-center"
-      >
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          className="z-10"
-        >
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
-          <p className="max-w-2xl text-slate-600 leading-relaxed text-lg mx-auto">
-            My name is Grant Kyle, and I build customer experiences that scale.
-            I am a customer success and experience leader passionate about
-            helping mission-driven companies deliver real impact through
-            meaningful relationships with their customers. I specialize in
-            building the programs, playbooks, and systems that turn customer
-            feedback into action—improving satisfaction, retention, and advocacy
-            at scale. My work centers on creating high-touch, proactive
-            experiences that balance empathy with execution, ensuring customers
-            feel supported, heard, and confident from onboarding to renewal. I’m
-            driven by the belief that great customer success isn’t just about
-            solving problems—it’s about helping people achieve outcomes that
-            matter.
-          </p>
-        </motion.div>
-      </section>
+      {/* --- Selected Highlights --- */}
+      <section id="work" className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div className={sectionKicker}>Selected highlights</div>
+            <h2 className={`${sectionTitle} mt-2`}>Work that blends people, product, and execution.</h2>
+            <p className={`mt-3 max-w-2xl ${bodyText}`}>
+              A few representative chapters. I’m intentionally concise here, the goal is credibility and signal.
+            </p>
+          </div>
+          <a href="#contact" className="btn-secondary px-5 py-3 rounded-2xl text-sm font-semibold self-start md:self-auto">
+            Ask for the full resume
+          </a>
+        </div>
 
-      {/* ---- WORK ---- */}
-      <section
-        id="work"
-        className="snap-start relative min-h-screen flex flex-col justify-center px-6"
-      >
-        <h2 className="text-4xl font-bold text-center mb-12">
-          Selected Work Highlights
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 container mx-auto">
+        <div className="mt-10 grid md:grid-cols-3 gap-6">
           {[
             {
-              title: "Technical CSM Lead at Aquaria",
-              desc: "The founding CSM of Aquaria. Responsible for MVP build of all proactive success and reactive support processes, including a revenue-driving Maintenance-as-a-Service model.",
+              title: "Technical CSM Lead",
+              org: "Aquaria",
+              bullets: [
+                "Built CS foundations: support workflows, playbooks, and proactive customer communications.",
+                "Led technical troubleshooting across stakeholders and external service providers.",
+                "Designed scalable self-serve strategy to reduce repeat issues and improve consistency.",
+              ],
+              tag: "Hardware + field ops",
             },
             {
-              title: "Marketing Software Engineer at Recovery.com",
-              desc: "The first engineer hire underneath the founding engineer. Built the first Resource Center on the website, implementing conversion tactics that increased pageviews by 300%.",
+              title: "Marketing Software Engineer",
+              org: "Recovery.com",
+              bullets: [
+                "Delivered customer-facing web experiences with strong UX + conversion fundamentals.",
+                "Partnered with product, design, and content to ship fast and sustainably.",
+                "Improved discoverability and structure of educational content on-site.",
+              ],
+              tag: "Web + growth",
             },
             {
-              title: "Project Manager contract at Muuse",
-              desc: "A fractional Project Manager, brought onto the project to hire and lead a team of 12 contractors. Diligent work and compelling storytelling helped convince stakeholders to approve a 3-month extension on the project length.",
+              title: "Project Manager (Contract)",
+              org: "Muuse",
+              bullets: [
+                "Coordinated a contractor team and kept delivery moving with clear scopes and narratives.",
+                "Managed stakeholder expectations and execution across a shifting environment.",
+                "Built structure: milestones, accountability, and crisp comms.",
+              ],
+              tag: "Delivery + alignment",
             },
           ].map((p, i) => (
             <motion.div
               key={p.title}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-white/70 backdrop-blur-xl border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all"
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              className="rounded-3xl bg-white/80 border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6"
             >
-              <h3 className="text-xl font-semibold mb-2">{p.title}</h3>
-              <p className="text-slate-600 text-sm">{p.desc}</p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold text-slate-900">{p.title}</div>
+                  <div className="text-sm text-slate-600 mt-1">{p.org}</div>
+                </div>
+                <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700">
+                  {p.tag}
+                </span>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+                {p.bullets.map((b) => (
+                  <li key={b} className="flex gap-2">
+                    <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ---- VALUES ---- */}
+      {/* --- What I Deliver --- */}
+      <section id="what" className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className={sectionKicker}>How I drive value</div>
+        <h2 className={`${sectionTitle} mt-2`}>What you can expect when I own an account book.</h2>
+        <p className={`mt-3 max-w-3xl ${bodyText}`}>
+          I’m motivated by clarity: defined outcomes, measurable adoption, and a customer experience that earns trust. These are the core lanes I
+          operate in.
+        </p>
+
+        <div className="mt-10 grid md:grid-cols-4 gap-6">
+          {[
+            {
+              title: "Adoption & activation",
+              text: "Onboarding that leads to usage, not just training. Success plans, enablement, and habits that stick.",
+            },
+            {
+              title: "Technical problem-solving",
+              text: "I’ll get into the weeds when needed: root cause, systems thinking, integrations, and calm escalation leadership.",
+            },
+            {
+              title: "Retention readiness",
+              text: "Health signals, risk mitigation, and value narratives that align stakeholders before renewal season shows up.",
+            },
+            {
+              title: "Cross-functional execution",
+              text: "Turning customer reality into internal priorities: crisp feedback loops with Product, Eng, and Ops.",
+            },
+          ].map((c) => (
+            <div
+              key={c.title}
+              className="rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <div className="text-sm font-semibold text-slate-900">{c.title}</div>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{c.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- Case Studies --- */}
+      <section id="cases" className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className={sectionKicker}>Case studies</div>
+        <h2 className={`${sectionTitle} mt-2`}>A closer look at how I operate.</h2>
+        <p className={`mt-3 max-w-3xl ${bodyText}`}>
+          These are written to show approach: problem framing, execution, and how I communicate across stakeholders. Swap in metrics as you like.
+        </p>
+
+        <div className="mt-10 grid lg:grid-cols-2 gap-6">
+          <CaseCard
+            title="Scaling support without losing the human touch"
+            context="Hardware startup with high-touch customers and operational constraints."
+            bullets={[
+              "Standardized intake and triage to reduce noise and clarify ownership.",
+              "Built customer-facing education and proactive communication rhythms.",
+              "Created repeatable documentation for external technicians and internal escalation.",
+            ]}
+            outcome={[
+              "Faster, more consistent resolution paths",
+              "Less reliance on ad hoc knowledge",
+              "Improved customer confidence through clarity",
+            ]}
+            tools={["HubSpot", "Notion/KB", "Playbooks", "Service templates"]}
+          />
+
+          <CaseCard
+            title="Driving adoption across multiple stakeholder layers"
+            context="Complex product usage where buyer and end user needs don’t always match."
+            bullets={[
+              "Aligned on outcomes with the economic buyer and translated them into day-to-day workflows for operators.",
+              "Created enablement moments tied to real milestones, not generic training.",
+              "Closed the loop: surfaced patterns to internal teams and returned updates to customers.",
+            ]}
+            outcome={[
+              "Clearer value narrative across stakeholders",
+              "Higher engagement through workflow-based enablement",
+              "Better internal prioritization through patterned feedback",
+            ]}
+            tools={["Success plans", "QBR narrative", "Enablement assets", "Stakeholder mapping"]}
+          />
+        </div>
+      </section>
+
+      {/* --- Values (cleaner, less “poster”) --- */}
       <section
         id="values"
-        className="snap-start relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-r from-[#e0f7fa] via-[#fbe9e7] to-[#f3e5f5]"
+        className="border-t border-slate-200 bg-white"
       >
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          className="max-w-4xl z-10"
-        >
-          <h2 className="text-4xl font-bold mb-10">Values</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Empathy In Action",
-                text: "Building genuine relationships through active listening, thoughtful communication, and a deep understanding of customer needs.",
-              },
-              {
-                title: "Operational Excellence",
-                text: "Designing scalable systems and processes that turn great intentions into consistent, measurable results.",
-              },
-              {
-                title: "Mission-driven Integrity",
-                text: "Ensuring the center of gravity is always contributing to a greater good. Following through on promises. I don't talk about it, I be about it.",
-              },
-            ].map((v, i) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2 }}
-                className="bg-white/60 rounded-2xl p-8 shadow-sm border border-white/30 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
-              >
-                <h3 className="text-lg font-semibold mb-2">{v.title}</h3>
-                <p className="text-slate-700 text-sm">{v.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ---- CONTACT ---- */}
-      <section
-        id="contact"
-        className="snap-start relative min-h-screen flex flex-col justify-center items-center px-6 text-center"
-      >
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          className="z-10"
-        >
-          <h2 className="text-4xl font-bold mb-6">Let’s Connect</h2>
-          <p className="text-slate-600 mb-8 max-w-xl mx-auto">
-            If you are reading this, there is a 98% chance that I will be happy to hear from you.
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+          <div className={sectionKicker}>Values</div>
+          <h2 className={`${sectionTitle} mt-2`}>How I prefer to work.</h2>
+          <p className={`mt-3 max-w-3xl ${bodyText}`}>
+            Values are only useful when they show up in behavior. These are the ones I try to operationalize.
           </p>
-          <div className="flex justify-center gap-4">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="mailto:hello@grantkyle.com"
-              className="btn-primary px-6 py-3 rounded-full font-semibold text-sm"
-            >
-              Email Me
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="https://www.linkedin.com/in/sgrantkyle/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary px-6 py-3 rounded-full font-semibold text-sm"
-            >
-              LinkedIn
-            </motion.a>
+
+          <div className="mt-10 grid md:grid-cols-3 gap-6">
+            <ValueCard
+              title="Empathy, with standards"
+              text="Warm communication, clear expectations, and follow-through. Customers feel heard and also guided."
+            />
+            <ValueCard
+              title="Operational excellence"
+              text="Documented systems beat heroic memory. Consistency scales. Metrics tell the truth."
+            />
+            <ValueCard
+              title="Integrity and accountability"
+              text="Say what you’ll do, do what you said, and close the loop. Especially when things get hard."
+            />
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* ---- FOOTER ---- */}
+      {/* --- Contact --- */}
+      <section id="contact" className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="rounded-3xl border border-slate-200 bg-white/80 shadow-sm p-8 md:p-10">
+          <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+            <div>
+              <div className={sectionKicker}>Contact</div>
+              <h2 className={`${sectionTitle} mt-2`}>Let’s connect.</h2>
+              <p className={`mt-3 max-w-2xl ${bodyText}`}>
+                If you’re hiring for Customer Success where relationship-building and technical depth both matter, I’m open to conversations.
+              </p>
+
+              <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                <a href="mailto:hello@grantkyle.com" className="btn-primary px-5 py-3 rounded-2xl text-sm font-semibold text-center">
+                  hello@grantkyle.com
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/sgrantkyle/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary px-5 py-3 rounded-2xl text-sm font-semibold text-center"
+                >
+                  LinkedIn
+                </a>
+              </div>
+
+              <p className="mt-5 text-xs text-slate-500">
+                Prefer a quick call? Send an email with a couple times and I’ll respond quickly.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-slate-50 border border-slate-200 p-6">
+              <div className="text-sm font-semibold text-slate-900">What I’m looking for</div>
+              <ul className="mt-3 space-y-2 text-sm text-slate-600">
+                {[
+                  "Clear success metrics and accountability",
+                  "High-trust, high-ownership culture",
+                  "Product-led organization with strong customer outcomes",
+                  "Room to build systems and improve adoption",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer className="text-center text-slate-500 text-sm py-10">
-        © {new Date().getFullYear()} Grant Kyle — Designed with React + Tailwind
+        © {new Date().getFullYear()} Grant Kyle • React + Next.js + Tailwind
       </footer>
 
       {/* Inline styling */}
       <style jsx>{`
         .btn-primary {
-          background: linear-gradient(180deg, #ffb5a7, #fcd5ce);
-          color: #111;
-          box-shadow: 0 8px 20px -8px rgba(255, 136, 106, 0.4);
-          transition: all 0.25s ease;
+          background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+          color: white;
+          box-shadow: 0 14px 30px -18px rgba(2, 6, 23, 0.7);
+          transition: all 0.2s ease;
         }
         .btn-primary:hover {
-          transform: translateY(-2px);
+          transform: translateY(-1px);
           filter: brightness(1.05);
         }
         .btn-secondary {
-          background-color: rgba(255, 255, 255, 0.7);
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          transition: all 0.25s ease;
+          background-color: rgba(255, 255, 255, 0.75);
+          border: 1px solid rgba(15, 23, 42, 0.12);
+          color: rgba(15, 23, 42, 0.9);
+          transition: all 0.2s ease;
         }
         .btn-secondary:hover {
-          background-color: rgba(255, 255, 255, 0.9);
-          transform: translateY(-2px);
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradientShift 8s ease infinite;
-        }
-        .animate-gradientFade {
-          background-size: 200% 200%;
-          animation: gradientFade 10s ease infinite;
-        }
-        @keyframes gradientShift {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-        @keyframes gradientFade {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
+          background-color: rgba(255, 255, 255, 0.92);
+          transform: translateY(-1px);
         }
       `}</style>
     </main>
   );
 }
 
-/* ---- COMPONENTS ---- */
+/* --- Components --- */
+
+function MetricRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-start justify-between gap-4">
+      <div className="text-sm text-slate-600">{label}</div>
+      <div className="text-sm font-medium text-slate-800 text-right">{value}</div>
+    </div>
+  );
+}
+
+function CaseCard({
+  title,
+  context,
+  bullets,
+  outcome,
+  tools,
+}: {
+  title: string;
+  context: string;
+  bullets: string[];
+  outcome: string[];
+  tools: string[];
+}) {
+  return (
+    <div className="rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-7 hover:shadow-md transition-shadow">
+      <div className="text-sm font-semibold text-slate-900">{title}</div>
+      <div className="mt-2 text-sm text-slate-600">{context}</div>
+
+      <div className="mt-5 grid gap-5">
+        <div>
+          <div className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-2">What I did</div>
+          <ul className="space-y-2 text-sm text-slate-600">
+            {bullets.map((b) => (
+              <li key={b} className="flex gap-2">
+                <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-2">Outcome</div>
+          <div className="flex flex-wrap gap-2">
+            {outcome.map((o) => (
+              <span key={o} className="px-2.5 py-1 rounded-full text-xs bg-slate-50 border border-slate-200 text-slate-700">
+                {o}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-2">Tools</div>
+          <div className="flex flex-wrap gap-2">
+            {tools.map((t) => (
+              <span key={t} className="px-2.5 py-1 rounded-lg text-xs bg-white border border-slate-200 text-slate-700">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ValueCard({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-3xl bg-slate-50 border border-slate-200 p-7">
+      <div className="text-sm font-semibold text-slate-900">{title}</div>
+      <p className="mt-2 text-sm text-slate-600 leading-relaxed">{text}</p>
+    </div>
+  );
+}
+
 const NavLink = ({ href, label }: { href: string; label: string }) => (
   <Link href={href} className="group relative">
-    <span>{label}</span>
-    <span className="absolute left-0 bottom-[-3px] h-[2px] w-0 bg-gradient-to-r from-pink-500 to-orange-400 transition-all duration-300 group-hover:w-full" />
+    <span className="hover:text-slate-900 transition-colors">{label}</span>
+    <span className="absolute left-0 bottom-[-6px] h-[2px] w-0 bg-slate-900 transition-all duration-300 group-hover:w-full" />
   </Link>
 );
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <>
+    <div className="md:hidden relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-50"
+        onClick={() => setIsOpen((v) => !v)}
+        className="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/80"
+        aria-label="Open menu"
       >
-        <span
-          className={`block h-0.5 w-6 bg-slate-800 rounded-sm transition-all duration-300 ${
-            isOpen ? "rotate-45 translate-y-1.5" : "-translate-y-0.5"
-          }`}
-        />
-        <span
-          className={`block h-0.5 w-6 bg-slate-800 rounded-sm transition-all duration-300 my-1 ${
-            isOpen ? "opacity-0" : "opacity-100"
-          }`}
-        />
-        <span
-          className={`block h-0.5 w-6 bg-slate-800 rounded-sm transition-all duration-300 ${
-            isOpen ? "-rotate-45 -translate-y-1.5" : "translate-y-0.5"
-          }`}
-        />
+        <span className="sr-only">Menu</span>
+        <div className="flex flex-col gap-1">
+          <span className={`block h-0.5 w-5 bg-slate-800 transition ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+          <span className={`block h-0.5 w-5 bg-slate-800 transition ${isOpen ? "opacity-0" : "opacity-100"}`} />
+          <span className={`block h-0.5 w-5 bg-slate-800 transition ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
+        </div>
       </button>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -10 }}
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="absolute top-full left-0 w-full bg-white border-t border-slate-200 shadow-md md:hidden"
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-56 rounded-2xl border border-slate-200 bg-white shadow-lg overflow-hidden"
           >
-            <div className="flex flex-col items-center py-4 space-y-4 text-slate-800 text-base font-medium">
-              <Link
-                href="#about"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-pink-500 transition"
-              >
-                About
-              </Link>
-              <Link
-                href="#work"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-orange-500 transition"
-              >
-                Work
-              </Link>
-              <Link
-                href="#values"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-amber-500 transition"
-              >
-                Values
-              </Link>
-              <Link
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-pink-500 transition"
-              >
-                Contact
-              </Link>
+            <div className="flex flex-col p-2 text-sm">
+              {[
+                { href: "#work", label: "Highlights" },
+                { href: "#what", label: "What I deliver" },
+                { href: "#cases", label: "Case studies" },
+                { href: "#values", label: "Values" },
+                { href: "#contact", label: "Contact" },
+              ].map((i) => (
+                <Link
+                  key={i.href}
+                  href={i.href}
+                  onClick={() => setIsOpen(false)}
+                  className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition"
+                >
+                  {i.label}
+                </Link>
+              ))}
             </div>
-          </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
