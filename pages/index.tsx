@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, LayoutGroup } from "framer-motion";
 import Link from "next/link";
 
@@ -18,39 +18,24 @@ const sectionTitle = "text-3xl md:text-4xl font-semibold tracking-tight text-sla
 const body = "text-slate-500 leading-relaxed";
 
 const TOOLS = [
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy", "Revenue Expansion",
-  "Stakeholder Management", "Escalation Leadership", "Customer Education", "Health Scoring",
-  "Voice of Customer", "Process Documentation", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Success Plans", "Spanish (B2)", "Customer Advocacy",
-  "Support Infrastructure", "Team Scaling", "Product Feedback Loops", "HubSpot", "Intercom", "Notion",
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy", "Revenue Expansion",
-  "Stakeholder Management", "Escalation Leadership", "Customer Education", "Health Scoring",
-  "Voice of Customer", "Process Documentation", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Success Plans", "Spanish (B2)", "Customer Advocacy",
-  "Support Infrastructure", "Team Scaling", "Product Feedback Loops", "HubSpot", "Intercom", "Notion",
+  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
+  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
+  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
+  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
+  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
+  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
+  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
+  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
+  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
+  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
 ];
 
 /* ══════════════════════════════════════════════════════════ */
 export default function GrantLanding() {
-  const [roleIndex, setRoleIndex] = useState(0);
   const [activeSection, setActiveSection] = useState("top");
-
-  const roles = useMemo(
-    () => [
-      "Technical Customer Success Manager",
-      "Post-Sale Experience Builder",
-      "The Bridge Between Customers & Teams",
-    ],
-    []
-  );
 
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress, [0, 0.4], [0, 90]);
-
-  useEffect(() => {
-    const id = setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 2800);
-    return () => clearInterval(id);
-  }, [roles.length]);
 
   useEffect(() => {
     const ids = ["top", "what", "work", "cases", "values", "contact"];
@@ -68,11 +53,11 @@ export default function GrantLanding() {
   }, []);
 
   const NAV = [
-    { href: "#what",    label: "What I do",    id: "what"    },
-    { href: "#work",    label: "Experience",   id: "work"    },
-    { href: "#cases",   label: "Case studies", id: "cases"   },
-    { href: "#values",  label: "Values",       id: "values"  },
-    { href: "#contact", label: "Contact",      id: "contact" },
+    { href: "#what",             label: "Skills",       id: "what"    },
+    { href: "#work",             label: "Experience",   id: "work"    },
+    { href: "#cases",            label: "Case studies", id: "cases"   },
+    { href: "/web-development",  label: "Web dev",      id: "webdev"  },
+    { href: "#contact",          label: "Contact",      id: "contact" },
   ];
 
   return (
@@ -89,7 +74,7 @@ export default function GrantLanding() {
               </div>
               <div className="leading-tight hidden sm:block">
                 <div className="text-sm font-semibold text-slate-900">Grant Kyle</div>
-                <div className="text-[11px] text-slate-400">CSM · Technical · Ops</div>
+                <div className="text-[11px] text-slate-400">Customer Success · Engineering · Web</div>
               </div>
             </Link>
 
@@ -117,6 +102,17 @@ export default function GrantLanding() {
             </nav>
 
             <div className="flex items-center gap-2">
+              <a
+                href="https://github.com/stgrky"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-300 transition-colors"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="text-slate-700">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.12 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.21 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12 24 5.65 18.85.5 12 .5z"/>
+                </svg>
+              </a>
               <a
                 href="mailto:hello@grantkyle.com"
                 className="hidden sm:inline-flex btn-secondary text-sm px-4 py-2 rounded-lg font-medium"
@@ -151,8 +147,7 @@ export default function GrantLanding() {
               <motion.div initial="hidden" animate="visible" variants={fadeUp}>
 
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 mb-7">
-                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                  <span className="text-xs font-medium text-indigo-700">Technical CSM · Open to new roles</span>
+                  <span className="text-xs font-medium text-indigo-700 tracking-wide">Customer Success · Engineering · Web</span>
                 </div>
 
                 <h1 className="text-4xl md:text-[3.4rem] leading-[1.1] font-semibold tracking-tight">
@@ -161,33 +156,44 @@ export default function GrantLanding() {
                   and the customers who need to succeed with them.
                 </h1>
 
-                <div className="mt-5 h-7 overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.p
-                      key={roleIndex}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.38, ease: "easeOut" }}
-                      className="text-base md:text-lg text-slate-500 font-medium"
-                    >
-                      {roles[roleIndex]}
-                    </motion.p>
-                  </AnimatePresence>
-                </div>
-
-                <p className={`mt-6 max-w-xl ${body}`}>
-                  I came up through software engineering — JavaScript, React, TypeScript — and made the deliberate move into customer success because I realized the most interesting problems live at the intersection of people and product. That technical foundation is what makes me different: I can sit in a conversation with an engineering team and actually understand what's being said, then turn around and translate it for a customer or executive in a way that builds trust instead of confusion. I'm most energized taking things from zero to one — building the post-sale infrastructure, feedback loops, and customer experiences that didn't exist yet.
+                <p className="mt-5 text-base md:text-lg text-slate-500 font-medium">
+                  Customer-facing operator with an engineering foundation.
                 </p>
+
+                <div className={`mt-6 max-w-xl space-y-4 ${body}`}>
+                  <p>
+                    I am a naturally curious human, and my professional journey is testament to this.
+                  </p>
+                  <p>
+                    I came up through sales. After selling SEO and web development at a digital marketing agency, I learned the JavaScript ecosystem (Vanilla JS / React / TypeScript) and made the deliberate move into software development. I knew I wouldn't stay competitive among those who live and die by the code, but I was relentless in my pursuit of technical training nonetheless. After several years in engineering roles, my customer-facing and selling abilities had grown considerably, and I sought to come back to roles that fit my natural skill set.
+                  </p>
+                  <p>
+                    This is where I am now: living at the intersection of people and product. That technical foundation is what makes me different — I can sit in a conversation with an engineering team and actually understand what's being said, then turn around and translate it for a customer or executive in a way that builds trust instead of confusion. I'm most energized taking things from zero to one: building the post-sale infrastructure, feedback loops, and customer experiences that didn't exist yet.
+                  </p>
+                </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href="#cases" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold">
-                    View case studies
+                    See recent work
                   </a>
-                  <a href="#contact" className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold">
-                    Get in touch
+                  <a
+                    href="https://github.com/stgrky"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold"
+                  >
+                    GitHub →
                   </a>
                 </div>
+
+                <Link
+                  href="/web-development"
+                  className="mt-5 inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-indigo-600 transition-colors group"
+                >
+                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Currently building: websites for mental health practices
+                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                </Link>
 
                 <div className="mt-8 flex flex-wrap gap-2">
                   {[
@@ -212,11 +218,11 @@ export default function GrantLanding() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="text-sm font-semibold text-slate-900">Profile snapshot</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">How I typically show up</div>
+                    <div className="text-sm font-semibold text-slate-900">At a glance</div>
+                    <div className="text-[11px] text-slate-400 mt-0.5">How I show up in the work</div>
                   </div>
                   <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-600 text-white tracking-wide uppercase">
-                    Technical CSM
+                    Builder
                   </span>
                 </div>
 
@@ -259,10 +265,10 @@ export default function GrantLanding() {
       {/* ── WHAT I DO ── */}
       <section id="what" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-          <div className={kicker}>How I drive value</div>
-          <h2 className={`${sectionTitle} mt-2`}>What you get when I own an account book.</h2>
+          <div className={kicker}>The work</div>
+          <h2 className={`${sectionTitle} mt-2`}>What I'm good at.</h2>
           <p className={`mt-3 max-w-2xl ${body}`}>
-            I work at the intersection of customer relationships, technical depth, and operational clarity. These are the four things I consistently deliver.
+            I live at the intersection of customer relationships, technical depth, and operational clarity. Four things I keep coming back to, across roles.
           </p>
         </motion.div>
 
@@ -327,13 +333,18 @@ export default function GrantLanding() {
           >
             <div>
               <div className={kicker}>Experience</div>
-              <h2 className={`${sectionTitle} mt-2`}>Where I've built things that mattered.</h2>
+              <h2 className={`${sectionTitle} mt-2`}>Where I've worked.</h2>
               <p className={`mt-3 max-w-2xl ${body}`}>
-                A mix of startups, contracts, and growth environments — intentionally concise. The goal is signal, not volume.
+                A mix of startups, contracts, and growth environments — kept intentionally concise. Signal over volume.
               </p>
             </div>
-            <a href="#contact" className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold self-start md:self-auto whitespace-nowrap flex-shrink-0">
-              Ask for the full resume →
+            <a
+              href="https://www.linkedin.com/in/sgrantkyle/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold self-start md:self-auto whitespace-nowrap flex-shrink-0"
+            >
+              Full history on LinkedIn →
             </a>
           </motion.div>
 
@@ -411,8 +422,13 @@ export default function GrantLanding() {
               <span className="font-semibold text-slate-700">Earlier: </span>
               Project Manager at Muuse (NextGen Consortium · Starbucks / McDonald's), web developer at Paperstreet, SEO Account Manager at 51Blocks managing 35+ client campaigns end-to-end.
             </p>
-            <a href="#contact" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors whitespace-nowrap">
-              Full resume →
+            <a
+              href="https://www.linkedin.com/in/sgrantkyle/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors whitespace-nowrap"
+            >
+              More on LinkedIn →
             </a>
           </motion.div>
         </div>
@@ -484,9 +500,9 @@ export default function GrantLanding() {
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
             <div className={kicker}>Values</div>
-            <h2 className={`${sectionTitle} mt-2`}>How I prefer to work.</h2>
+            <h2 className={`${sectionTitle} mt-2`}>How I work.</h2>
             <p className={`mt-3 max-w-2xl ${body}`}>
-              Values only matter when they show up in behavior. These are the ones I try to operationalize.
+              Values only matter when they show up in behavior. These are the ones I operationalize.
             </p>
           </motion.div>
 
@@ -529,9 +545,9 @@ export default function GrantLanding() {
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
             <div>
               <div className={kicker}>Contact</div>
-              <h2 className={`${sectionTitle} mt-2`}>Let's connect.</h2>
+              <h2 className={`${sectionTitle} mt-2`}>Get in touch.</h2>
               <p className={`mt-3 max-w-lg ${body}`}>
-                If you're building a team where customer empathy and technical depth both matter, I'm open to conversations.
+                Happy to talk shop — customer success, technical work, or building things for the mental health space. Email or LinkedIn, whichever's easiest.
               </p>
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <a href="mailto:hello@grantkyle.com" className="btn-primary px-5 py-3 rounded-xl text-sm font-semibold text-center">
@@ -547,26 +563,25 @@ export default function GrantLanding() {
                 </a>
               </div>
               <p className="mt-5 text-xs text-slate-400">
-                Prefer a quick call? Send an email with a few times and I'll get back to you fast.
+                Prefer a call? Send an email with a few times and I&apos;ll get back to you fast.
               </p>
             </div>
 
             <div className="rounded-2xl bg-slate-50 border border-slate-100 p-6">
-              <div className="text-sm font-semibold text-slate-900 mb-4">What I'm looking for</div>
-              <ul className="space-y-2.5">
-                {[
-                  "Clear success metrics and real ownership",
-                  "High-trust, high-accountability culture",
-                  "Products with genuine customer impact",
-                  "Room to build systems, not just maintain them",
-                  "A team that values both the relationship and the result",
-                ].map((t) => (
-                  <li key={t} className="flex gap-2.5 text-sm text-slate-500">
-                    <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-3">Recent build</div>
+              <div className="text-sm font-semibold text-slate-900 mb-2">
+                Websites for mental health practices
+              </div>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                Modern, client-managed therapy practice sites — Next.js + Sanity, so non-technical owners can publish blog posts and edit pages without a developer.
+              </p>
+              <Link
+                href="/web-development"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors group"
+              >
+                See what&apos;s included
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </Link>
             </div>
           </div>
         </motion.div>
