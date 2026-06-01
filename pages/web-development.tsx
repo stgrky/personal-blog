@@ -395,23 +395,73 @@ export default function WebDevelopmentLanding() {
               style={{
                 boxShadow: "0 30px 60px -20px rgba(74, 106, 93, 0.18)",
                 backgroundColor: "#fff",
+                border: `1px solid ${sage.rule}`,
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={PHOTOS.hero}
-                alt="Reference practice site preview"
+                src="/screenshots/therapy/home.png"
+                alt="Reference therapy practice site — home page"
                 className="block w-full"
-                style={{ aspectRatio: "16 / 10", objectFit: "cover" }}
+                style={{ aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "top" }}
               />
             </motion.div>
-            <p
-              className="text-center mt-6 text-xs tracking-wide"
-              style={{ color: sage.muted, fontStyle: "italic" }}
-            >
-              A placeholder while real screenshots are captured. Live demo is
-              ready to view at the link above.
-            </p>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {[
+                {
+                  src: "/screenshots/therapy/about.png",
+                  alt: "Reference site — About page",
+                  label: "About",
+                },
+                {
+                  src: "/screenshots/therapy/blog.png",
+                  alt: "Reference site — Blog",
+                  label: "Blog",
+                },
+                {
+                  src: "/screenshots/therapy/services.png",
+                  alt: "Reference site — Services page",
+                  label: "Services",
+                },
+              ].map((shot, i) => (
+                <motion.div
+                  key={shot.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.05 }}
+                >
+                  <div
+                    className="rounded-2xl overflow-hidden"
+                    style={{
+                      boxShadow:
+                        "0 14px 30px -14px rgba(74, 106, 93, 0.18)",
+                      backgroundColor: "#fff",
+                      border: `1px solid ${sage.rule}`,
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={shot.src}
+                      alt={shot.alt}
+                      className="block w-full"
+                      style={{
+                        aspectRatio: "16 / 10",
+                        objectFit: "cover",
+                        objectPosition: "top",
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="mt-3 text-center text-[11px] tracking-[0.18em] uppercase"
+                    style={{ color: sage.muted }}
+                  >
+                    {shot.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
