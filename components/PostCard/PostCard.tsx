@@ -7,51 +7,101 @@ interface PostCardProps {
   post: any;
 }
 
-const PostCard: NextPage<PostCardProps> = (props): JSX.Element => {
+const PostCard: NextPage<PostCardProps> = ({ post }): JSX.Element => {
   return (
-    <div className="bg-white shadlow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
-      <div className="relative overflow-hidden shadow-md pb-80 mb-6">
-        <img
-          src={props.post.featuredImage.url}
-          alt={props.post.title}
-          className="object-top absolute h-80 w-full lg:object-cover rounded shadow-lg rounded-t-lg lg:rounded-lg"
-        />
-      </div>
-      <h1
-        className="transition duration-200 text-center mb-8 cursor-pointer
-      hover:text-blue-600 text-3xl font-semibold
-      "
-      >
-        <Link href={`/post/${props.post.slug}`}>{props.post.title}</Link>
-      </h1>
-      <div className="bloc lg:flex text-center items-center justify-center mb-8 w-full">
-        <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
+    <article
+      className="overflow-hidden rounded-2xl mb-10 transition-all"
+      style={{
+        backgroundColor: "var(--warm-card)",
+        border: "1px solid var(--warm-rule)",
+      }}
+    >
+      {post?.featuredImage?.url && (
+        <Link href={`/post/${post.slug}`} className="block">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={props.post.author.photo.url}
-            alt={props.post.author.name}
-            height="30px"
-            width="30px"
-            className="align-middle rounded-full"
+            src={post.featuredImage.url}
+            alt={post.title}
+            className="block w-full"
+            style={{
+              aspectRatio: "16 / 9",
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
           />
-          <p className="inline align-middle text-gray-700 ml-2 text-lg">
-            {props.post.author.name}
+        </Link>
+      )}
+
+      <div className="px-7 md:px-10 py-8 md:py-10">
+        <div
+          className="flex flex-wrap items-center gap-3 text-xs mb-5"
+          style={{ color: "var(--warm-muted)" }}
+        >
+          {post?.author?.name && (
+            <span className="inline-flex items-center gap-2">
+              {post.author?.photo?.url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={post.author.photo.url}
+                  alt={post.author.name}
+                  width={22}
+                  height={22}
+                  className="rounded-full object-cover"
+                  style={{ height: 22, width: 22 }}
+                />
+              )}
+              <span>{post.author.name}</span>
+            </span>
+          )}
+          {post?.createdAt && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
+            </>
+          )}
+        </div>
+
+        <h2
+          className="text-2xl md:text-[2rem] leading-tight"
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontWeight: 500,
+            color: "var(--warm-ink)",
+          }}
+        >
+          <Link
+            href={`/post/${post.slug}`}
+            className="transition-colors"
+            style={{ color: "var(--warm-ink)" }}
+          >
+            {post.title}
+          </Link>
+        </h2>
+
+        {post?.excerpt && (
+          <p
+            className="mt-4 text-base leading-relaxed"
+            style={{ color: "var(--warm-body)" }}
+          >
+            {post.excerpt}
           </p>
-        </div>
-        <div className="font-medium text-gray-700">
-          <span>{moment(props.post.createdAt).format("MMM DD, YYYY")}</span>
-        </div>
-      </div>
-      <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
-        {props.post.excerpt}
-      </p>
-      <div className="text-center">
-        <Link href={`/post/${props.post.slug}`}>
-          <span className="transition duration-500 transform hover:-translate-y-1 inline-block bg-blue-600 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
-            Read More
-          </span>
+        )}
+
+        <Link
+          href={`/post/${post.slug}`}
+          className="inline-flex items-center gap-1.5 mt-6 text-sm transition-colors hover:underline"
+          style={{
+            color: "var(--warm-accent-dark)",
+            fontFamily: "var(--font-serif)",
+            fontStyle: "italic",
+            fontWeight: 500,
+          }}
+        >
+          Read more
+          <span>→</span>
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

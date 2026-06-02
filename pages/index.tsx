@@ -1,49 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, LayoutGroup } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import Link from "next/link";
 
-/* ─── animation variants ─── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
+/* ─── animation tokens ─── */
+const fadeIn = {
+  hidden: { opacity: 0, y: 18 },
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1], delay },
   }),
 };
 
-/* ─── style constants ─── */
-const kicker = "text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500";
-const sectionTitle = "text-3xl md:text-4xl font-semibold tracking-tight text-slate-900";
-const body = "text-slate-500 leading-relaxed";
+/* ─── shared style strings ─── */
+const serif = "var(--font-serif)";
+const kicker =
+  "text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--warm-muted)]";
+const sectionTitleCls =
+  "text-3xl md:text-[2.6rem] leading-[1.15] tracking-tight text-[var(--warm-ink)]";
+const body = "text-[var(--warm-body)] leading-relaxed";
 
-const TOOLS = [
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
-  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
-  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
-  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
-  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
-  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
-  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
-];
-
-/* ══════════════════════════════════════════════════════════ */
 export default function GrantLanding() {
   const [activeSection, setActiveSection] = useState("top");
 
-  const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, 90]);
-
   useEffect(() => {
-    const ids = ["top", "what", "work", "cases", "values", "contact"];
+    const ids = ["top", "what", "work", "cases", "values", "now", "contact"];
     const observers = ids.map((sectionId) => {
       const el = document.getElementById(sectionId);
       if (!el) return null;
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(sectionId); },
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(sectionId);
+        },
         { rootMargin: "-40% 0px -55% 0px" }
       );
       obs.observe(el);
@@ -53,29 +41,40 @@ export default function GrantLanding() {
   }, []);
 
   const NAV = [
-    { href: "#what",             label: "Skills",       id: "what"    },
-    { href: "#work",             label: "Experience",   id: "work"    },
-    { href: "#cases",            label: "Case studies", id: "cases"   },
-    { href: "/web-development",  label: "Web dev",      id: "webdev"  },
-    { href: "#contact",          label: "Contact",      id: "contact" },
+    { href: "#what", label: "Skills", id: "what" },
+    { href: "#work", label: "Experience", id: "work" },
+    { href: "#cases", label: "Cases", id: "cases" },
+    { href: "/web-development", label: "Web dev", id: "webdev" },
+    { href: "#contact", label: "Contact", id: "contact" },
   ];
 
   return (
-    <main className="min-h-screen w-full text-slate-900 bg-white antialiased">
-
+    <main
+      className="min-h-screen w-full antialiased"
+      style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-ink)" }}
+    >
       {/* ── STICKY NAV ── */}
       <LayoutGroup>
-        <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
-          <div className="mx-auto max-w-6xl px-5 py-3.5 flex items-center justify-between">
-
-            <Link href="#top" className="flex items-center gap-2.5 group">
-              <div className="h-8 w-8 rounded-lg bg-indigo-600 grid place-items-center shadow-sm shadow-indigo-200 group-hover:bg-indigo-700 transition-colors">
-                <span className="text-[11px] font-bold text-white tracking-tight">GK</span>
-              </div>
-              <div className="leading-tight hidden sm:block">
-                <div className="text-sm font-semibold text-slate-900">Grant Kyle</div>
-                <div className="text-[11px] text-slate-400">Customer Success · Engineering · Web</div>
-              </div>
+        <header
+          className="sticky top-0 z-50 backdrop-blur-md"
+          style={{
+            backgroundColor: "rgba(253, 251, 247, 0.82)",
+            borderBottom: "1px solid var(--warm-rule)",
+          }}
+        >
+          <div className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+            <Link
+              href="#top"
+              className="text-lg leading-none"
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              Grant Kyle
+              <span
+                className="ml-2 text-[11px] tracking-wide hidden sm:inline"
+                style={{ color: "var(--warm-muted)", fontFamily: "var(--font-sans)" }}
+              >
+                / customer success · engineering · web
+              </span>
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">
@@ -83,18 +82,22 @@ export default function GrantLanding() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative px-3.5 py-2 rounded-lg text-sm transition-colors ${
+                  className="relative px-3 py-1.5 rounded-full text-sm transition-colors"
+                  style={
                     activeSection === item.id
-                      ? "text-indigo-600 font-medium"
-                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
+                      ? {
+                          color: "var(--warm-accent-dark)",
+                        }
+                      : { color: "var(--warm-body)" }
+                  }
                 >
                   {item.label}
                   {activeSection === item.id && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-indigo-50 -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                      className="absolute inset-0 rounded-full -z-10"
+                      style={{ backgroundColor: "var(--warm-accent-soft)" }}
+                      transition={{ type: "spring", bounce: 0.18, duration: 0.45 }}
                     />
                   )}
                 </Link>
@@ -107,25 +110,23 @@ export default function GrantLanding() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-300 transition-colors"
+                className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors"
+                style={{ color: "var(--warm-body)" }}
               >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="text-slate-700">
-                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.12 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.21 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12 24 5.65 18.85.5 12 .5z"/>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.12 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.21 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
                 </svg>
               </a>
               <a
                 href="mailto:hello@grantkyle.com"
-                className="hidden sm:inline-flex btn-secondary text-sm px-4 py-2 rounded-lg font-medium"
+                className="text-sm px-4 py-2 rounded-full transition-all hover:opacity-90"
+                style={{
+                  backgroundColor: "var(--warm-accent)",
+                  color: "#fff",
+                  fontWeight: 500,
+                }}
               >
-                Email
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sgrantkyle/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary text-sm px-4 py-2 rounded-lg font-semibold"
-              >
-                LinkedIn →
+                Say hi
               </a>
               <MobileMenu nav={NAV} />
             </div>
@@ -134,227 +135,184 @@ export default function GrantLanding() {
       </LayoutGroup>
 
       {/* ── HERO ── */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_-10%_-5%,rgba(99,102,241,0.10),transparent_60%),radial-gradient(ellipse_55%_45%_at_105%_15%,rgba(139,92,246,0.09),transparent_55%),radial-gradient(ellipse_60%_70%_at_50%_110%,rgba(99,102,241,0.05),transparent_55%)]" />
-        </div>
+      <section id="top" className="relative">
+        <div className="mx-auto max-w-3xl px-6 pt-20 pb-20 md:pt-28 md:pb-24">
+          <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <p
+              className="mb-7 text-base"
+              style={{
+                fontFamily: serif,
+                color: "var(--warm-accent)",
+                fontStyle: "italic",
+              }}
+            >
+              Hi —
+            </p>
+            <h1
+              className="text-4xl md:text-[3.6rem] leading-[1.05] tracking-tight"
+              style={{
+                fontFamily: serif,
+                fontWeight: 500,
+                color: "var(--warm-ink)",
+              }}
+            >
+              I&apos;m Grant. A customer-facing operator with an{" "}
+              <span style={{ color: "var(--warm-accent)" }}>engineering</span>{" "}
+              foundation.
+            </h1>
 
-        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-14 md:pt-24 md:pb-20">
-          <motion.div style={{ y: heroY }}>
-            <div className="grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-start">
+            <div
+              className="mt-8 space-y-5 text-lg md:text-[1.2rem] leading-relaxed"
+              style={{ color: "var(--warm-body)" }}
+            >
+              <p>
+                I am a naturally curious human, and my professional journey is
+                testament to this.
+              </p>
+              <p>
+                I came up through sales. After selling SEO and web development
+                at a digital marketing agency, I learned the JavaScript
+                ecosystem (Vanilla JS / React / TypeScript) and made the
+                deliberate move into software development. I knew I wouldn&apos;t
+                stay competitive among those who live and die by the code, but I
+                was relentless in my pursuit of technical training nonetheless.
+                After several years in engineering roles, my customer-facing and
+                selling abilities had grown considerably, and I sought to come
+                back to roles that fit my natural skill set.
+              </p>
+              <p>
+                This is where I am now: living at the intersection of people and
+                product. That technical foundation is what makes me different —
+                I can sit in a conversation with an engineering team and
+                actually understand what&apos;s being said, then turn around and
+                translate it for a customer or executive in a way that builds
+                trust instead of confusion. I&apos;m most energized taking
+                things from zero to one: building the post-sale infrastructure,
+                feedback loops, and customer experiences that didn&apos;t exist
+                yet.
+              </p>
+            </div>
 
-              {/* Left: Message */}
-              <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 mb-7">
-                  <span className="text-xs font-medium text-indigo-700 tracking-wide">Customer Success · Engineering · Web</span>
-                </div>
-
-                <h1 className="text-4xl md:text-[3.4rem] leading-[1.1] font-semibold tracking-tight">
-                  I bridge the gap between{" "}
-                  <span className="gradient-text">complex products</span>{" "}
-                  and the customers who need to succeed with them.
-                </h1>
-
-                <p className="mt-5 text-base md:text-lg text-slate-500 font-medium">
-                  Customer-facing operator with an engineering foundation.
-                </p>
-
-                <div className={`mt-6 max-w-xl space-y-4 ${body}`}>
-                  <p>
-                    I am a naturally curious human, and my professional journey is testament to this.
-                  </p>
-                  <p>
-                    I came up through sales. After selling SEO and web development at a digital marketing agency, I learned the JavaScript ecosystem (Vanilla JS / React / TypeScript) and made the deliberate move into software development. I knew I wouldn't stay competitive among those who live and die by the code, but I was relentless in my pursuit of technical training nonetheless. After several years in engineering roles, my customer-facing and selling abilities had grown considerably, and I sought to come back to roles that fit my natural skill set.
-                  </p>
-                  <p>
-                    This is where I am now: living at the intersection of people and product. That technical foundation is what makes me different — I can sit in a conversation with an engineering team and actually understand what's being said, then turn around and translate it for a customer or executive in a way that builds trust instead of confusion. I'm most energized taking things from zero to one: building the post-sale infrastructure, feedback loops, and customer experiences that didn't exist yet.
-                  </p>
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="#cases" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold">
-                    See recent work
-                  </a>
-                  <a
-                    href="https://github.com/stgrky"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold"
-                  >
-                    GitHub →
-                  </a>
-                </div>
-
-                <Link
-                  href="/web-development"
-                  className="mt-5 inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-indigo-600 transition-colors group"
-                >
-                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Currently building: websites for mental health practices
-                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
-                </Link>
-
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {[
-                    "Customer-facing foundation",
-                    "Technically fluent, not a silo",
-                    "0-to-1 ops builder",
-                    "Stakeholder translation",
-                    "Voice of customer → product",
-                    "Spanish business proficiency",
-                  ].map((t) => (
-                    <span key={t} className="chip">{t}</span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Right: Snapshot panel */}
-              <motion.aside
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="md:sticky md:top-[72px] rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-100 p-6"
+            <div className="mt-10 flex flex-wrap items-center gap-6">
+              <a
+                href="#cases"
+                className="inline-flex items-center gap-2 text-sm px-6 py-3 rounded-full transition-all hover:opacity-90"
+                style={{
+                  backgroundColor: "var(--warm-accent)",
+                  color: "#fff",
+                  fontWeight: 500,
+                }}
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="text-sm font-semibold text-slate-900">At a glance</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">How I show up in the work</div>
-                  </div>
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-600 text-white tracking-wide uppercase">
-                    Builder
-                  </span>
-                </div>
-
-                <div className="mt-5 space-y-3.5 divide-y divide-slate-100">
-                  <SnapshotRow label="Relationships" value="Executive-to-end-user ownership" />
-                  <SnapshotRow label="Background" value="Software engineering → Customer success" />
-                  <SnapshotRow label="CS operations" value="Onboarding, health signals, escalation" />
-                  <SnapshotRow label="Cross-functional" value="Voice of customer to Eng + Product" />
-                  <SnapshotRow label="Split" value="~60% customer-facing · 40% technical" />
-                </div>
-
-                <div className="mt-5 pt-5 border-t border-slate-100">
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-3">Background & tools</div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {["JavaScript", "React", "TypeScript", "HubSpot", "Intercom", "Notion", "Jira", "Figma"].map((t) => (
-                      <span key={t} className="px-2 py-1 rounded-md text-[11px] bg-slate-50 border border-slate-100 text-slate-600 font-medium">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.aside>
+                See recent work
+                <span>→</span>
+              </a>
+              <a
+                href="https://github.com/stgrky"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm transition-colors hover:underline"
+                style={{ color: "var(--warm-accent-dark)" }}
+              >
+                GitHub ↗
+              </a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── MARQUEE TICKER ── */}
-      <div className="border-y border-slate-100 bg-slate-50 py-3 overflow-hidden" aria-hidden="true">
-        <div className="marquee-track flex gap-6 whitespace-nowrap w-max">
-          {TOOLS.map((tool, i) => (
-            <span key={i} className="inline-flex items-center gap-6 text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
-              {tool}
-              <span className="h-1 w-1 rounded-full bg-indigo-300 inline-block flex-shrink-0" />
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── WHAT I DO ── */}
-      <section id="what" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-          <div className={kicker}>The work</div>
-          <h2 className={`${sectionTitle} mt-2`}>What I'm good at.</h2>
-          <p className={`mt-3 max-w-2xl ${body}`}>
-            I live at the intersection of customer relationships, technical depth, and operational clarity. Four things I keep coming back to, across roles.
-          </p>
-        </motion.div>
-
-        {/* Bento grid */}
-        <div className="mt-10 grid md:grid-cols-3 gap-4">
+      {/* ── SKILLS / WHAT I'M GOOD AT ── */}
+      <section
+        id="what"
+        className="border-y"
+        style={{ borderColor: "var(--warm-rule)", backgroundColor: "var(--warm-bg-soft)" }}
+      >
+        <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0} variants={fadeUp}
-            className="md:col-span-2 pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
           >
-            <div className="text-xl mb-4" aria-hidden>🎯</div>
-            <div className="text-sm font-semibold text-slate-900">Customer adoption & enablement</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Onboarding that leads to real usage — not just a training checkbox. I design success plans, build enablement resources, and create communication rhythms that keep customers engaged long past go-live and build habits that actually stick.
+            <p className={kicker}>The work</p>
+            <h2
+              className={`${sectionTitleCls} mt-3`}
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              What I&apos;m good at.
+            </h2>
+            <p className={`mt-6 text-lg ${body}`}>
+              I live at the intersection of customer relationships, technical
+              depth, and operational clarity. Four things I keep coming back to,
+              across roles.
             </p>
           </motion.div>
 
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.08} variants={fadeUp}
-            className="pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>🔧</div>
-            <div className="text-sm font-semibold text-slate-900">Technical problem-solving</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Having built software professionally, I understand what's actually happening under the hood — which means I can diagnose issues more precisely, have more credible conversations with engineering teams, and translate technical complexity into something customers can act on. It's not a party trick; it's what makes the customer experience better.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.12} variants={fadeUp}
-            className="pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>⚙️</div>
-            <div className="text-sm font-semibold text-slate-900">Ops & process design</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Documented systems beat heroic memory. I build playbooks, ticketing workflows, SOPs, and handoff processes that make teams scalable — not dependent on any one person knowing the answer.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.16} variants={fadeUp}
-            className="md:col-span-2 pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>🔗</div>
-            <div className="text-sm font-semibold text-slate-900">Cross-functional bridge</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Customer reality doesn't translate itself to internal priorities. I collect structured feedback from the field, surface patterns to product and engineering, and bring updates back to customers — closing the loop in both directions. I've managed relationships from end-user to executive and know how to communicate differently for each.
-            </p>
-          </motion.div>
+          <div className="mt-14 space-y-14">
+            <Skill
+              kicker="Adoption & enablement"
+              heading="Onboarding that leads to real usage."
+              body="Not just a training checkbox. I design success plans, build enablement resources, and create communication rhythms that keep customers engaged long past go-live — and help them build habits that actually stick."
+            />
+            <Skill
+              kicker="Technical depth"
+              heading="Engineering background that quietly does a lot of work."
+              body="Having built software professionally, I understand what's actually happening under the hood. That means I can diagnose issues more precisely, have more credible conversations with engineering teams, and translate technical complexity into something customers can act on. It's not a party trick — it's what makes the customer experience better."
+            />
+            <Skill
+              kicker="Ops & systems"
+              heading="Documented processes beat heroic memory."
+              body="Playbooks, ticketing workflows, SOPs, handoff processes. The boring infrastructure that makes a team scalable instead of dependent on any one person knowing the answer."
+            />
+            <Skill
+              kicker="Cross-functional translation"
+              heading="Customer reality doesn't translate itself."
+              body="I collect structured feedback from the field, surface patterns to product and engineering, and bring updates back to customers — closing the loop in both directions. I've held relationships from end-user to executive and know how to communicate differently for each."
+            />
+          </div>
         </div>
       </section>
 
       {/* ── EXPERIENCE ── */}
-      <section id="work" className="bg-slate-50 border-y border-slate-100">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+      <section id="work">
+        <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
             className="flex flex-col md:flex-row md:items-end gap-6 justify-between"
           >
             <div>
-              <div className={kicker}>Experience</div>
-              <h2 className={`${sectionTitle} mt-2`}>Where I've worked.</h2>
-              <p className={`mt-3 max-w-2xl ${body}`}>
-                A mix of startups, contracts, and growth environments — kept intentionally concise. Signal over volume.
+              <p className={kicker}>Experience</p>
+              <h2
+                className={`${sectionTitleCls} mt-3`}
+                style={{ fontFamily: serif, fontWeight: 500 }}
+              >
+                Where I&apos;ve worked.
+              </h2>
+              <p className={`mt-4 max-w-2xl text-lg ${body}`}>
+                A mix of startups, contracts, and growth environments — kept
+                intentionally concise. Signal over volume.
               </p>
             </div>
             <a
               href="https://www.linkedin.com/in/sgrantkyle/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold self-start md:self-auto whitespace-nowrap flex-shrink-0"
+              className="text-sm transition-colors hover:underline self-start md:self-auto whitespace-nowrap"
+              style={{ color: "var(--warm-accent-dark)" }}
             >
-              Full history on LinkedIn →
+              Full history on LinkedIn ↗
             </a>
           </motion.div>
 
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
               {
                 title: "Technical CSM",
                 org: "Aquaria",
                 period: "2024 – Present",
-                tag: "Hardware startup · Series A",
+                tag: "Hardware · Series A",
                 bullets: [
                   "Built CS and support operations from scratch — playbooks, ticketing, customer education content, self-serve hub, and AE-to-CSM handoff SOP.",
                   "Led end-to-end field deployments, coordinating contractors, logistics partners, and internal teams across complex hardware installations.",
@@ -387,23 +345,52 @@ export default function GrantLanding() {
             ].map((job, i) => (
               <motion.div
                 key={job.org}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                custom={i * 0.08} variants={fadeUp}
-                className="work-card rounded-2xl bg-white border border-slate-200 p-6 hover:shadow-md hover:shadow-slate-100 transition-all"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                custom={i * 0.06}
+                variants={fadeIn}
+                className="rounded-2xl p-7 transition-all"
+                style={{
+                  backgroundColor: "var(--warm-card)",
+                  border: "1px solid var(--warm-rule)",
+                }}
               >
-                <div className="flex items-start justify-between gap-2 mb-4">
-                  <div>
-                    <div className="text-sm font-semibold text-slate-900">{job.title}</div>
-                    <div className="text-xs text-slate-400 mt-0.5">{job.org} · {job.period}</div>
+                <div className="mb-5">
+                  <div
+                    className="text-base leading-snug"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: "var(--warm-ink)",
+                    }}
+                  >
+                    {job.title}
                   </div>
-                  <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 whitespace-nowrap flex-shrink-0">
+                  <div
+                    className="text-[12px] mt-1"
+                    style={{ color: "var(--warm-muted)" }}
+                  >
+                    {job.org} · {job.period}
+                  </div>
+                  <div
+                    className="text-[10px] mt-3 tracking-[0.18em] uppercase"
+                    style={{ color: "var(--warm-accent)" }}
+                  >
                     {job.tag}
-                  </span>
+                  </div>
                 </div>
-                <ul className="space-y-2.5">
+                <ul className="space-y-3">
                   {job.bullets.map((b) => (
-                    <li key={b} className="flex gap-2.5 text-sm text-slate-500">
-                      <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-indigo-300 flex-shrink-0" />
+                    <li
+                      key={b}
+                      className="flex gap-3 text-sm leading-relaxed"
+                      style={{ color: "var(--warm-body)" }}
+                    >
+                      <span
+                        className="mt-[8px] h-1 w-1 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: "var(--warm-accent)" }}
+                      />
                       <span>{b}</span>
                     </li>
                   ))}
@@ -412,46 +399,61 @@ export default function GrantLanding() {
             ))}
           </div>
 
-          {/* Earlier career callout */}
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.24} variants={fadeUp}
-            className="mt-5 rounded-2xl bg-white border border-slate-200 p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between"
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeIn}
+            className="mt-8 text-sm leading-relaxed"
+            style={{ color: "var(--warm-body)" }}
           >
-            <p className="text-sm text-slate-500">
-              <span className="font-semibold text-slate-700">Earlier: </span>
-              Project Manager at Muuse (NextGen Consortium · Starbucks / McDonald's), web developer at Paperstreet, SEO Account Manager at 51Blocks managing 35+ client campaigns end-to-end.
-            </p>
-            <a
-              href="https://www.linkedin.com/in/sgrantkyle/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors whitespace-nowrap"
+            <span
+              style={{
+                fontFamily: serif,
+                fontStyle: "italic",
+                color: "var(--warm-ink)",
+                fontWeight: 500,
+              }}
             >
-              More on LinkedIn →
-            </a>
-          </motion.div>
+              Earlier —{" "}
+            </span>
+            Project Manager at Muuse (NextGen Consortium · Starbucks /
+            McDonald&apos;s), web developer at Paperstreet, SEO Account Manager
+            at 51Blocks managing 35+ client campaigns end-to-end.
+          </motion.p>
         </div>
       </section>
 
       {/* ── CASE STUDIES ── */}
-      <section id="cases" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-          <div className={kicker}>Case studies</div>
-          <h2 className={`${sectionTitle} mt-2`}>A closer look at how I operate.</h2>
-          <p className={`mt-3 max-w-2xl ${body}`}>
-            Written to show approach — problem framing, execution, and how I communicate across technical and business stakeholders.
-          </p>
-        </motion.div>
-
-        <div className="mt-10 grid lg:grid-cols-2 gap-6">
+      <section
+        id="cases"
+        className="border-y"
+        style={{ borderColor: "var(--warm-rule)", backgroundColor: "var(--warm-bg-soft)" }}
+      >
+        <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0} variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
           >
-            <CaseCard
-              tag="CS Ops · Hardware"
-              title="Building customer success from scratch at a hardware startup"
+            <p className={kicker}>Cases</p>
+            <h2
+              className={`${sectionTitleCls} mt-3`}
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              A closer look at how I operate.
+            </h2>
+            <p className={`mt-4 text-lg ${body}`}>
+              Two stories written for approach — problem framing, execution, and
+              how I communicate across technical and business stakeholders.
+            </p>
+          </motion.div>
+
+          <div className="mt-14 space-y-16">
+            <CaseStudy
+              kicker="CS Ops · Hardware"
+              title="Building customer success from scratch at a hardware startup."
               context="Series-A startup with complex physical product deployments, a growing customer base, and no existing CS infrastructure."
               whatIDid={[
                 "Designed the entire post-sale motion — ticketing workflows, email cadences, customer education content, self-serve resource hub, and AE-to-CSM handoff SOP.",
@@ -465,17 +467,11 @@ export default function GrantLanding() {
                 "Tighter engineering feedback loop",
                 "Customer advocacy driving revenue",
               ]}
-              tools={["HubSpot", "Notion", "SOPs & playbooks", "Customer education content", "Field QA"]}
             />
-          </motion.div>
 
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.1} variants={fadeUp}
-          >
-            <CaseCard
-              tag="SaaS · Churn prevention"
-              title="Technical onboarding and enterprise account recovery at a loyalty SaaS"
+            <CaseStudy
+              kicker="SaaS · Churn prevention"
+              title="Technical onboarding and enterprise account recovery."
               context="SaaS platform with enterprise clients who needed hands-on technical onboarding and reliable post-launch support to get full value from the product."
               whatIDid={[
                 "Managed complex onboarding end-to-end, coordinating across client teams, internal resources, and platform configurations to ensure successful launches.",
@@ -489,24 +485,76 @@ export default function GrantLanding() {
                 "Successful high-volume program launch",
                 "Consistently high CSAT post-onboarding",
               ]}
-              tools={["Enterprise onboarding", "Technical troubleshooting", "Stakeholder management", "Expectation setting", "Success planning"]}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ── NOW / RECENT BUILD ── */}
+      <section id="now">
+        <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+          >
+            <p className={kicker}>Now</p>
+            <h2
+              className={`${sectionTitleCls} mt-3`}
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              Currently building.
+            </h2>
+            <p className={`mt-6 text-lg ${body}`}>
+              Modern, client-managed websites for therapists in private
+              practice. Built on Next.js and Sanity so the practice owner can
+              edit any page and publish blog posts themselves — without a
+              developer in the loop.
+            </p>
+            <Link
+              href="/web-development"
+              className="mt-8 inline-flex items-center gap-2 text-base transition-colors hover:underline"
+              style={{
+                color: "var(--warm-accent-dark)",
+                fontFamily: serif,
+                fontStyle: "italic",
+                fontWeight: 500,
+              }}
+            >
+              See what&apos;s included →
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ── VALUES ── */}
-      <section id="values" className="bg-slate-50 border-t border-slate-100">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-            <div className={kicker}>Values</div>
-            <h2 className={`${sectionTitle} mt-2`}>How I work.</h2>
-            <p className={`mt-3 max-w-2xl ${body}`}>
-              Values only matter when they show up in behavior. These are the ones I operationalize.
+      {/* ── VALUES / HOW I WORK ── */}
+      <section
+        id="values"
+        className="border-y"
+        style={{ borderColor: "var(--warm-rule)", backgroundColor: "var(--warm-bg-soft)" }}
+      >
+        <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+          >
+            <p className={kicker}>Values</p>
+            <h2
+              className={`${sectionTitleCls} mt-3`}
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              How I work.
+            </h2>
+            <p className={`mt-4 text-lg ${body} max-w-2xl`}>
+              Values only matter when they show up in behavior. These are the
+              ones I operationalize.
             </p>
           </motion.div>
 
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="mt-14 grid md:grid-cols-3 gap-6">
             {[
               {
                 title: "Empathy with accountability",
@@ -517,19 +565,43 @@ export default function GrantLanding() {
                 text: "I'd rather create the system than wait for someone else to. Documented playbooks, self-serve resources, and scalable workflows — built to outlast any single person's memory.",
               },
               {
-                title: "Engineering background, customer-first mindset",
+                title: "Engineering background, customer-first mind",
                 text: "I came up through software engineering and made a deliberate move into customer success. That foundation means I can hold a technical conversation without needing a translator — and use that depth to make the customer experience sharper, not just the product.",
               },
             ].map((v, i) => (
               <motion.div
                 key={v.title}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                custom={i * 0.08} variants={fadeUp}
-                className="rounded-2xl bg-white border border-slate-200 p-7"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                custom={i * 0.06}
+                variants={fadeIn}
+                className="rounded-2xl p-7"
+                style={{
+                  backgroundColor: "var(--warm-card)",
+                  border: "1px solid var(--warm-rule)",
+                }}
               >
-                <div className="h-0.5 w-8 bg-indigo-500 rounded-full mb-5" />
-                <div className="text-sm font-semibold text-slate-900">{v.title}</div>
-                <p className="mt-2 text-sm text-slate-500 leading-relaxed">{v.text}</p>
+                <div
+                  className="h-0.5 w-8 rounded-full mb-5"
+                  style={{ backgroundColor: "var(--warm-accent)" }}
+                />
+                <div
+                  className="text-lg leading-snug"
+                  style={{
+                    fontFamily: serif,
+                    fontWeight: 500,
+                    color: "var(--warm-ink)",
+                  }}
+                >
+                  {v.title}
+                </div>
+                <p
+                  className="mt-3 text-sm leading-relaxed"
+                  style={{ color: "var(--warm-body)" }}
+                >
+                  {v.text}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -537,138 +609,107 @@ export default function GrantLanding() {
       </section>
 
       {/* ── CONTACT ── */}
-      <section id="contact" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
-          className="rounded-3xl border border-slate-200 bg-white p-8 md:p-12"
-        >
-          <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-            <div>
-              <div className={kicker}>Contact</div>
-              <h2 className={`${sectionTitle} mt-2`}>Get in touch.</h2>
-              <p className={`mt-3 max-w-lg ${body}`}>
-                Happy to talk shop — customer success, technical work, or building things for the mental health space. Email or LinkedIn, whichever's easiest.
-              </p>
-              <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <a href="mailto:hello@grantkyle.com" className="btn-primary px-5 py-3 rounded-xl text-sm font-semibold text-center">
-                  hello@grantkyle.com
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/sgrantkyle/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary px-5 py-3 rounded-xl text-sm font-semibold text-center"
-                >
-                  LinkedIn →
-                </a>
-              </div>
-              <p className="mt-5 text-xs text-slate-400">
-                Prefer a call? Send an email with a few times and I&apos;ll get back to you fast.
-              </p>
+      <section id="contact">
+        <div className="mx-auto max-w-3xl px-6 py-24 md:py-32 text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+          >
+            <p className={kicker}>Get in touch</p>
+            <h2
+              className={`${sectionTitleCls} mt-3`}
+              style={{ fontFamily: serif, fontWeight: 500 }}
+            >
+              Happy to talk shop.
+            </h2>
+            <p className={`mt-6 max-w-xl mx-auto text-lg ${body}`}>
+              Customer success, technical work, or building things for the
+              mental health space — happy to hear from you. Email or LinkedIn,
+              whichever&apos;s easier.
+            </p>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="mailto:hello@grantkyle.com"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm transition-all hover:opacity-95"
+                style={{
+                  backgroundColor: "var(--warm-accent)",
+                  color: "#fff",
+                  fontWeight: 500,
+                }}
+              >
+                hello@grantkyle.com
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sgrantkyle/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm transition-colors"
+                style={{
+                  backgroundColor: "#fff",
+                  color: "var(--warm-accent-dark)",
+                  border: "1px solid var(--warm-rule)",
+                  fontWeight: 500,
+                }}
+              >
+                LinkedIn ↗
+              </a>
             </div>
 
-            <div className="rounded-2xl bg-slate-50 border border-slate-100 p-6">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-3">Recent build</div>
-              <div className="text-sm font-semibold text-slate-900 mb-2">
-                Websites for mental health practices
-              </div>
-              <p className="text-sm text-slate-500 leading-relaxed mb-4">
-                Modern, client-managed therapy practice sites — Next.js + Sanity, so non-technical owners can publish blog posts and edit pages without a developer.
-              </p>
-              <Link
-                href="/web-development"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors group"
-              >
-                See what&apos;s included
-                <span className="transition-transform group-hover:translate-x-0.5">→</span>
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+            <p
+              className="mt-6 text-xs"
+              style={{ color: "var(--warm-muted)" }}
+            >
+              I reply within a couple of days. Prefer a call? Send a few times.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      <footer className="text-center text-slate-400 text-xs py-8 border-t border-slate-100">
-        © {new Date().getFullYear()} Grant Kyle &nbsp;·&nbsp; Built with Next.js, React, Tailwind &amp; Framer Motion
+      {/* ── FOOTER ── */}
+      <footer
+        className="border-t"
+        style={{
+          borderColor: "var(--warm-rule)",
+          backgroundColor: "var(--warm-bg)",
+        }}
+      >
+        <div className="mx-auto max-w-5xl px-6 py-10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs">
+          <div style={{ color: "var(--warm-muted)" }}>
+            <span
+              style={{
+                fontFamily: serif,
+                fontStyle: "italic",
+                color: "var(--warm-ink)",
+              }}
+            >
+              Grant Kyle
+            </span>{" "}
+            · © {new Date().getFullYear()} · Made with care in Austin
+          </div>
+          <div
+            className="flex items-center gap-5"
+            style={{ color: "var(--warm-muted)" }}
+          >
+            <Link href="/blog" className="hover:underline">
+              Blog
+            </Link>
+            <Link href="/about" className="hover:underline">
+              About
+            </Link>
+            <a
+              href="https://github.com/stgrky"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
       </footer>
-
-      {/* ─────────────────────────── STYLES ─────────────────────────── */}
-      <style jsx>{`
-        /* Gradient text */
-        .gradient-text {
-          background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 60%, #6366f1 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        /* Buttons */
-        .btn-primary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(180deg, #4f46e5 0%, #4338ca 100%);
-          color: #fff;
-          box-shadow: 0 4px 14px -4px rgba(79, 70, 229, 0.55);
-          transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-        }
-        .btn-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px -4px rgba(79, 70, 229, 0.65);
-          filter: brightness(1.06);
-        }
-        .btn-secondary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #fff;
-          border: 1px solid rgba(15, 23, 42, 0.12);
-          color: rgba(15, 23, 42, 0.85);
-          transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-        }
-        .btn-secondary:hover {
-          transform: translateY(-1px);
-          border-color: rgba(79, 70, 229, 0.35);
-          color: #4f46e5;
-        }
-
-        /* Proof chips */
-        .chip {
-          display: inline-flex;
-          padding: 5px 12px;
-          border-radius: 999px;
-          font-size: 12px;
-          font-weight: 500;
-          background: rgba(79, 70, 229, 0.06);
-          border: 1px solid rgba(79, 70, 229, 0.16);
-          color: #4338ca;
-        }
-
-        /* Marquee */
-        .marquee-track {
-          animation: marquee 38s linear infinite;
-        }
-        @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        /* Pillar cards */
-        .pillar-card {
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .pillar-card:hover {
-          border-color: rgba(99, 102, 241, 0.25);
-          box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.12), 0 4px 24px -6px rgba(99, 102, 241, 0.12);
-        }
-
-        /* Work cards */
-        .work-card {
-          transition: box-shadow 0.2s ease, transform 0.2s ease;
-        }
-        .work-card:hover {
-          transform: translateY(-2px);
-        }
-      `}</style>
     </main>
   );
 }
@@ -677,90 +718,179 @@ export default function GrantLanding() {
 /* Sub-components                                             */
 /* ══════════════════════════════════════════════════════════ */
 
-function SnapshotRow({ label, value }: { label: string; value: string }) {
+function Skill({
+  kicker,
+  heading,
+  body,
+}: {
+  kicker: string;
+  heading: string;
+  body: string;
+}) {
   return (
-    <div className="flex items-start justify-between gap-4 pt-3 first:pt-0">
-      <div className="text-[11px] text-slate-400 font-medium">{label}</div>
-      <div className="text-[11px] font-semibold text-slate-700 text-right">{value}</div>
-    </div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={fadeIn}
+    >
+      <p
+        className="text-[11px] mb-3 tracking-[0.18em] uppercase"
+        style={{ color: "var(--warm-accent)" }}
+      >
+        {kicker}
+      </p>
+      <h3
+        className="text-2xl md:text-[1.7rem] leading-snug"
+        style={{
+          fontFamily: serif,
+          fontWeight: 500,
+          color: "var(--warm-ink)",
+        }}
+      >
+        {heading}
+      </h3>
+      <p
+        className="mt-4 text-lg leading-relaxed"
+        style={{ color: "var(--warm-body)" }}
+      >
+        {body}
+      </p>
+    </motion.div>
   );
 }
 
-function CaseCard({
-  tag,
+function CaseStudy({
+  kicker,
   title,
   context,
   whatIDid,
   outcomes,
-  tools,
 }: {
-  tag: string;
+  kicker: string;
   title: string;
   context: string;
   whatIDid: string[];
   outcomes: string[];
-  tools: string[];
 }) {
   return (
-    <div className="h-full rounded-2xl bg-white border border-slate-200 p-7 hover:shadow-md hover:shadow-slate-100 transition-all flex flex-col gap-5">
-      <div>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-500">{tag}</span>
-        <div className="mt-2 text-base font-semibold text-slate-900 leading-snug">{title}</div>
-        <div className="mt-2 text-sm text-slate-400">{context}</div>
-      </div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={fadeIn}
+    >
+      <p
+        className="text-[11px] mb-3 tracking-[0.22em] uppercase"
+        style={{ color: "var(--warm-accent)" }}
+      >
+        {kicker}
+      </p>
+      <h3
+        className="text-2xl md:text-[2rem] leading-snug"
+        style={{
+          fontFamily: serif,
+          fontWeight: 500,
+          color: "var(--warm-ink)",
+        }}
+      >
+        {title}
+      </h3>
+      <p
+        className="mt-4 text-base leading-relaxed italic"
+        style={{ color: "var(--warm-muted)", fontFamily: "var(--font-sans)" }}
+      >
+        {context}
+      </p>
 
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">What I did</div>
-        <ul className="space-y-2">
+      <div className="mt-7">
+        <p
+          className="text-[10px] mb-3 tracking-[0.22em] uppercase"
+          style={{ color: "var(--warm-muted)" }}
+        >
+          What I did
+        </p>
+        <ul className="space-y-3">
           {whatIDid.map((b) => (
-            <li key={b} className="flex gap-2.5 text-sm text-slate-500">
-              <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-indigo-300 flex-shrink-0" />
+            <li
+              key={b}
+              className="flex gap-3 text-base leading-relaxed"
+              style={{ color: "var(--warm-body)" }}
+            >
+              <span
+                className="mt-[10px] h-1 w-1 rounded-full flex-shrink-0"
+                style={{ backgroundColor: "var(--warm-accent)" }}
+              />
               <span>{b}</span>
             </li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">Outcomes</div>
+      <div className="mt-7">
+        <p
+          className="text-[10px] mb-3 tracking-[0.22em] uppercase"
+          style={{ color: "var(--warm-muted)" }}
+        >
+          Outcomes
+        </p>
         <div className="flex flex-wrap gap-2">
           {outcomes.map((o) => (
-            <span key={o} className="px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 border border-indigo-100 text-indigo-700">
+            <span
+              key={o}
+              className="px-3 py-1.5 rounded-full text-xs"
+              style={{
+                backgroundColor: "var(--warm-accent-soft)",
+                color: "var(--warm-accent-dark)",
+              }}
+            >
               {o}
             </span>
           ))}
         </div>
       </div>
-
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">Tools &amp; methods</div>
-        <div className="flex flex-wrap gap-1.5">
-          {tools.map((t) => (
-            <span key={t} className="px-2.5 py-1 rounded-lg text-xs bg-white border border-slate-200 text-slate-500 font-medium">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
-function MobileMenu({ nav }: { nav: { href: string; label: string }[] }) {
+function MobileMenu({
+  nav,
+}: {
+  nav: { href: string; label: string }[];
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="md:hidden relative">
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
+        className="inline-flex items-center justify-center h-9 w-9 rounded-full transition-colors"
+        style={{
+          border: "1px solid var(--warm-rule)",
+          backgroundColor: "var(--warm-card)",
+        }}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
       >
         <div className="flex flex-col gap-[5px] items-center justify-center w-4 h-4">
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full origin-center transition-all duration-200 ${isOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} />
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full transition-all duration-200 ${isOpen ? "opacity-0 scale-x-0" : ""}`} />
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full origin-center transition-all duration-200 ${isOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
+          <span
+            className={`block h-[1.5px] w-full rounded-full origin-center transition-all duration-200 ${
+              isOpen ? "rotate-45 translate-y-[6.5px]" : ""
+            }`}
+            style={{ backgroundColor: "var(--warm-body)" }}
+          />
+          <span
+            className={`block h-[1.5px] w-full rounded-full transition-all duration-200 ${
+              isOpen ? "opacity-0 scale-x-0" : ""
+            }`}
+            style={{ backgroundColor: "var(--warm-body)" }}
+          />
+          <span
+            className={`block h-[1.5px] w-full rounded-full origin-center transition-all duration-200 ${
+              isOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
+            }`}
+            style={{ backgroundColor: "var(--warm-body)" }}
+          />
         </div>
       </button>
 
@@ -770,16 +900,22 @@ function MobileMenu({ nav }: { nav: { href: string; label: string }[] }) {
             initial={{ opacity: 0, y: -8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="absolute right-0 mt-2 w-52 rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60 overflow-hidden"
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute right-0 mt-2 w-56 rounded-2xl overflow-hidden"
+            style={{
+              backgroundColor: "var(--warm-card)",
+              border: "1px solid var(--warm-rule)",
+              boxShadow: "0 18px 40px -12px rgba(42, 39, 36, 0.18)",
+            }}
           >
-            <nav className="flex flex-col p-1.5">
+            <nav className="flex flex-col p-2">
               {nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
+                  className="px-3 py-2.5 rounded-xl text-sm transition-colors"
+                  style={{ color: "var(--warm-ink)" }}
                 >
                   {item.label}
                 </Link>
