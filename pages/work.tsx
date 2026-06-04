@@ -59,23 +59,44 @@ const WorkPage = () => {
                 The work —
               </p>
               <h1
-                className="text-4xl md:text-[3.4rem] leading-[1.05] tracking-tight"
+                className="text-3xl md:text-[2.4rem] leading-[1.25] tracking-tight"
                 style={{
                   fontFamily: serif,
                   fontWeight: 500,
                   color: "var(--warm-ink)",
                 }}
               >
-                What I do for a living.
+                I am a naturally curious human, and my professional journey is
+                testament to this.
               </h1>
-              <p
-                className="mt-7 max-w-xl text-lg leading-relaxed"
+
+              <div
+                className="mt-8 space-y-6 text-lg md:text-[1.2rem] leading-relaxed"
                 style={{ color: "var(--warm-body)" }}
               >
-                Customer success, technical depth, and the operational systems
-                that keep teams from depending on heroic memory. A longer look
-                at the skills, the roles, the case studies, and how I show up.
-              </p>
+                <p>
+                  I came up through sales. After selling SEO and web development
+                  at a digital marketing agency, I learned the JavaScript
+                  ecosystem (Vanilla JS / React / TypeScript) and made the
+                  deliberate move into software development. I knew I wouldn&apos;t
+                  stay competitive among those who live and die by the code, but I
+                  was relentless in my pursuit of technical training nonetheless.
+                  After several years in engineering roles, my customer-facing and
+                  selling abilities had grown considerably, and I sought to come
+                  back to roles that fit my natural skill set.
+                </p>
+                <p>
+                  This is where I am now: living at the intersection of people and
+                  product. That technical foundation is what makes me different —
+                  I can sit in a conversation with an engineering team and
+                  actually understand what&apos;s being said, then turn around and
+                  translate it for a customer or executive in a way that builds
+                  trust instead of confusion. I&apos;m most energized taking
+                  things from zero to one: building the post-sale infrastructure,
+                  feedback loops, and customer experiences that didn&apos;t exist
+                  yet.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

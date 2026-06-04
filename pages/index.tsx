@@ -24,49 +24,32 @@ export default function GrantLanding() {
     >
       <SiteNav />
 
-      {/* ── HERO ── */}
+      {/* ── HERO ── TODO: new homepage intro copy goes here */}
       <section id="top" className="relative">
         <div className="mx-auto max-w-3xl px-6 pt-20 pb-20 md:pt-28 md:pb-24">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <p
+              className="text-sm uppercase tracking-[0.22em]"
+              style={{ color: "var(--warm-muted)" }}
+            >
+              [ new homepage intro — coming ]
+            </p>
             <h1
-              className="text-3xl md:text-[2.4rem] leading-[1.25] tracking-tight"
+              className="mt-6 text-3xl md:text-[2.4rem] leading-[1.25] tracking-tight"
               style={{
                 fontFamily: serif,
                 fontWeight: 500,
                 color: "var(--warm-ink)",
               }}
             >
-              I am a naturally curious human, and my professional journey is
-              testament to this.
+              Placeholder headline.
             </h1>
-
-            <div
-              className="mt-8 space-y-6 text-lg md:text-[1.2rem] leading-relaxed"
+            <p
+              className="mt-6 text-lg leading-relaxed"
               style={{ color: "var(--warm-body)" }}
             >
-              <p>
-                I came up through sales. After selling SEO and web development
-                at a digital marketing agency, I learned the JavaScript
-                ecosystem (Vanilla JS / React / TypeScript) and made the
-                deliberate move into software development. I knew I wouldn&apos;t
-                stay competitive among those who live and die by the code, but I
-                was relentless in my pursuit of technical training nonetheless.
-                After several years in engineering roles, my customer-facing and
-                selling abilities had grown considerably, and I sought to come
-                back to roles that fit my natural skill set.
-              </p>
-              <p>
-                This is where I am now: living at the intersection of people and
-                product. That technical foundation is what makes me different —
-                I can sit in a conversation with an engineering team and
-                actually understand what&apos;s being said, then turn around and
-                translate it for a customer or executive in a way that builds
-                trust instead of confusion. I&apos;m most energized taking
-                things from zero to one: building the post-sale infrastructure,
-                feedback loops, and customer experiences that didn&apos;t exist
-                yet.
-              </p>
-            </div>
+              Drop the new intro paragraph(s) here.
+            </p>
           </motion.div>
         </div>
       </section>
