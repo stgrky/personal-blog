@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import PostWidget from "../components/PostWidget";
 import PostCard from "../components/PostCard";
+import SiteNav from "../components/SiteNav";
 import { getPosts } from "../services";
 
 interface BlogProps {
@@ -53,31 +54,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
         className="min-h-screen w-full antialiased"
         style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-ink)" }}
       >
-        {/* ── Soft top bar ── */}
-        <header
-          className="sticky top-0 z-50 backdrop-blur-md"
-          style={{
-            backgroundColor: "rgba(253, 251, 247, 0.82)",
-            borderBottom: "1px solid var(--warm-rule)",
-          }}
-        >
-          <div className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-lg leading-none"
-              style={{ fontFamily: serif, fontWeight: 500 }}
-            >
-              Grant Kyle
-            </Link>
-            <Link
-              href="/"
-              className="text-sm transition-colors hover:underline"
-              style={{ color: "var(--warm-accent-dark)" }}
-            >
-              ← Home
-            </Link>
-          </div>
-        </header>
+        <SiteNav />
 
         {/* ── HERO ── */}
         <section>
@@ -199,8 +176,11 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
               className="flex items-center gap-5"
               style={{ color: "var(--warm-muted)" }}
             >
-              <Link href="/about" className="hover:underline">
-                About
+              <Link href="/work" className="hover:underline">
+                Work
+              </Link>
+              <Link href="/life" className="hover:underline">
+                Life
               </Link>
               <Link href="/" className="hover:underline">
                 Home

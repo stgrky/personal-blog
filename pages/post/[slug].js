@@ -127,8 +127,11 @@ const PostDetails = ({ post }) => {
               <Link href="/blog" className="hover:underline">
                 Blog
               </Link>
-              <Link href="/about" className="hover:underline">
-                About
+              <Link href="/work" className="hover:underline">
+                Work
+              </Link>
+              <Link href="/life" className="hover:underline">
+                Life
               </Link>
               <Link href="/" className="hover:underline">
                 Home
