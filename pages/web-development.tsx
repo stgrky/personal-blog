@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -54,14 +54,45 @@ const HOME_NAV = [
   { href: "/#contact", label: "Contact" },
 ];
 
+const WEBDEV_SECTIONS = [
+  { href: "#example", label: "Example", id: "example" },
+  { href: "#process", label: "Process", id: "process" },
+  { href: "#pricing", label: "Pricing", id: "pricing" },
+  { href: "#addons", label: "Add-ons", id: "addons" },
+  { href: "#referrals", label: "Referrals", id: "referrals" },
+  { href: "#faq", label: "FAQ", id: "faq" },
+  { href: "#contact", label: "Contact", id: "contact" },
+];
+
 export default function WebDevelopmentLanding() {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observers = WEBDEV_SECTIONS.map((s) => {
+      const el = document.getElementById(s.id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(s.id);
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () =>
+      observers.forEach((o) => {
+        if (o) o.disconnect();
+      });
+  }, []);
+
   return (
     <>
       <Head>
         <title>Therapy Practice Websites — Grant Kyle</title>
         <meta
           name="description"
-          content="Calming, modern websites for therapists in private practice. Built on Next.js and Sanity so you can edit your own content — no developer required."
+          content="Calming, modern websites for therapists in private practice. Built so you can edit your own content — no developer required."
         />
       </Head>
 
@@ -74,8 +105,9 @@ export default function WebDevelopmentLanding() {
         }}
       >
         {/* ── HEADER (sticky, soft) ── */}
+        <div className="sticky top-0 z-50">
         <header
-          className="sticky top-0 z-50 backdrop-blur-md"
+          className="backdrop-blur-md"
           style={{
             backgroundColor: "rgba(251, 250, 247, 0.85)",
             borderBottom: `1px solid ${sage.rule}`,
@@ -144,6 +176,39 @@ export default function WebDevelopmentLanding() {
             </a>
           </div>
         </header>
+
+        {/* ── SUB-NAV ── */}
+        <div
+          className="backdrop-blur-md"
+          style={{
+            backgroundColor: "rgba(251, 250, 247, 0.78)",
+            borderBottom: `1px solid ${sage.rule}`,
+          }}
+        >
+          <div className="mx-auto max-w-6xl px-6 py-2 flex items-center justify-center gap-1 overflow-x-auto">
+            {WEBDEV_SECTIONS.map((s) => {
+              const active = activeSection === s.id;
+              return (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  className="px-3 py-1 rounded-full text-[13px] whitespace-nowrap transition-colors"
+                  style={
+                    active
+                      ? {
+                          color: sage.accentDark,
+                          backgroundColor: sage.accentSoft,
+                        }
+                      : { color: sage.muted }
+                  }
+                >
+                  {s.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+        </div>
 
         {/* ── HERO ── */}
         <section className="relative">
@@ -307,7 +372,7 @@ export default function WebDevelopmentLanding() {
               index="01"
               kicker="Ownership"
               heading="You’ll own it."
-              body="The code lives in a GitHub repo under your account. The site deploys on Vercel’s free tier, so there’s no hosting bill from me — just your domain (about $12 a year). No monthly platform fee. No lock-in. If you ever want to bring in another developer, or move the site elsewhere entirely, you can. That’s the whole point."
+              body="I build the site. I host it. I keep it healthy. And if you ever decide to take it elsewhere — different developer, different setup, different anything — the whole site comes with you. No platform holding it hostage, no escape fee, no quiet lock-in. If you bring in another developer down the road, I’ll personally hop on a call with them to walk through the handoff so it lands gracefully. You stay because the work is good, not because you can’t get out."
               photo={PHOTOS.tree}
               alt="A lone tree standing in an open field"
               reverse={false}
@@ -335,6 +400,7 @@ export default function WebDevelopmentLanding() {
 
         {/* ── LIVE EXAMPLE ── */}
         <section
+          id="example"
           className="border-y"
           style={{ borderColor: sage.rule, backgroundColor: "#f5f1ea" }}
         >
@@ -466,7 +532,7 @@ export default function WebDevelopmentLanding() {
         </section>
 
         {/* ── HOW IT GOES ── */}
-        <section>
+        <section id="process">
           <div className="mx-auto max-w-3xl px-6 py-24 md:py-32">
             <motion.div
               initial="hidden"
@@ -500,13 +566,13 @@ export default function WebDevelopmentLanding() {
               />
               <Step
                 phase="Then"
-                heading="I build it over two to three weeks."
+                heading="I build it in about a week."
                 body="I send a homepage mockup first, based on what we discussed. We iterate together until you'd be proud to share it with a colleague. Then I build the full site, set up your editor, and seed it with your initial content — your bio, your services, an intro blog post."
               />
               <Step
                 phase="Finally"
                 heading="I hand it off cleanly."
-                body="We connect your domain, deploy to production, and I walk you through the editor so you're comfortable making changes on your own. The site is yours. I'm available for 30 days of post-launch tweaks at no additional cost — the kind that always come up after a project goes live."
+                body="We connect your domain, take the site live, and I walk you through the editor so you're comfortable making changes on your own. The site is yours. From there, your optional hosting tier handles the ongoing — monitoring, maintenance, and (in Tier 2) a monthly hour of dev work to keep things sharp."
               />
             </div>
           </div>
@@ -514,6 +580,430 @@ export default function WebDevelopmentLanding() {
 
         {/* ── INVESTMENT ── */}
         <section
+          id="pricing"
+          className="border-y"
+          style={{ borderColor: sage.rule, backgroundColor: "#f5f1ea" }}
+        >
+          <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeIn}
+              className="text-center"
+            >
+              <p
+                className="text-[11px] tracking-[0.22em] uppercase mb-6"
+                style={{ color: sage.muted }}
+              >
+                Pricing
+              </p>
+              <h2
+                className="text-3xl md:text-[2.5rem] leading-[1.2]"
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 500,
+                  color: sage.ink,
+                }}
+              >
+                Get your practice online in one week.
+              </h2>
+              <p
+                className="mt-6 text-lg leading-relaxed max-w-xl mx-auto"
+                style={{ color: sage.body }}
+              >
+                Simple, transparent pricing. No hidden fees, no nickel-and-diming,
+                no surprise invoices six months in.
+              </p>
+            </motion.div>
+
+            {/* ── Initial Build Card ── */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeIn}
+              className="mt-16 max-w-2xl mx-auto rounded-2xl p-10 md:p-12"
+              style={{
+                backgroundColor: sage.card,
+                border: `1px solid ${sage.rule}`,
+                boxShadow: "0 1px 2px rgba(74, 106, 93, 0.04)",
+              }}
+            >
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div>
+                  <p
+                    className="text-[11px] tracking-[0.22em] uppercase"
+                    style={{ color: sage.muted }}
+                  >
+                    One-time
+                  </p>
+                  <h3
+                    className="mt-2 text-2xl md:text-[1.7rem]"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    Initial Build
+                  </h3>
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span
+                    className="text-5xl md:text-6xl"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    $333
+                  </span>
+                </div>
+              </div>
+              <p
+                className="mt-6 text-base leading-relaxed"
+                style={{ color: sage.body }}
+              >
+                A 5-page professional website — Home, About, Services, Blog,
+                and Contact — built for you in about a week.
+              </p>
+              <div
+                className="mt-8 space-y-3"
+                style={{ color: sage.body }}
+              >
+                {[
+                  "Five custom pages: Home, About, Services, Blog, Contact",
+                  "Two rounds of revisions (up to 4 hours)",
+                  "Basic Google Analytics — see who visits and what they read",
+                  "Your own secure login to manage every word, photo, and post",
+                ].map((line) => (
+                  <div
+                    key={line}
+                    className="flex items-start gap-3 text-base"
+                  >
+                    <span
+                      className="mt-2.5 h-1 w-1 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: sage.accent }}
+                    />
+                    <span>{line}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ── Hosting & Maintenance intro ── */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeIn}
+              className="mt-24 md:mt-28 text-center"
+            >
+              <p
+                className="text-[11px] tracking-[0.22em] uppercase mb-6"
+                style={{ color: sage.muted }}
+              >
+                Hosting &amp; Maintenance
+              </p>
+              <h3
+                className="text-2xl md:text-[2rem] leading-[1.2]"
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 500,
+                  color: sage.ink,
+                }}
+              >
+                Then, choose your plan.
+              </h3>
+              <p
+                className="mt-5 text-base leading-relaxed max-w-xl mx-auto"
+                style={{ color: sage.body }}
+              >
+                Pick the level of ongoing support that fits how active you
+                want your site to be. You can change tiers anytime, or cancel
+                outright — your site comes with you.
+              </p>
+            </motion.div>
+
+            {/* ── Tier Cards ── */}
+            <div className="mt-12 grid md:grid-cols-2 gap-6">
+              {/* Tier 1 */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                variants={fadeIn}
+                className="rounded-2xl p-8 md:p-10 flex flex-col"
+                style={{
+                  backgroundColor: sage.card,
+                  border: `1px solid ${sage.rule}`,
+                }}
+              >
+                <p
+                  className="text-[11px] tracking-[0.22em] uppercase"
+                  style={{ color: sage.muted }}
+                >
+                  Tier 1 · Essentials
+                </p>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span
+                    className="text-4xl md:text-5xl"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    $39
+                  </span>
+                  <span
+                    className="text-sm"
+                    style={{ color: sage.muted }}
+                  >
+                    /month
+                  </span>
+                </div>
+                <p
+                  className="mt-5 text-[15px] leading-relaxed"
+                  style={{ color: sage.body }}
+                >
+                  Keep your site online, fast, and healthy. Quiet, reliable,
+                  hands-off.
+                </p>
+                <div
+                  className="mt-6 space-y-3 flex-grow"
+                  style={{ color: sage.body }}
+                >
+                  {[
+                    "Hosting and infrastructure",
+                    "Security monitoring",
+                    "Outage monitoring and alerts",
+                    "Maintenance — bugs, errors, and outages fixed",
+                  ].map((line) => (
+                    <div
+                      key={line}
+                      className="flex items-start gap-3 text-[15px]"
+                    >
+                      <span
+                        className="mt-2 h-1 w-1 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: sage.accent }}
+                      />
+                      <span>{line}</span>
+                    </div>
+                  ))}
+                </div>
+                <p
+                  className="mt-8 pt-6 text-sm italic leading-relaxed border-t"
+                  style={{ color: sage.muted, borderColor: sage.rule }}
+                >
+                  Best for therapists who want a professional online presence
+                  that just works in the background — a digital business card
+                  that asks nothing of you.
+                </p>
+              </motion.div>
+
+              {/* Tier 2 — featured */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                variants={fadeIn}
+                className="rounded-2xl p-8 md:p-10 flex flex-col relative"
+                style={{
+                  backgroundColor: sage.card,
+                  border: `2px solid ${sage.accent}`,
+                  boxShadow: "0 12px 30px -16px rgba(74, 106, 93, 0.35)",
+                }}
+              >
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] tracking-[0.18em] uppercase"
+                  style={{
+                    backgroundColor: sage.accent,
+                    color: "#fff",
+                    fontWeight: 600,
+                  }}
+                >
+                  Recommended
+                </div>
+                <p
+                  className="text-[11px] tracking-[0.22em] uppercase"
+                  style={{ color: sage.accentDark }}
+                >
+                  Tier 2 · Growth
+                </p>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span
+                    className="text-4xl md:text-5xl"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    $59
+                  </span>
+                  <span
+                    className="text-sm"
+                    style={{ color: sage.muted }}
+                  >
+                    /month
+                  </span>
+                </div>
+                <p
+                  className="mt-5 text-[15px] leading-relaxed"
+                  style={{ color: sage.body }}
+                >
+                  Everything in Tier 1, plus active growth support — analytics,
+                  SEO, and a monthly hour of dev work on the house.
+                </p>
+                <div
+                  className="mt-6 space-y-3 flex-grow"
+                  style={{ color: sage.body }}
+                >
+                  {[
+                    "Everything in Tier 1",
+                    "One hour of development work per month",
+                    "Advanced Analytics + monthly performance reviews",
+                    "Google Business Profile setup + monthly maintenance",
+                    "Contact form, set up and ready",
+                    "Typeform testimonials + monthly curation",
+                    "SEO setup + monthly monitoring",
+                  ].map((line) => (
+                    <div
+                      key={line}
+                      className="flex items-start gap-3 text-[15px]"
+                    >
+                      <span
+                        className="mt-2 h-1 w-1 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: sage.accent }}
+                      />
+                      <span>{line}</span>
+                    </div>
+                  ))}
+                </div>
+                <p
+                  className="mt-8 pt-6 text-sm italic leading-relaxed border-t"
+                  style={{ color: sage.muted, borderColor: sage.rule }}
+                >
+                  Best for therapists who want the site to actively grow the
+                  practice — continuous optimization, marketing insight, and a
+                  professional managing your online presence. No technical work
+                  on your end.
+                </p>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeIn}
+              className="mt-12 text-center"
+            >
+              <a
+                href="mailto:hello@grantkyle.com?subject=Therapy%20practice%20website"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm transition-all hover:opacity-95"
+                style={{
+                  backgroundColor: sage.accent,
+                  color: "#fff",
+                  fontWeight: 500,
+                  boxShadow: "0 6px 20px -8px rgba(74, 106, 93, 0.4)",
+                }}
+              >
+                Schedule a consultation
+                <span>→</span>
+              </a>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── ADD-ONS ── */}
+        <section id="addons">
+          <div className="mx-auto max-w-3xl px-6 py-24 md:py-32">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeIn}
+            >
+              <p
+                className="text-[11px] tracking-[0.22em] uppercase mb-6"
+                style={{ color: sage.muted }}
+              >
+                Add-ons
+              </p>
+              <h2
+                className="text-3xl md:text-[2.5rem] leading-[1.2]"
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 500,
+                  color: sage.ink,
+                }}
+              >
+                Extras, if you want them.
+              </h2>
+              <p
+                className="mt-6 text-lg leading-relaxed max-w-xl"
+                style={{ color: sage.body }}
+              >
+                The base package covers what most practices actually need. These
+                are à la carte — added at intake, billed once, no surprises
+                later.
+              </p>
+
+              <div className="mt-14 grid sm:grid-cols-2 gap-x-10 gap-y-4">
+                {[
+                  { label: "Extra page", price: "$49 / page" },
+                  { label: "Legal or disclaimer pages", price: "$29 / page" },
+                  { label: "Calendly scheduling integration", price: "$49" },
+                  { label: "Typeform testimonial integration", price: "$49" },
+                  { label: "Google Business Profile setup", price: "$49" },
+                  { label: "SEO setup", price: "$99" },
+                  { label: "Advanced Analytics setup", price: "$99" },
+                  { label: "Custom logo design", price: "$99" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-baseline justify-between gap-4 py-3 border-b"
+                    style={{ borderColor: sage.rule }}
+                  >
+                    <span
+                      className="text-base"
+                      style={{ color: sage.body }}
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      className="text-base whitespace-nowrap"
+                      style={{
+                        fontFamily: serif,
+                        fontWeight: 500,
+                        color: sage.ink,
+                      }}
+                    >
+                      {item.price}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <p
+                className="mt-10 text-sm italic"
+                style={{ color: sage.muted }}
+              >
+                Need something not listed? Ask — most things therapists request
+                are either already included or one of the items above in
+                disguise.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── REFERRALS ── */}
+        <section
+          id="referrals"
           className="border-y"
           style={{ borderColor: sage.rule, backgroundColor: "#f5f1ea" }}
         >
@@ -528,7 +1018,7 @@ export default function WebDevelopmentLanding() {
                 className="text-[11px] tracking-[0.22em] uppercase mb-6"
                 style={{ color: sage.muted }}
               >
-                Investment
+                Referrals
               </p>
               <h2
                 className="text-3xl md:text-[2.5rem] leading-[1.2]"
@@ -538,85 +1028,87 @@ export default function WebDevelopmentLanding() {
                   color: sage.ink,
                 }}
               >
-                One project, one price.
+                Know another therapist who needs a site?
               </h2>
               <p
                 className="mt-6 text-lg leading-relaxed max-w-xl mx-auto"
                 style={{ color: sage.body }}
               >
-                No retainers. No monthly maintenance fees. After we launch,
-                the site is yours — and you only hear from me again if you
-                want to.
-              </p>
-
-              <div className="mt-12 flex items-baseline justify-center gap-3">
-                <span
-                  className="text-sm"
-                  style={{ color: sage.muted, fontStyle: "italic" }}
-                >
-                  starting at
-                </span>
-                <span
-                  className="text-6xl md:text-7xl"
-                  style={{
-                    fontFamily: serif,
-                    fontWeight: 500,
-                    color: sage.ink,
-                  }}
-                >
-                  $X,XXX
-                </span>
-              </div>
-              <p
-                className="mt-3 text-sm"
-                style={{ color: sage.muted }}
-              >
-                Paid in two parts — half at kickoff, half at launch.
+                Send them my way. If they sign up, you both get three months
+                of free hosting at your respective tier. That&apos;s it. No
+                limits, no catches, no fine print.
               </p>
 
               <div
-                className="mt-12 max-w-xl mx-auto text-left space-y-3"
-                style={{ color: sage.body }}
+                className="mt-12 grid sm:grid-cols-2 gap-4 max-w-xl mx-auto"
               >
-                {[
-                  "Custom-designed home, about, services, and contact pages",
-                  "Full blog system with authors, categories, and rich text",
-                  "Sanity editor — edit anything, anytime, no developer needed",
-                  "Vercel hosting setup, custom domain, SSL — all configured",
-                  "Performance, accessibility, and SEO fundamentals built-in",
-                  "30 days of post-launch tweaks at no extra cost",
-                ].map((line) => (
-                  <div key={line} className="flex items-start gap-3 text-base">
-                    <span
-                      className="mt-2.5 h-1 w-1 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: sage.accent }}
-                    />
-                    <span>{line}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-12">
-                <a
-                  href="mailto:hello@grantkyle.com?subject=Therapy%20practice%20website"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm transition-all hover:opacity-95"
+                <div
+                  className="rounded-2xl p-6 text-left"
                   style={{
-                    backgroundColor: sage.accent,
-                    color: "#fff",
-                    fontWeight: 500,
-                    boxShadow: "0 6px 20px -8px rgba(74, 106, 93, 0.4)",
+                    backgroundColor: sage.card,
+                    border: `1px solid ${sage.rule}`,
                   }}
                 >
-                  Start a conversation
-                  <span>→</span>
-                </a>
+                  <p
+                    className="text-[11px] tracking-[0.22em] uppercase"
+                    style={{ color: sage.muted }}
+                  >
+                    You get
+                  </p>
+                  <p
+                    className="mt-3 text-xl"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    3 months free
+                  </p>
+                  <p
+                    className="mt-1 text-sm"
+                    style={{ color: sage.muted }}
+                  >
+                    at your tier
+                  </p>
+                </div>
+                <div
+                  className="rounded-2xl p-6 text-left"
+                  style={{
+                    backgroundColor: sage.card,
+                    border: `1px solid ${sage.rule}`,
+                  }}
+                >
+                  <p
+                    className="text-[11px] tracking-[0.22em] uppercase"
+                    style={{ color: sage.muted }}
+                  >
+                    They get
+                  </p>
+                  <p
+                    className="mt-3 text-xl"
+                    style={{
+                      fontFamily: serif,
+                      fontWeight: 500,
+                      color: sage.ink,
+                    }}
+                  >
+                    3 months free
+                  </p>
+                  <p
+                    className="mt-1 text-sm"
+                    style={{ color: sage.muted }}
+                  >
+                    at their tier
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* ── QUESTIONS ── */}
-        <section>
+        <section id="faq">
           <div className="mx-auto max-w-3xl px-6 py-24 md:py-32">
             <motion.div
               initial="hidden"
@@ -650,19 +1142,19 @@ export default function WebDevelopmentLanding() {
                 },
                 {
                   q: "What if I want changes after launch?",
-                  a: "Anything content-related — copy, photos, blog posts, even adding new pages — you can do yourself in the editor. For design changes or new features beyond the original scope, I offer hourly support at a flat rate. Most clients don't need it.",
+                  a: "Anything content-related — copy, photos, blog posts, even adding new pages — you can do yourself in the editor. For ongoing design tweaks and dev work, the Tier 2 retainer includes one hour of my time each month. If you'd rather stay hands-off, Tier 1 keeps the site humming without dev work. And if something bigger comes up either way, we scope it as a one-off — no surprise bills.",
                 },
                 {
                   q: "How is this different from Squarespace?",
-                  a: "Three meaningful ways: it's much faster (sub-second loads vs three to five seconds), it's truly yours (you own the code, no monthly platform fee, no lock-in), and the design is built specifically for your practice rather than a template thousands of other therapists are also using.",
+                  a: "Three meaningful ways: it's much faster (sub-second loads vs three to five seconds), it's truly yours (no monthly platform fee, no lock-in — if you ever want to move it, it moves with you), and the design is built specifically for your practice rather than a template thousands of other therapists are also using.",
                 },
                 {
                   q: "What does ongoing hosting cost?",
-                  a: "About $12 per year for your domain. Hosting itself is free on Vercel's hobby tier, which comfortably handles a small therapist site. No surprise bills, no subscriptions to manage.",
+                  a: "Hosting is bundled into one of the two monthly tiers — $39/month for Essentials or $59/month for Growth. Your domain (about $12/year) is the only thing you pay for separately. No surprise bills, no add-on subscriptions to manage.",
                 },
                 {
-                  q: "What happens if my practice grows or I want to hire another developer?",
-                  a: "The code lives in a GitHub repo under your account. Any modern web developer can pick it up and extend it. You're not locked into me or any platform — the whole point is that the work is yours.",
+                  q: "What if I ever want to work with a different developer?",
+                  a: "Easy. The whole site — every file, every setting, your editor and everything in it — comes with you. I'll get on a call with whoever you bring in next and walk them through how it all fits together, so the handoff lands gracefully. You're not locked into me, and I'm not going to make leaving feel like a battle. The freedom to go is part of what you're paying for.",
                 },
                 {
                   q: "Can you help with photography, branding, or copy too?",
@@ -670,7 +1162,7 @@ export default function WebDevelopmentLanding() {
                 },
                 {
                   q: "How long does the whole thing take?",
-                  a: "Two to four weeks from kickoff is typical. Most variance comes from how much content you already have ready. If your bio, services copy, and headshot are in hand, we're on the faster end. If we're writing things from scratch together, closer to four.",
+                  a: "About a week from kickoff is typical, assuming your bio, services copy, and a headshot are in hand. If we're writing or sourcing content from scratch together, it stretches a bit — usually no more than two weeks total.",
                 },
               ].map((item) => (
                 <motion.div
@@ -705,6 +1197,7 @@ export default function WebDevelopmentLanding() {
 
         {/* ── REACH OUT ── */}
         <section
+          id="contact"
           className="border-t"
           style={{ borderColor: sage.rule, backgroundColor: "#f5f1ea" }}
         >
@@ -719,7 +1212,7 @@ export default function WebDevelopmentLanding() {
                 className="text-[11px] tracking-[0.22em] uppercase mb-6"
                 style={{ color: sage.muted }}
               >
-                Reach out
+                Get started
               </p>
               <h2
                 className="text-3xl md:text-[2.5rem] leading-[1.2]"
@@ -729,20 +1222,22 @@ export default function WebDevelopmentLanding() {
                   color: sage.ink,
                 }}
               >
-                Curious whether this might be a fit?
+                Ready to build your practice website?
               </h2>
               <p
                 className="mt-6 text-lg leading-relaxed max-w-xl mx-auto"
                 style={{ color: sage.body }}
               >
-                Send a note about where your practice is and what you&apos;re
-                hoping for. I read every one personally and reply within a
-                couple of days.
+                Schedule a 30-minute consultation. We&apos;ll talk through
+                what your practice needs, walk through the options together,
+                and figure out whether this is the right fit. No pressure,
+                no pitch — and if it&apos;s a yes, you can be live in about
+                a week.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:hello@grantkyle.com?subject=Therapy%20practice%20website"
+                  href="mailto:hello@grantkyle.com?subject=Therapy%20practice%20website%20consultation"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm transition-all hover:opacity-95"
                   style={{
                     backgroundColor: sage.accent,
@@ -751,7 +1246,7 @@ export default function WebDevelopmentLanding() {
                     boxShadow: "0 6px 20px -8px rgba(74, 106, 93, 0.4)",
                   }}
                 >
-                  hello@grantkyle.com
+                  Schedule a consultation →
                 </a>
                 <a
                   href="https://www.linkedin.com/in/sgrantkyle/"
