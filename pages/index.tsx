@@ -24,7 +24,7 @@ export default function GrantLanding() {
     >
       <SiteNav />
 
-      {/* ── HERO ── TODO: new homepage intro copy goes here */}
+      {/* ── HERO ── */}
       <section id="top" className="relative">
         <div className="mx-auto max-w-3xl px-6 pt-20 pb-20 md:pt-28 md:pb-24">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
@@ -32,7 +32,13 @@ export default function GrantLanding() {
               className="text-sm uppercase tracking-[0.22em]"
               style={{ color: "var(--warm-muted)" }}
             >
-              [ new homepage intro — coming ]
+              Warning: this site is everything Grant Kyle. It is — by nature —
+              very Grantcentric. If you explicitly{" "}
+              <em style={{ fontStyle: "italic", textTransform: "none" }}>
+                do not
+              </em>{" "}
+              want further information pertaining to Grant Kyle, please navigate
+              away from this website now.
             </p>
             <h1
               className="mt-6 text-3xl md:text-[2.4rem] leading-[1.25] tracking-tight"
@@ -42,14 +48,27 @@ export default function GrantLanding() {
                 color: "var(--warm-ink)",
               }}
             >
-              Placeholder headline.
+              Grant Kyle&apos;s Website
             </h1>
-            <p
-              className="mt-6 text-lg leading-relaxed"
+            <div
+              className="mt-6 space-y-6 text-lg leading-relaxed"
               style={{ color: "var(--warm-body)" }}
             >
-              Drop the new intro paragraph(s) here.
-            </p>
+              <p>
+                If you are reading this, welcome. There is little chance you are
+                here by accident: maybe you got here from LinkedIn. Maybe you
+                googled my name deliberately and found this in the SERP, which
+                is an unsettling concept but whatever. Maybe you are reading
+                this and have no idea who I am and have no idea how you got
+                here. That&apos;s also okay. You are here now. And that&apos;s
+                all that matters ✨
+              </p>
+              <p>
+                No matter who you are, welcome to Grant Kyle&apos;s website. I
+                am Grant. Here you will find all things Grant, both professional
+                and [enough] personal [as not to tarnish my professional image].
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
