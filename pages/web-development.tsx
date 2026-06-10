@@ -953,39 +953,132 @@ export default function WebDevelopmentLanding() {
                 later.
               </p>
 
-              <div className="mt-14 grid sm:grid-cols-2 gap-x-10 gap-y-4">
+              <div className="mt-14 grid sm:grid-cols-2 gap-x-10 gap-y-0 items-start">
                 {[
-                  { label: "Extra page", price: "$49 / page" },
-                  { label: "Legal or disclaimer pages", price: "$29 / page" },
-                  { label: "Calendly scheduling integration", price: "$49" },
-                  { label: "Typeform testimonial integration", price: "$49" },
-                  { label: "Google Business Profile setup", price: "$49" },
-                  { label: "SEO setup", price: "$99" },
-                  { label: "Advanced Analytics setup", price: "$99" },
-                  { label: "Custom logo design", price: "$99" },
+                  {
+                    label: "Extra page",
+                    price: "$49 / page",
+                    what: "A page beyond the base five — e.g. an FAQ, specialties breakdown, or a focused service page.",
+                    why: "Sometimes one page can&rsquo;t carry everything a visitor needs to know. Extra pages give specific topics room to breathe.",
+                    whoFor: "Therapists with multiple specialties, group practices, or anyone who finds themselves cramming three topics into one section.",
+                  },
+                  {
+                    label: "Legal or disclaimer pages",
+                    price: "$29 / page",
+                    what: "Privacy policy, HIPAA notice, terms of service, accessibility statement — the pages your regulators and insurance carrier like to see.",
+                    why: "Cheaper than a regular extra page because the copy is mostly boilerplate I can draft from a template.",
+                    whoFor: "Every licensed practice eventually. Often required for ad networks and some referral platforms.",
+                  },
+                  {
+                    label: "Calendly scheduling integration",
+                    price: "$49",
+                    what: "Your Calendly (or Cal.com) booking widget embedded directly on the site so visitors can pick a consult time without leaving.",
+                    why: "Removes a click between &ldquo;interested&rdquo; and &ldquo;booked.&rdquo; For an anxious prospective client, that click is the conversion-killer.",
+                    whoFor: "Anyone who already uses a scheduler, or can spare 10 minutes to set one up.",
+                  },
+                  {
+                    label: "Typeform testimonial integration",
+                    price: "$49",
+                    what: "A Typeform on the site where past clients can submit testimonials. You review and approve before they go live.",
+                    why: "Therapy decisions are emotional and social proof helps. A streamlined collection process means you actually end up with quotes.",
+                    whoFor: "Established practices with happy clients who&rsquo;d give a review if asked.",
+                  },
+                  {
+                    label: "Google Business Profile setup",
+                    price: "$49",
+                    what: "I claim or create your Google Business Profile, optimize it with photos, hours, and service area, and link it to your site.",
+                    why: "Most people find a nearby therapist through Google&rsquo;s map. Without a profile, you&rsquo;re effectively invisible to local search.",
+                    whoFor: "Anyone with a physical office — even part-time. Telehealth-only practices benefit less.",
+                  },
+                  {
+                    label: "SEO setup",
+                    price: "$99",
+                    what: "Meta titles and descriptions for every page, an XML sitemap, schema markup for local business, and keyword research for your niche.",
+                    why: "Helps the right kind of clients find you on Google. Most of the work is one-time; the lift is ongoing.",
+                    whoFor: "Practices that want long-term organic traffic instead of paid ads forever.",
+                  },
+                  {
+                    label: "Advanced Analytics setup",
+                    price: "$99",
+                    what: "Google Analytics 4 with conversion goals, scroll tracking, and event tracking for key actions (booking clicks, contact submissions, etc.).",
+                    why: "You can finally answer &ldquo;is the site actually working?&rdquo; with data instead of guesses.",
+                    whoFor: "Therapists spending on marketing who want to know what&rsquo;s pulling its weight.",
+                  },
+                  {
+                    label: "Custom logo design",
+                    price: "$99",
+                    what: "A simple, professional wordmark or lockup for your practice. Usually one to two rounds of revisions.",
+                    why: "A logo signals you&rsquo;re a real practice, not a side project. Used in your site header, favicon, and email signatures.",
+                    whoFor: "New practices, rebrands, or anyone still relying on a Canva template.",
+                  },
                 ].map((item) => (
-                  <div
+                  <details
                     key={item.label}
-                    className="flex items-baseline justify-between gap-4 py-3 border-b"
+                    className="group border-b [&_summary::-webkit-details-marker]:hidden"
                     style={{ borderColor: sage.rule }}
                   >
-                    <span
-                      className="text-base"
-                      style={{ color: sage.body }}
+                    <summary
+                      className="flex items-baseline justify-between gap-4 py-3 cursor-pointer list-none select-none"
+                      aria-label={`${item.label}, ${item.price}. Tap to expand details.`}
                     >
-                      {item.label}
-                    </span>
-                    <span
-                      className="text-base whitespace-nowrap"
-                      style={{
-                        fontFamily: serif,
-                        fontWeight: 500,
-                        color: sage.ink,
-                      }}
-                    >
-                      {item.price}
-                    </span>
-                  </div>
+                      <span
+                        className="text-base flex items-center gap-2"
+                        style={{ color: sage.body }}
+                      >
+                        {item.label}
+                        <svg
+                          aria-hidden
+                          viewBox="0 0 20 20"
+                          width="12"
+                          height="12"
+                          className="transition-transform duration-300 group-open:rotate-180 flex-shrink-0"
+                          style={{ color: sage.muted }}
+                        >
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 8l5 5 5-5"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        className="text-base whitespace-nowrap"
+                        style={{
+                          fontFamily: serif,
+                          fontWeight: 500,
+                          color: sage.ink,
+                        }}
+                      >
+                        {item.price}
+                      </span>
+                    </summary>
+                    <div className="pb-5 pt-1 space-y-3">
+                      {(
+                        [
+                          { kicker: "What", body: item.what },
+                          { kicker: "Why", body: item.why },
+                          { kicker: "Who it's for", body: item.whoFor },
+                        ] as const
+                      ).map((row) => (
+                        <div key={row.kicker}>
+                          <div
+                            className="text-[10px] font-medium tracking-[0.18em] uppercase"
+                            style={{ color: sage.muted }}
+                          >
+                            {row.kicker}
+                          </div>
+                          <p
+                            className="mt-1 text-sm leading-relaxed"
+                            style={{ color: sage.body }}
+                            dangerouslySetInnerHTML={{ __html: row.body }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </details>
                 ))}
               </div>
 
