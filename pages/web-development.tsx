@@ -991,6 +991,13 @@ export default function WebDevelopmentLanding() {
                     whoFor: "Anyone with a physical office — even part-time. Telehealth-only practices benefit less.",
                   },
                   {
+                    label: "Content migration",
+                    price: "from $49",
+                    what: "I move your existing blog posts — text, images, dates, and authors — from your current site into your new editor. Done-for-you from WordPress, Squarespace, or Webflow. Priced by volume: $49 up to 25 posts, $99 up to 100, custom beyond that.",
+                    why: "Keeps the writing and search ranking you&rsquo;ve already built. No re-typing, no starting your blog back at zero.",
+                    whoFor: "Anyone moving from an existing site with posts worth keeping. On Wix? There&rsquo;s no clean way to export it, so I&rsquo;ll walk you through moving posts yourself — free, as part of onboarding. You&rsquo;ll learn your new editor in the process, which you&rsquo;ll want anyway.",
+                  },
+                  {
                     label: "SEO setup",
                     price: "$99",
                     what: "Meta titles and descriptions for every page, an XML sitemap, schema markup for local business, and keyword research for your niche.",
