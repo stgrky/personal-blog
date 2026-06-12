@@ -32,7 +32,14 @@ export const getPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.postsConnection.edges;
 };
@@ -50,7 +57,14 @@ export const getRecentPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
   return result.posts;
 };
 
@@ -74,7 +88,14 @@ export const getSimilarPosts = async (categories, slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query, { categories, slug })
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query, { categories, slug });
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.posts;
 };
@@ -89,7 +110,14 @@ export const getCategories = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.categories;
 };
@@ -124,7 +152,14 @@ export const getPostDetails = async (slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query, { slug });
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query, { slug });
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.post;
 };
@@ -144,7 +179,14 @@ export const getAboutPageDetails = async (slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.allAboutPages;
 };
@@ -164,7 +206,14 @@ export const getMusicPageDetails = async (slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.allMusicPages;
 };
@@ -182,7 +231,14 @@ export const getDevPortfolioDetails = async (slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  if (!graphqlAPI) return null;
+  let result;
+  try {
+    result = await request(graphqlAPI, query);
+  } catch (err) {
+    console.warn("Hygraph fetch failed:", err.message);
+    return null;
+  }
 
   return result.allDevPortfolios;
 };

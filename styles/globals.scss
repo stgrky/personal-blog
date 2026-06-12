@@ -2,34 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✅ Inter: clean, modern, UI-optimized typeface */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+/* ───────────────────────────────────────────────────────────
+   Warm personal-site design tokens.
+   /web-development has its own sage/Cormorant palette inline;
+   this file governs the rest of grantkyle.com.
+   ─────────────────────────────────────────────────────────── */
+
+:root {
+  /* Fonts (next/font assigns the *-base vars in _app.tsx) */
+  --font-serif: var(--font-serif-base), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans-base), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+  /* Warm cream + terracotta palette */
+  --warm-bg: #fdfbf7;
+  --warm-bg-soft: #f8f3ea;
+  --warm-ink: #2a2724;
+  --warm-body: #5b5550;
+  --warm-muted: #8a847d;
+  --warm-rule: #ebe5dc;
+  --warm-accent: #b8634d;
+  --warm-accent-dark: #8f4a36;
+  --warm-accent-soft: #f4e3dd;
+  --warm-card: #ffffff;
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-  &:before {
-    content: "";
-    width: 100%;
-    height: 100vh;
-    background-image: url("../public/background.jpg");
-    filter: brightness(70%);
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  background: var(--warm-bg);
+  color: var(--warm-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Selection highlight in terracotta */
+::selection {
+  background: var(--warm-accent-soft);
+  color: var(--warm-accent-dark);
+}
+
+/* Used by some Hygraph blog rendering paths (legacy carousel/adjacent posts) */
 .text-shadow {
-  text-shadow: 0px 2px 0px rgb(0 0 0 / 30%);
+  text-shadow: 0px 2px 0px rgb(0 0 0 / 10%);
 }
 
 .adjacent-post {
@@ -52,13 +79,4 @@ body {
       width: 60px;
     }
   }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }

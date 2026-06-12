@@ -1,793 +1,349 @@
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, LayoutGroup } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import SiteNav from "../components/SiteNav";
 
-/* ─── animation variants ─── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
+const fadeIn = {
+  hidden: { opacity: 0, y: 18 },
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1], delay },
   }),
 };
 
-/* ─── style constants ─── */
-const kicker = "text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500";
-const sectionTitle = "text-3xl md:text-4xl font-semibold tracking-tight text-slate-900";
-const body = "text-slate-500 leading-relaxed";
+const serif = "var(--font-serif)";
+const kicker =
+  "text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--warm-muted)]";
 
-const TOOLS = [
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
-  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
-  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
-  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
-  "Customer Success", "Post-Sale Ops", "Onboarding Design", "Retention Strategy",
-  "React", "TypeScript", "Next.js", "Sanity CMS", "Stakeholder Management",
-  "Escalation Leadership", "Voice of Customer", "Cross-functional Ops", "0-to-1 Builder",
-  "Technical Troubleshooting", "Web Development", "Tailwind CSS", "Vercel",
-  "Process Documentation", "Success Plans", "Spanish (B2)", "HubSpot", "Intercom", "Notion",
-];
-
-/* ══════════════════════════════════════════════════════════ */
 export default function GrantLanding() {
-  const [activeSection, setActiveSection] = useState("top");
-
-  const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, 90]);
-
-  useEffect(() => {
-    const ids = ["top", "what", "work", "cases", "values", "contact"];
-    const observers = ids.map((sectionId) => {
-      const el = document.getElementById(sectionId);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(sectionId); },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
-  }, []);
-
-  const NAV = [
-    { href: "#what",             label: "Skills",       id: "what"    },
-    { href: "#work",             label: "Experience",   id: "work"    },
-    { href: "#cases",            label: "Case studies", id: "cases"   },
-    { href: "/web-development",  label: "Web dev",      id: "webdev"  },
-    { href: "#contact",          label: "Contact",      id: "contact" },
-  ];
-
   return (
-    <main className="min-h-screen w-full text-slate-900 bg-white antialiased">
+    <main
+      className="min-h-screen w-full antialiased"
+      style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-ink)" }}
+    >
+      <SiteNav />
 
-      {/* ── STICKY NAV ── */}
-      <LayoutGroup>
-        <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
-          <div className="mx-auto max-w-6xl px-5 py-3.5 flex items-center justify-between">
+      {/* ── HERO ── */}
+      <section id="top" className="relative">
+        <div className="mx-auto max-w-3xl px-6 pt-20 pb-20 md:pt-28 md:pb-24">
+          <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <p
+              className="text-sm uppercase tracking-[0.22em]"
+              style={{ color: "var(--warm-muted)" }}
+            >
+              Warning: this site is everything Grant Kyle. It is — by nature —
+              very Grantcentric. If you explicitly{" "}
+              <em style={{ fontStyle: "italic", textTransform: "none" }}>
+                do not
+              </em>{" "}
+              want further information pertaining to Grant Kyle, please navigate
+              away from this website now.
+            </p>
+            <h1
+              className="mt-6 text-3xl md:text-[2.4rem] leading-[1.25] tracking-tight"
+              style={{
+                fontFamily: serif,
+                fontWeight: 500,
+                color: "var(--warm-ink)",
+              }}
+            >
+              Grant Kyle&apos;s Website
+            </h1>
+            <div
+              className="mt-6 space-y-6 text-lg leading-relaxed"
+              style={{ color: "var(--warm-body)" }}
+            >
+              <p>
+                If you are reading this, welcome. There is little chance you are
+                here by accident: maybe you got here from LinkedIn. Maybe you
+                googled my name deliberately and found this in the SERP, which
+                is an unsettling concept but whatever. Maybe you are reading
+                this and have no idea who I am and have no idea how you got
+                here. That&apos;s also okay. You are here now. And that&apos;s
+                all that matters ✨
+              </p>
+              <p>
+                No matter who you are, welcome to Grant Kyle&apos;s website. I
+                am Grant. Here you will find all things Grant, both professional
+                and [enough] personal [as not to tarnish my professional image].
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-            <Link href="#top" className="flex items-center gap-2.5 group">
-              <div className="h-8 w-8 rounded-lg bg-indigo-600 grid place-items-center shadow-sm shadow-indigo-200 group-hover:bg-indigo-700 transition-colors">
-                <span className="text-[11px] font-bold text-white tracking-tight">GK</span>
-              </div>
-              <div className="leading-tight hidden sm:block">
-                <div className="text-sm font-semibold text-slate-900">Grant Kyle</div>
-                <div className="text-[11px] text-slate-400">Customer Success · Engineering · Web</div>
-              </div>
+      {/* ── TWO DOORS ── */}
+      <section
+        className="border-y"
+        style={{
+          borderColor: "var(--warm-rule)",
+          backgroundColor: "var(--warm-bg-soft)",
+        }}
+      >
+        <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+            className="mb-12"
+          >
+            <p className={kicker}>Two sides</p>
+            <h2
+              className="text-2xl md:text-3xl mt-3 leading-snug max-w-xl"
+              style={{
+                fontFamily: serif,
+                fontWeight: 500,
+                color: "var(--warm-ink)",
+              }}
+            >
+              Pick a door — they&apos;re both me.
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <DoorCard
+              href="/work"
+              label="The work"
+              title="Customer success, technical depth, and operations."
+              body="The professional side. Skills, experience, case studies, how I work. Built up over a decade of working with customers, products, and engineering teams."
+              cta="See the work →"
+            />
+            <DoorCard
+              href="/life"
+              label="The life"
+              title="The version of me that doesn&rsquo;t show up on LinkedIn."
+              body="The personal side. Where I&rsquo;m from, what I&rsquo;m into, what I&rsquo;ve been reading. A page that grows slower — and that&rsquo;s the point."
+              cta="See the life →"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── NOW / RECENT BUILD ── */}
+      <section>
+        <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+          >
+            <p className={kicker}>Now</p>
+            <h2
+              className="text-3xl md:text-[2.4rem] leading-[1.15] tracking-tight mt-3"
+              style={{
+                fontFamily: serif,
+                fontWeight: 500,
+                color: "var(--warm-ink)",
+              }}
+            >
+              Currently building.
+            </h2>
+            <p
+              className="mt-6 text-lg leading-relaxed"
+              style={{ color: "var(--warm-body)" }}
+            >
+              Modern, client-managed websites for therapists in private
+              practice. Built on Next.js and Sanity so the practice owner can
+              edit any page and publish blog posts themselves — without a
+              developer in the loop.
+            </p>
+            <Link
+              href="/web-development"
+              className="mt-8 inline-flex items-center gap-2 text-base transition-colors hover:underline"
+              style={{
+                color: "var(--warm-accent-dark)",
+                fontFamily: serif,
+                fontStyle: "italic",
+                fontWeight: 500,
+              }}
+            >
+              See what&apos;s included →
             </Link>
+          </motion.div>
+        </div>
+      </section>
 
-            <nav className="hidden md:flex items-center gap-1">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`relative px-3.5 py-2 rounded-lg text-sm transition-colors ${
-                    activeSection === item.id
-                      ? "text-indigo-600 font-medium"
-                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
-                >
-                  {item.label}
-                  {activeSection === item.id && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-indigo-50 -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                </Link>
-              ))}
-            </nav>
+      {/* ── CONTACT ── */}
+      <section
+        id="contact"
+        className="border-t"
+        style={{
+          borderColor: "var(--warm-rule)",
+          backgroundColor: "var(--warm-bg-soft)",
+        }}
+      >
+        <div className="mx-auto max-w-3xl px-6 py-24 md:py-32 text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+          >
+            <p className={kicker}>Get in touch</p>
+            <h2
+              className="text-3xl md:text-[2.4rem] leading-[1.15] tracking-tight mt-3"
+              style={{
+                fontFamily: serif,
+                fontWeight: 500,
+                color: "var(--warm-ink)",
+              }}
+            >
+              Happy to talk shop.
+            </h2>
+            <p
+              className="mt-6 max-w-xl mx-auto text-lg leading-relaxed"
+              style={{ color: "var(--warm-body)" }}
+            >
+              Customer success, technical work, or building things in the
+              mental health space — happy to hear from you. Email or LinkedIn,
+              whichever&apos;s easier.
+            </p>
 
-            <div className="flex items-center gap-2">
-              <a
-                href="https://github.com/stgrky"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-300 transition-colors"
-              >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="text-slate-700">
-                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.12 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.21 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12 24 5.65 18.85.5 12 .5z"/>
-                </svg>
-              </a>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="mailto:hello@grantkyle.com"
-                className="hidden sm:inline-flex btn-secondary text-sm px-4 py-2 rounded-lg font-medium"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm transition-all hover:opacity-95"
+                style={{
+                  backgroundColor: "var(--warm-accent)",
+                  color: "#fff",
+                  fontWeight: 500,
+                }}
               >
-                Email
+                hello@grantkyle.com
               </a>
               <a
                 href="https://www.linkedin.com/in/sgrantkyle/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-sm px-4 py-2 rounded-lg font-semibold"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm transition-colors"
+                style={{
+                  backgroundColor: "#fff",
+                  color: "var(--warm-accent-dark)",
+                  border: "1px solid var(--warm-rule)",
+                  fontWeight: 500,
+                }}
               >
-                LinkedIn →
+                LinkedIn ↗
               </a>
-              <MobileMenu nav={NAV} />
             </div>
+
+            <p
+              className="mt-6 text-xs"
+              style={{ color: "var(--warm-muted)" }}
+            >
+              I reply within a couple of days. Prefer a call? Send a few times.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer
+        className="border-t"
+        style={{
+          borderColor: "var(--warm-rule)",
+          backgroundColor: "var(--warm-bg)",
+        }}
+      >
+        <div className="mx-auto max-w-5xl px-6 py-10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs">
+          <div style={{ color: "var(--warm-muted)" }}>
+            <span
+              style={{
+                fontFamily: serif,
+                fontStyle: "italic",
+                color: "var(--warm-ink)",
+              }}
+            >
+              Grant Kyle
+            </span>{" "}
+            · © {new Date().getFullYear()} · Made with care in Austin
           </div>
-        </header>
-      </LayoutGroup>
-
-      {/* ── HERO ── */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_-10%_-5%,rgba(99,102,241,0.10),transparent_60%),radial-gradient(ellipse_55%_45%_at_105%_15%,rgba(139,92,246,0.09),transparent_55%),radial-gradient(ellipse_60%_70%_at_50%_110%,rgba(99,102,241,0.05),transparent_55%)]" />
-        </div>
-
-        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-14 md:pt-24 md:pb-20">
-          <motion.div style={{ y: heroY }}>
-            <div className="grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-start">
-
-              {/* Left: Message */}
-              <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 mb-7">
-                  <span className="text-xs font-medium text-indigo-700 tracking-wide">Customer Success · Engineering · Web</span>
-                </div>
-
-                <h1 className="text-4xl md:text-[3.4rem] leading-[1.1] font-semibold tracking-tight">
-                  I bridge the gap between{" "}
-                  <span className="gradient-text">complex products</span>{" "}
-                  and the customers who need to succeed with them.
-                </h1>
-
-                <p className="mt-5 text-base md:text-lg text-slate-500 font-medium">
-                  Customer-facing operator with an engineering foundation.
-                </p>
-
-                <div className={`mt-6 max-w-xl space-y-4 ${body}`}>
-                  <p>
-                    I am a naturally curious human, and my professional journey is testament to this.
-                  </p>
-                  <p>
-                    I came up through sales. After selling SEO and web development at a digital marketing agency, I learned the JavaScript ecosystem (Vanilla JS / React / TypeScript) and made the deliberate move into software development. I knew I wouldn't stay competitive among those who live and die by the code, but I was relentless in my pursuit of technical training nonetheless. After several years in engineering roles, my customer-facing and selling abilities had grown considerably, and I sought to come back to roles that fit my natural skill set.
-                  </p>
-                  <p>
-                    This is where I am now: living at the intersection of people and product. That technical foundation is what makes me different — I can sit in a conversation with an engineering team and actually understand what's being said, then turn around and translate it for a customer or executive in a way that builds trust instead of confusion. I'm most energized taking things from zero to one: building the post-sale infrastructure, feedback loops, and customer experiences that didn't exist yet.
-                  </p>
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="#cases" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold">
-                    See recent work
-                  </a>
-                  <a
-                    href="https://github.com/stgrky"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold"
-                  >
-                    GitHub →
-                  </a>
-                </div>
-
-                <Link
-                  href="/web-development"
-                  className="mt-5 inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-indigo-600 transition-colors group"
-                >
-                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Currently building: websites for mental health practices
-                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
-                </Link>
-
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {[
-                    "Customer-facing foundation",
-                    "Technically fluent, not a silo",
-                    "0-to-1 ops builder",
-                    "Stakeholder translation",
-                    "Voice of customer → product",
-                    "Spanish business proficiency",
-                  ].map((t) => (
-                    <span key={t} className="chip">{t}</span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Right: Snapshot panel */}
-              <motion.aside
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="md:sticky md:top-[72px] rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-100 p-6"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="text-sm font-semibold text-slate-900">At a glance</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">How I show up in the work</div>
-                  </div>
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-600 text-white tracking-wide uppercase">
-                    Builder
-                  </span>
-                </div>
-
-                <div className="mt-5 space-y-3.5 divide-y divide-slate-100">
-                  <SnapshotRow label="Relationships" value="Executive-to-end-user ownership" />
-                  <SnapshotRow label="Background" value="Software engineering → Customer success" />
-                  <SnapshotRow label="CS operations" value="Onboarding, health signals, escalation" />
-                  <SnapshotRow label="Cross-functional" value="Voice of customer to Eng + Product" />
-                  <SnapshotRow label="Split" value="~60% customer-facing · 40% technical" />
-                </div>
-
-                <div className="mt-5 pt-5 border-t border-slate-100">
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-3">Background & tools</div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {["JavaScript", "React", "TypeScript", "HubSpot", "Intercom", "Notion", "Jira", "Figma"].map((t) => (
-                      <span key={t} className="px-2 py-1 rounded-md text-[11px] bg-slate-50 border border-slate-100 text-slate-600 font-medium">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.aside>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── MARQUEE TICKER ── */}
-      <div className="border-y border-slate-100 bg-slate-50 py-3 overflow-hidden" aria-hidden="true">
-        <div className="marquee-track flex gap-6 whitespace-nowrap w-max">
-          {TOOLS.map((tool, i) => (
-            <span key={i} className="inline-flex items-center gap-6 text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
-              {tool}
-              <span className="h-1 w-1 rounded-full bg-indigo-300 inline-block flex-shrink-0" />
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── WHAT I DO ── */}
-      <section id="what" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-          <div className={kicker}>The work</div>
-          <h2 className={`${sectionTitle} mt-2`}>What I'm good at.</h2>
-          <p className={`mt-3 max-w-2xl ${body}`}>
-            I live at the intersection of customer relationships, technical depth, and operational clarity. Four things I keep coming back to, across roles.
-          </p>
-        </motion.div>
-
-        {/* Bento grid */}
-        <div className="mt-10 grid md:grid-cols-3 gap-4">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0} variants={fadeUp}
-            className="md:col-span-2 pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
+          <div
+            className="flex items-center gap-5"
+            style={{ color: "var(--warm-muted)" }}
           >
-            <div className="text-xl mb-4" aria-hidden>🎯</div>
-            <div className="text-sm font-semibold text-slate-900">Customer adoption & enablement</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Onboarding that leads to real usage — not just a training checkbox. I design success plans, build enablement resources, and create communication rhythms that keep customers engaged long past go-live and build habits that actually stick.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.08} variants={fadeUp}
-            className="pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>🔧</div>
-            <div className="text-sm font-semibold text-slate-900">Technical problem-solving</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Having built software professionally, I understand what's actually happening under the hood — which means I can diagnose issues more precisely, have more credible conversations with engineering teams, and translate technical complexity into something customers can act on. It's not a party trick; it's what makes the customer experience better.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.12} variants={fadeUp}
-            className="pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>⚙️</div>
-            <div className="text-sm font-semibold text-slate-900">Ops & process design</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Documented systems beat heroic memory. I build playbooks, ticketing workflows, SOPs, and handoff processes that make teams scalable — not dependent on any one person knowing the answer.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.16} variants={fadeUp}
-            className="md:col-span-2 pillar-card rounded-2xl border border-slate-200 bg-white p-7 group"
-          >
-            <div className="text-xl mb-4" aria-hidden>🔗</div>
-            <div className="text-sm font-semibold text-slate-900">Cross-functional bridge</div>
-            <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-              Customer reality doesn't translate itself to internal priorities. I collect structured feedback from the field, surface patterns to product and engineering, and bring updates back to customers — closing the loop in both directions. I've managed relationships from end-user to executive and know how to communicate differently for each.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── EXPERIENCE ── */}
-      <section id="work" className="bg-slate-50 border-y border-slate-100">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
-            className="flex flex-col md:flex-row md:items-end gap-6 justify-between"
-          >
-            <div>
-              <div className={kicker}>Experience</div>
-              <h2 className={`${sectionTitle} mt-2`}>Where I've worked.</h2>
-              <p className={`mt-3 max-w-2xl ${body}`}>
-                A mix of startups, contracts, and growth environments — kept intentionally concise. Signal over volume.
-              </p>
-            </div>
+            <Link href="/work" className="hover:underline">
+              Work
+            </Link>
+            <Link href="/life" className="hover:underline">
+              Life
+            </Link>
+            <Link href="/blog" className="hover:underline">
+              Blog
+            </Link>
             <a
-              href="https://www.linkedin.com/in/sgrantkyle/"
+              href="https://github.com/stgrky"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary px-5 py-2.5 rounded-xl text-sm font-semibold self-start md:self-auto whitespace-nowrap flex-shrink-0"
+              className="hover:underline"
             >
-              Full history on LinkedIn →
+              GitHub
             </a>
-          </motion.div>
-
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {[
-              {
-                title: "Technical CSM",
-                org: "Aquaria",
-                period: "2024 – Present",
-                tag: "Hardware startup · Series A",
-                bullets: [
-                  "Built CS and support operations from scratch — playbooks, ticketing, customer education content, self-serve hub, and AE-to-CSM handoff SOP.",
-                  "Led end-to-end field deployments, coordinating contractors, logistics partners, and internal teams across complex hardware installations.",
-                  "Served as the primary voice of the customer, translating field feedback into product improvements in direct collaboration with engineering.",
-                  "Launched customer advocacy programs (referral + video testimonial) that became a measurable revenue channel.",
-                ],
-              },
-              {
-                title: "Customer Success Engineer",
-                org: "Inveterate",
-                period: "2024",
-                tag: "eCommerce SaaS · Contract",
-                bullets: [
-                  "Managed technical onboarding for enterprise brands end-to-end, partnering directly with client teams to ensure integrations launched smoothly and performed reliably.",
-                  "Maintained high customer satisfaction through proactive communication, clear expectation-setting, and hands-on troubleshooting when issues arose.",
-                  "Recovered an at-risk enterprise account through careful problem-solving and deliberate relationship rebuilding — preventing churn and expanding the account.",
-                ],
-              },
-              {
-                title: "Cross-functional Engineer",
-                org: "Recovery.com",
-                period: "2021 – 2023",
-                tag: "Health tech · Full-time",
-                bullets: [
-                  "Led cross-functional projects with design, product, SEO, and content teams — translating business goals into technical execution and shipping work that moved the needle.",
-                  "Introduced quality assurance processes and content architecture that reduced production issues and gave non-technical stakeholders more confidence in releases.",
-                  "Consistently connected technical work to business outcomes, making the case for every initiative in terms stakeholders at all levels could act on.",
-                ],
-              },
-            ].map((job, i) => (
-              <motion.div
-                key={job.org}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                custom={i * 0.08} variants={fadeUp}
-                className="work-card rounded-2xl bg-white border border-slate-200 p-6 hover:shadow-md hover:shadow-slate-100 transition-all"
-              >
-                <div className="flex items-start justify-between gap-2 mb-4">
-                  <div>
-                    <div className="text-sm font-semibold text-slate-900">{job.title}</div>
-                    <div className="text-xs text-slate-400 mt-0.5">{job.org} · {job.period}</div>
-                  </div>
-                  <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 whitespace-nowrap flex-shrink-0">
-                    {job.tag}
-                  </span>
-                </div>
-                <ul className="space-y-2.5">
-                  {job.bullets.map((b) => (
-                    <li key={b} className="flex gap-2.5 text-sm text-slate-500">
-                      <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-indigo-300 flex-shrink-0" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Earlier career callout */}
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.24} variants={fadeUp}
-            className="mt-5 rounded-2xl bg-white border border-slate-200 p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between"
-          >
-            <p className="text-sm text-slate-500">
-              <span className="font-semibold text-slate-700">Earlier: </span>
-              Project Manager at Muuse (NextGen Consortium · Starbucks / McDonald's), web developer at Paperstreet, SEO Account Manager at 51Blocks managing 35+ client campaigns end-to-end.
-            </p>
-            <a
-              href="https://www.linkedin.com/in/sgrantkyle/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors whitespace-nowrap"
-            >
-              More on LinkedIn →
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── CASE STUDIES ── */}
-      <section id="cases" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-          <div className={kicker}>Case studies</div>
-          <h2 className={`${sectionTitle} mt-2`}>A closer look at how I operate.</h2>
-          <p className={`mt-3 max-w-2xl ${body}`}>
-            Written to show approach — problem framing, execution, and how I communicate across technical and business stakeholders.
-          </p>
-        </motion.div>
-
-        <div className="mt-10 grid lg:grid-cols-2 gap-6">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0} variants={fadeUp}
-          >
-            <CaseCard
-              tag="CS Ops · Hardware"
-              title="Building customer success from scratch at a hardware startup"
-              context="Series-A startup with complex physical product deployments, a growing customer base, and no existing CS infrastructure."
-              whatIDid={[
-                "Designed the entire post-sale motion — ticketing workflows, email cadences, customer education content, self-serve resource hub, and AE-to-CSM handoff SOP.",
-                "Led on-site deployments end-to-end, coordinating contractors, logistics, and internal teams while acting as QA and the customer's primary point of contact.",
-                "Collected structured field feedback and channeled it directly into engineering conversations, turning customer problems into product improvements.",
-                "Launched a referral and video testimonial program that became a meaningful, measurable revenue channel.",
-              ]}
-              outcomes={[
-                "Scalable CS ops where none existed",
-                "Faster, consistent resolution paths",
-                "Tighter engineering feedback loop",
-                "Customer advocacy driving revenue",
-              ]}
-              tools={["HubSpot", "Notion", "SOPs & playbooks", "Customer education content", "Field QA"]}
-            />
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            custom={0.1} variants={fadeUp}
-          >
-            <CaseCard
-              tag="SaaS · Churn prevention"
-              title="Technical onboarding and enterprise account recovery at a loyalty SaaS"
-              context="SaaS platform with enterprise clients who needed hands-on technical onboarding and reliable post-launch support to get full value from the product."
-              whatIDid={[
-                "Managed complex onboarding end-to-end, coordinating across client teams, internal resources, and platform configurations to ensure successful launches.",
-                "Maintained high customer satisfaction through proactive communication, hands-on troubleshooting, and clear expectation management throughout the process.",
-                "Identified and recovered a churning enterprise account through deliberate problem-solving, trust rebuilding, and a clear plan to restore confidence.",
-                "Guided a high-volume client through a critical go-live phase, helping them launch a large-scale program on time and without disruption.",
-              ]}
-              outcomes={[
-                "Churn prevented on key account",
-                "Expanded revenue via relationship recovery",
-                "Successful high-volume program launch",
-                "Consistently high CSAT post-onboarding",
-              ]}
-              tools={["Enterprise onboarding", "Technical troubleshooting", "Stakeholder management", "Expectation setting", "Success planning"]}
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── VALUES ── */}
-      <section id="values" className="bg-slate-50 border-t border-slate-100">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-            <div className={kicker}>Values</div>
-            <h2 className={`${sectionTitle} mt-2`}>How I work.</h2>
-            <p className={`mt-3 max-w-2xl ${body}`}>
-              Values only matter when they show up in behavior. These are the ones I operationalize.
-            </p>
-          </motion.div>
-
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {[
-              {
-                title: "Empathy with accountability",
-                text: "Warm, clear communication — but with follow-through. Customers feel heard and guided at the same time. I don't choose between the relationship and the result.",
-              },
-              {
-                title: "Builder, not a blocker",
-                text: "I'd rather create the system than wait for someone else to. Documented playbooks, self-serve resources, and scalable workflows — built to outlast any single person's memory.",
-              },
-              {
-                title: "Engineering background, customer-first mindset",
-                text: "I came up through software engineering and made a deliberate move into customer success. That foundation means I can hold a technical conversation without needing a translator — and use that depth to make the customer experience sharper, not just the product.",
-              },
-            ].map((v, i) => (
-              <motion.div
-                key={v.title}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                custom={i * 0.08} variants={fadeUp}
-                className="rounded-2xl bg-white border border-slate-200 p-7"
-              >
-                <div className="h-0.5 w-8 bg-indigo-500 rounded-full mb-5" />
-                <div className="text-sm font-semibold text-slate-900">{v.title}</div>
-                <p className="mt-2 text-sm text-slate-500 leading-relaxed">{v.text}</p>
-              </motion.div>
-            ))}
           </div>
         </div>
-      </section>
-
-      {/* ── CONTACT ── */}
-      <section id="contact" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
-          className="rounded-3xl border border-slate-200 bg-white p-8 md:p-12"
-        >
-          <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-            <div>
-              <div className={kicker}>Contact</div>
-              <h2 className={`${sectionTitle} mt-2`}>Get in touch.</h2>
-              <p className={`mt-3 max-w-lg ${body}`}>
-                Happy to talk shop — customer success, technical work, or building things for the mental health space. Email or LinkedIn, whichever's easiest.
-              </p>
-              <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <a href="mailto:hello@grantkyle.com" className="btn-primary px-5 py-3 rounded-xl text-sm font-semibold text-center">
-                  hello@grantkyle.com
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/sgrantkyle/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary px-5 py-3 rounded-xl text-sm font-semibold text-center"
-                >
-                  LinkedIn →
-                </a>
-              </div>
-              <p className="mt-5 text-xs text-slate-400">
-                Prefer a call? Send an email with a few times and I&apos;ll get back to you fast.
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-slate-50 border border-slate-100 p-6">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-3">Recent build</div>
-              <div className="text-sm font-semibold text-slate-900 mb-2">
-                Websites for mental health practices
-              </div>
-              <p className="text-sm text-slate-500 leading-relaxed mb-4">
-                Modern, client-managed therapy practice sites — Next.js + Sanity, so non-technical owners can publish blog posts and edit pages without a developer.
-              </p>
-              <Link
-                href="/web-development"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors group"
-              >
-                See what&apos;s included
-                <span className="transition-transform group-hover:translate-x-0.5">→</span>
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      <footer className="text-center text-slate-400 text-xs py-8 border-t border-slate-100">
-        © {new Date().getFullYear()} Grant Kyle &nbsp;·&nbsp; Built with Next.js, React, Tailwind &amp; Framer Motion
       </footer>
-
-      {/* ─────────────────────────── STYLES ─────────────────────────── */}
-      <style jsx>{`
-        /* Gradient text */
-        .gradient-text {
-          background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 60%, #6366f1 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        /* Buttons */
-        .btn-primary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(180deg, #4f46e5 0%, #4338ca 100%);
-          color: #fff;
-          box-shadow: 0 4px 14px -4px rgba(79, 70, 229, 0.55);
-          transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-        }
-        .btn-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px -4px rgba(79, 70, 229, 0.65);
-          filter: brightness(1.06);
-        }
-        .btn-secondary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #fff;
-          border: 1px solid rgba(15, 23, 42, 0.12);
-          color: rgba(15, 23, 42, 0.85);
-          transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-        }
-        .btn-secondary:hover {
-          transform: translateY(-1px);
-          border-color: rgba(79, 70, 229, 0.35);
-          color: #4f46e5;
-        }
-
-        /* Proof chips */
-        .chip {
-          display: inline-flex;
-          padding: 5px 12px;
-          border-radius: 999px;
-          font-size: 12px;
-          font-weight: 500;
-          background: rgba(79, 70, 229, 0.06);
-          border: 1px solid rgba(79, 70, 229, 0.16);
-          color: #4338ca;
-        }
-
-        /* Marquee */
-        .marquee-track {
-          animation: marquee 38s linear infinite;
-        }
-        @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        /* Pillar cards */
-        .pillar-card {
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .pillar-card:hover {
-          border-color: rgba(99, 102, 241, 0.25);
-          box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.12), 0 4px 24px -6px rgba(99, 102, 241, 0.12);
-        }
-
-        /* Work cards */
-        .work-card {
-          transition: box-shadow 0.2s ease, transform 0.2s ease;
-        }
-        .work-card:hover {
-          transform: translateY(-2px);
-        }
-      `}</style>
     </main>
   );
 }
 
-/* ══════════════════════════════════════════════════════════ */
-/* Sub-components                                             */
-/* ══════════════════════════════════════════════════════════ */
-
-function SnapshotRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-start justify-between gap-4 pt-3 first:pt-0">
-      <div className="text-[11px] text-slate-400 font-medium">{label}</div>
-      <div className="text-[11px] font-semibold text-slate-700 text-right">{value}</div>
-    </div>
-  );
-}
-
-function CaseCard({
-  tag,
+function DoorCard({
+  href,
+  label,
   title,
-  context,
-  whatIDid,
-  outcomes,
-  tools,
+  body,
+  cta,
 }: {
-  tag: string;
+  href: string;
+  label: string;
   title: string;
-  context: string;
-  whatIDid: string[];
-  outcomes: string[];
-  tools: string[];
+  body: string;
+  cta: string;
 }) {
   return (
-    <div className="h-full rounded-2xl bg-white border border-slate-200 p-7 hover:shadow-md hover:shadow-slate-100 transition-all flex flex-col gap-5">
-      <div>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-500">{tag}</span>
-        <div className="mt-2 text-base font-semibold text-slate-900 leading-snug">{title}</div>
-        <div className="mt-2 text-sm text-slate-400">{context}</div>
-      </div>
-
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">What I did</div>
-        <ul className="space-y-2">
-          {whatIDid.map((b) => (
-            <li key={b} className="flex gap-2.5 text-sm text-slate-500">
-              <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-indigo-300 flex-shrink-0" />
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">Outcomes</div>
-        <div className="flex flex-wrap gap-2">
-          {outcomes.map((o) => (
-            <span key={o} className="px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 border border-indigo-100 text-indigo-700">
-              {o}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2.5">Tools &amp; methods</div>
-        <div className="flex flex-wrap gap-1.5">
-          {tools.map((t) => (
-            <span key={t} className="px-2.5 py-1 rounded-lg text-xs bg-white border border-slate-200 text-slate-500 font-medium">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MobileMenu({ nav }: { nav: { href: string; label: string }[] }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="md:hidden relative">
-      <button
-        onClick={() => setIsOpen((v) => !v)}
-        className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-        aria-expanded={isOpen}
+    <Link
+      href={href}
+      className="block group rounded-2xl p-8 md:p-10 transition-all hover:-translate-y-0.5"
+      style={{
+        backgroundColor: "var(--warm-card)",
+        border: "1px solid var(--warm-rule)",
+      }}
+    >
+      <p
+        className="text-[11px] mb-5 tracking-[0.22em] uppercase"
+        style={{ color: "var(--warm-accent)" }}
       >
-        <div className="flex flex-col gap-[5px] items-center justify-center w-4 h-4">
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full origin-center transition-all duration-200 ${isOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} />
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full transition-all duration-200 ${isOpen ? "opacity-0 scale-x-0" : ""}`} />
-          <span className={`block h-[1.5px] w-full bg-slate-700 rounded-full origin-center transition-all duration-200 ${isOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
-        </div>
-      </button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.96 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="absolute right-0 mt-2 w-52 rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60 overflow-hidden"
-          >
-            <nav className="flex flex-col p-1.5">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+        {label}
+      </p>
+      <h3
+        className="text-2xl md:text-[1.8rem] leading-snug"
+        style={{
+          fontFamily: serif,
+          fontWeight: 500,
+          color: "var(--warm-ink)",
+        }}
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
+      <p
+        className="mt-4 text-base leading-relaxed"
+        style={{ color: "var(--warm-body)" }}
+      >
+        {body}
+      </p>
+      <p
+        className="mt-6 text-sm transition-colors"
+        style={{
+          color: "var(--warm-accent-dark)",
+          fontFamily: serif,
+          fontStyle: "italic",
+          fontWeight: 500,
+        }}
+      >
+        {cta}
+      </p>
+    </Link>
   );
 }
+
